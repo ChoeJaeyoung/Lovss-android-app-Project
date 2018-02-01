@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.ezenac.cjy.teamproject.JoinActivity"
+    android:orientation="vertical">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/ultraViolet">
+    <ImageView
+        android:id="@+id/img_joinBack"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/left_arrow" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello TeamProject"
+            android:textSize="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/ultraViolet"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:layout_marginTop="50dp"/>
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="35dp"
+            android:background="@color/loginBar"
+            android:layout_marginTop="25dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/user"/>
+            <EditText
+                android:id="@+id/edit_joinId"
+                android:layout_width="280dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="13dp"
+                android:hint="User ID"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="30dp"
+            android:background="@color/loginBar"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/lock"/>
+            <EditText
+                android:id="@+id/edit_joinPw"
+                android:layout_width="280dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Password"
+                android:textSize="13dp"
+                android:background="@null"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_join"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/login_btn"
+            android:text="회 원 가 입"
+            android:textColor="#ffffff"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

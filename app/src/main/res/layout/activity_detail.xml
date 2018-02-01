@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.ezenac.cjy.teamproject.DetailActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/ultraViolet">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/left_arrow" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <ImageView
+            android:layout_width="275dp"
+            android:layout_height="330dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/daily_cover"
+            android:layout_marginTop="15dp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="340dp"
+        android:layout_height="10dp"
+        android:background="@drawable/underline2"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="136dp">
+        <TextView
+            android:layout_width="340dp"
+            android:layout_height="120dp"
+            android:hint="Content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/img_home"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/page_home_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/searcher_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_input"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/add2"
+            android:layout_marginLeft="45dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_option"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/settings2"
+            />
+    </LinearLayout>
+</LinearLayout>

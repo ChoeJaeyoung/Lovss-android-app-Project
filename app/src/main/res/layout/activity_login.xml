@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.ezenac.cjy.teamproject.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:orientation="vertical"
+        android:background="@color/ultraViolet"
+        android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project Name"
+                android:textColor="#ffffff"
+                android:layout_marginTop="135dp"
+                android:textSize="25dp"/>
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="25dp"
+            android:background="@color/loginBar"
+            android:layout_marginTop="75dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/user"/>
+            <EditText
+                android:id="@+id/edit_loginID"
+                android:layout_width="178dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:hint="User Id"
+                android:textSize="12dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="25dp"
+            android:background="@color/loginBar"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/lock"/>
+            <EditText
+                android:id="@+id/edit_loginPw"
+                android:layout_width="178dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:textSize="13dp"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/login_btn"
+            android:text="LOGIN"
+            android:textColor="#ffffff"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/text_loginJoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="회원가입"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="계정찾기"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
