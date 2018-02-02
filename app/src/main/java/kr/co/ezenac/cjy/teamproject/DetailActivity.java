@@ -11,6 +11,5 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         //주석추가
-
     }
 }
