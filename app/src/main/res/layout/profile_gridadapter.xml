@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="475dp">
         <ImageView
-            android:id="@+id/img_gridProfile"
+            android:id="@+id/img_proGridRoom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/daily_cover" />
     </LinearLayout>
     <TextView
-        android:id="@+id/text_gridRoomName"
+        android:id="@+id/text_proGridRoom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="RoomName"

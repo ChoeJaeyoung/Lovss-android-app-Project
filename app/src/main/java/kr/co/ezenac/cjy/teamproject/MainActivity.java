@@ -7,9 +7,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        String tmpMember_id = LoginInfo.getInstance().getMember().getMember_id();
+
+        text_mainId.setText(tmpMember_id);
+
     }
 
     @OnClick(R.id.img_mainBack)
     public void onClickImgBack(View view){
         finish();
     }
-
-
 }

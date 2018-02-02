@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.show();
         } else {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            LoginInfo.getInstance().setMember(member);
             startActivity(intent);
         }
     }
@@ -95,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        if (member.getId() == 0){
+        if (member.getId() == -2){
             alertDialog.show();
         } else {
             isAgreeId(member);
