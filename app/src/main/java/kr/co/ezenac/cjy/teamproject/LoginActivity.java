@@ -80,10 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.show();
         } else {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("id", member.getId());
-            intent.putExtra("member_id", member.getMember_id());
-            intent.putExtra("pw", member.getPw());
-            intent.putExtra("member_img", member.getMember_img());
             startActivity(intent);
         }
     }
@@ -97,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
+
 
         if (member.getId() == 0){
             alertDialog.show();
