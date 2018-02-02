@@ -46,6 +46,9 @@ public class JoinActivity extends AppCompatActivity {
                     Integer backInt = response.body();
                     Log.d("ksj","backInt : " + backInt);
                     idOverlapCheck(backInt);
+                } else {
+                    Log.d("ksj","1 : " );
+
                 }
             }
 
@@ -67,7 +70,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        if (backInt >= 1){
+        if (backInt > 1){
             alertDialog.show();
         } else {
             Intent intent = new Intent(JoinActivity.this, LoginActivity.class);

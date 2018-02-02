@@ -14,7 +14,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Member {
-    private Integer Id;
+    private Integer id;
     private String member_id;
     private String pw;
+    private String member_img;
 }

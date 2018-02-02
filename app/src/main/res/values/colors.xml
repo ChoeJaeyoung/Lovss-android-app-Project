@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="ultraViolet">#4f2f8c</color>
     <color name="loginBar">#f9effa</color>
+    <color name="navigation">#999999</color>
 </resources>

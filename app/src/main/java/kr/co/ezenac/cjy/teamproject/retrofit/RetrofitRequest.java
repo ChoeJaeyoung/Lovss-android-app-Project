@@ -15,9 +15,11 @@ import retrofit2.http.Query;
  */
 
 public interface RetrofitRequest {
-    @GET("")
+    @GET("login")
     Call<Member> login(@Query("member_id") String member_id, @Query("pw") String pw);
 
     @GET("insert_become_a_member")
     Call<Integer> join(@Query("member_id") String member_id, @Query("pw") String pw);
+
+
 }

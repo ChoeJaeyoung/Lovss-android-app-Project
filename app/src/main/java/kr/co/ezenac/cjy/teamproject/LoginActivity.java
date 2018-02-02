@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,10 +48,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {
                 if(response.isSuccessful()){
+                    Log.d("ttt", "2");
                     Member member = response.body();
-                    isExistId(member.getId());
+                    Integer tmpId = member.getId();
+                    Log.d("ttt", member.toString() + "tmpId " + tmpId);
+                    isExistId(member);
 
-                    Log.d("ttt", member.toString());
+                } else {
+                    Log.d("ttt", "1 : error");
                 }
             }
 
@@ -61,9 +66,31 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void isExistId(Integer id){
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
-            alertDialog.setTitle("경고");
+    public void isAgreeId(Member member){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("계정과 비밀번호가 일치하지 않습니다.");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        if (member.getId() == -1){
+            alertDialog.show();
+        } else {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("id", member.getId());
+            intent.putExtra("member_id", member.getMember_id());
+            intent.putExtra("pw", member.getPw());
+            intent.putExtra("member_img", member.getMember_img());
+            startActivity(intent);
+        }
+    }
+
+    public void isExistId(Member member){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+        alertDialog.setTitle("경고");
         alertDialog.setMessage("계정이 존재하지 않습니다. 회원가입을 하세요");
         alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
@@ -71,11 +98,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (id <= 0){
+        if (member.getId() == 0){
             alertDialog.show();
         } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            isAgreeId(member);
         }
     }
 
