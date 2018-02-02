@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void isExistId(Integer id){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
-        alertDialog.setTitle("경고");
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+            alertDialog.setTitle("경고");
         alertDialog.setMessage("계정이 존재하지 않습니다. 회원가입을 하세요");
         alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
