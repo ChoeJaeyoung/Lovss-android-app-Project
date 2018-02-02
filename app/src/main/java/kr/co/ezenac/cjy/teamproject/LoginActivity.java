@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         if (member.getId() == 0){
             alertDialog.show();
         } else {
