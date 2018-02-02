@@ -41,12 +41,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onClickBtnLogin(View view){
         String member_id = edit_loginID.getText().toString();
         String pw = edit_loginPw.getText().toString();
+        checkBlank(member_id, pw);
         Call<Member> obser = RetrofitService.getInstance().getRetrofitRequest().login(member_id, pw);
         obser.enqueue(new Callback<Member>() {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {
                 if(response.isSuccessful()){
                     Member member = response.body();
+                    isExistId(member.getId());
 
                     Log.d("ttt", member.toString());
                 }
@@ -57,9 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-        String check_id = edit_loginID.getText().toString();
-        String check_pw = edit_loginPw.getText().toString();
-        checkBlank(check_id, check_pw);
     }
 
     public void isExistId(Integer id){
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if (id == 0){
+        if (id <= 0){
             alertDialog.show();
         } else {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
