@@ -10,6 +10,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //주석추가
+        //주석추가//
     }
 }
