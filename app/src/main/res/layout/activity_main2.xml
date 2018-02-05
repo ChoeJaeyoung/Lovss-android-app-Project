@@ -3,44 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
 
 
     <LinearLayout
+        android:id="@+id/linear_main2_topBar"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/ultraViolet"
-        >
-
-    <ImageView
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/left_arrow"
-        />
-
-
+        android:background="@color/ultraViolet">
+        <ImageView
+            android:id="@+id/img_mainBack"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/left_arrow" />
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <Button
-        android:id="@+id/img_id"
-        android:background="@drawable/shape_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_toLeftOf="@id/text_id"
-        android:layout_centerInParent="true"
-        />
-    <EditText
-        android:id="@+id/text_id"
+
+    <TextView
+        android:id="@+id/text_room_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
-        android:text="myID : bjh95100"
+        android:text="MyRoomName"
         android:textSize="10dp"
        android:textColor="@color/colorIDICon"
         android:layout_centerInParent="true"
@@ -49,12 +39,30 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linear_main_roomInfo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/linear_main2_topBar"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_mainProfile"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/jc_ultraviolet2"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#999999"
+            android:layout_centerInParent="true" />
+    </LinearLayout>
+
     <GridView
-        android:id="@+id/grid_view"
+        android:id="@+id/grid_main2_gv"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="395dp"
         android:numColumns="4"
+        android:layout_below="@+id/linear_main_roomInfo"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -71,7 +79,6 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
             android:id="@+id/linearLayout">
 
             <ImageView

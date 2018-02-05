@@ -17,4 +17,5 @@ public class Member {
     private Integer id;
     private String member_id;
     private String pw;
+    private String member_img_path;
 }

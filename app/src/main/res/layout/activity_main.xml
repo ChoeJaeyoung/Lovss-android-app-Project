@@ -63,7 +63,7 @@
         android:layout_height="345dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linear_card"
-        android:numColumns="4"></GridView>
+        android:numColumns="3"></GridView>
 
     <LinearLayout
         android:layout_width="match_parent"
