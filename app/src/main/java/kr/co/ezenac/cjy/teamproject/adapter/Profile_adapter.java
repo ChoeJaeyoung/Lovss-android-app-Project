@@ -12,24 +12,33 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import kr.co.ezenac.cjy.teamproject.MainActivity;
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Join;
+import kr.co.ezenac.cjy.teamproject.model.Room;
 
 /**
  * Created by Administrator on 2018-02-02.
  */
 
 public class Profile_adapter extends BaseAdapter{
-    ArrayList<Img> imgs = new ArrayList<>();
+    ArrayList<Room> items = new ArrayList<>();
     Context context;
+
+    public Profile_adapter(ArrayList<Room> items, Context context) {
+        this.items = items;
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
-        return imgs.size();
+        return items.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return imgs.get(position);
+        return items.get(position);
     }
 
     @Override
@@ -44,17 +53,20 @@ public class Profile_adapter extends BaseAdapter{
         if (convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).
                     inflate(R.layout.profile_gridadapter, parent, false);
-            holder.img_proGridRoom = convertView.findViewById(R.id.img_gridProfile);
-            holder.text_proGridRoom = convertView.findViewById(R.id.text_gridRoomName);
+            holder.img_proGridRoom = convertView.findViewById(R.id.img_proGridRoom);
+            holder.text_proGridRoom = convertView.findViewById(R.id.text_proGridRoom);
 
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
 
-        Img item = (Img) getItem(position);
-        holder.text_proGridRoom.setText(item.getContent());
-        Glide.with(context).load(item.getPath()).centerCrop().into(holder.img_proGridRoom);
+
+        for (int i = 0; i < items.size(); i++){
+        Room item = (Room) getItem(i);
+        holder.text_proGridRoom.setText(item.getName());
+        Glide.with(context).load(item.getRoom_img_path()).centerCrop().into(holder.img_proGridRoom);
+        }
 
         return convertView;
     }

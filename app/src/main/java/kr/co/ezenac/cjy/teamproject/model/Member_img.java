@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Created by Administrator on 2018-02-01.
+ * Created by Administrator on 2018-02-05.
  */
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Member {
+public class Member_img {
     private Integer id;
-    private String member_id;
-    private String pw;
+    private String member_img_path;
+    private String member_img_id;
 }

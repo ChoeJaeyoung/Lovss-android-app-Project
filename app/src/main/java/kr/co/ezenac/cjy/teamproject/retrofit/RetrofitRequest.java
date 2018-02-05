@@ -3,7 +3,9 @@ package kr.co.ezenac.cjy.teamproject.retrofit;
 import java.util.ArrayList;
 
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Join;
 import kr.co.ezenac.cjy.teamproject.model.Member;
+import kr.co.ezenac.cjy.teamproject.model.Member_img;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -25,4 +27,9 @@ public interface RetrofitRequest {
     @GET("insert_become_a_member")
     Call<Integer> join(@Query("member_id") String member_id, @Query("pw") String pw);
 
+    @GET("")
+    Call<ArrayList<Room>> callProfile(@Query("id") Integer id);
+
+    @GET("")
+    Call<Member_img> callMemberInfo(@Query("id") Integer id);
 }

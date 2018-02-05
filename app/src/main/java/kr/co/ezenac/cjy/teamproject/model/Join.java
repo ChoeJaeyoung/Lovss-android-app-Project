@@ -6,15 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Created by Administrator on 2018-02-01.
+ * Created by Administrator on 2018-02-05.
  */
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Member {
+public class Join {
     private Integer id;
-    private String member_id;
-    private String pw;
+    private Integer member_id;
+    private Integer room_id;
+
 }
