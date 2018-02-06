@@ -61,26 +61,29 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.img_mainProfile)
     public void onClickProfileImg(View view){
         PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
-            }
+        @Override
+        public void onPermissionGranted() {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
+            String updateImg = LoginInfo.getInstance().getMember().getMember_img();
+            Glide.with(MainActivity.this).load(updateImg).centerCrop().
+                    into(img_mainProfile);
+        }
 
-            @Override
-            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
 
-            }
-        };
+        }
+    };
 
         TedPermission.with(MainActivity.this)
-                .setPermissionListener(permissionListener)
+            .setPermissionListener(permissionListener)
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
                 .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();
-    }
+}
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -106,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             Member member = response.body();
                             Log.d("profile", "success : " + member.toString());
-                            String updateImg = member.getMember_img();
-                            Glide.with(MainActivity.this).load(updateImg).centerCrop().
-                                    into(img_mainProfile);
+
 
                         } else {
                             Log.d("profile", "fail");
