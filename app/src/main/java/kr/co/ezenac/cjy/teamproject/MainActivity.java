@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             Member member = response.body();
                             Log.d("profile", "success : " + member.toString());
+                            String updateImg = member.getMember_img();
+                            Glide.with(MainActivity.this).load(updateImg).centerCrop().
+                                    into(img_mainProfile);
 
                         } else {
                             Log.d("profile", "fail");
