@@ -40,10 +40,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     public void onClickBtnLogin(View view){
-        String member_id = edit_loginID.getText().toString();
+        String login_id = edit_loginID.getText().toString();
         String pw = edit_loginPw.getText().toString();
-        checkBlank(member_id, pw);
-        Call<Member> obser = RetrofitService.getInstance().getRetrofitRequest().login(member_id, pw);
+        checkBlank(login_id, pw);
+        Call<Member> obser = RetrofitService.getInstance().getRetrofitRequest().login(login_id, pw);
         obser.enqueue(new Callback<Member>() {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {

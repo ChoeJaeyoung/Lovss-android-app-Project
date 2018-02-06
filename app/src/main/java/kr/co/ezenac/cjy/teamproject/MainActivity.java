@@ -1,5 +1,6 @@
 package kr.co.ezenac.cjy.teamproject;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,17 +12,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
+import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
+import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,14 +48,73 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Integer tmpId = LoginInfo.getInstance().getMember().getId();
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
-        String tmpMember_path = LoginInfo.getInstance().getMember().getMember_img();
+        String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
 
         callLoginInfo(tmpId);
-        Glide.with(MainActivity.this).load(tmpMember_path).centerCrop().
+        Glide.with(MainActivity.this).load(tmpMember_img).centerCrop().
                 into(img_mainProfile);
         text_mainId.setText(tmpMember_id);
 
+        Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
+    }
 
+    @OnClick(R.id.img_mainProfile)
+    public void onClickProfileImg(View view){
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+            }
+        };
+
+        TedPermission.with(MainActivity.this)
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .check();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == 0){
+                File file = new File(RealPathUtil.getRealPath(MainActivity.this, data.getData()));
+                if (file.exists()){
+                    Log.d("fff", "exist");
+                }
+                MultipartBody.Part filePart =
+                        MultipartBody.Part.createFormData("file", file.getName(),
+                                RequestBody.create(MediaType.parse("image/*"),file));
+
+                Call<Member> observ = RetrofitService.getInstance().getRetrofitRequest().updateProfile(filePart);
+                observ.enqueue(new Callback<Member>() {
+                    @Override
+                    public void onResponse(Call<Member> call, Response<Member> response) {
+                        if (response.isSuccessful()){
+                            Member member = response.body();
+                            Log.d("profile", "success : " + member.toString());
+                            finish();
+                        } else {
+                            Log.d("profile", "fail");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Member> call, Throwable t) {
+
+                    }
+                });
+            }
+        }
     }
 
     @OnClick(R.id.img_mainBack)
@@ -64,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
                profileAdapter = new Profile_adapter(items, MainActivity.this);
                grid_main.setAdapter(profileAdapter);
+               for (int i = 0; i < items.size(); i++) {
+                   Log.d("profile", "profile : " + items.get(i).toString());
+               }
                grid_main.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
