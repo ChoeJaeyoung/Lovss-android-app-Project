@@ -52,9 +52,10 @@
         android:id="@+id/grid_room_gv"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="410dp"
+        android:layout_height="match_parent"
         android:numColumns="4"
         android:layout_below="@+id/linear_room_Info"
+        android:layout_above="@+id/linearLayout"
         android:layout_marginTop="5dp"
         />
     <LinearLayout
