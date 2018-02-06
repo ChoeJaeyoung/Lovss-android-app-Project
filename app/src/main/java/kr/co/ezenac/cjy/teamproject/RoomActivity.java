@@ -45,7 +45,7 @@ public class RoomActivity extends AppCompatActivity {
 
     public void callImgInfo(Integer room_id){
         Call<ArrayList<Img>> observ = RetrofitService.getInstance().getRetrofitRequest().
-                callRoomInfo(room_id);
+                callRoomImg(room_id);
         observ.enqueue(new Callback<ArrayList<Img>>() {
             @Override
             public void onResponse(Call<ArrayList<Img>> call, Response<ArrayList<Img>> response) {

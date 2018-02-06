@@ -32,8 +32,8 @@ public interface RetrofitRequest {
     @POST("")
     Call<Member> updateProfile(@Part MultipartBody.Part photo);
 
-    @GET("")
-    Call<ArrayList<Img>> callRoomInfo(@Query("id") Integer id);
+    @GET("call_img")
+    Call<ArrayList<Img>> callRoomImg(@Query("room_number") Integer id);
 
     @Multipart
     @POST("insertRoom")

@@ -2,16 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="75dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:background="@drawable/girdbox">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/img_proGridRoom"
+    <ImageView
+       android:id="@+id/img_proGridRoom"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="55dp"
             android:background="@drawable/daily_cover" >
         </ImageView>
 
@@ -20,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="RoomName"
-            android:textSize="12dp"
+            android:textSize="11dp"
             android:gravity="center"/>
     </LinearLayout>
-</LinearLayout>
