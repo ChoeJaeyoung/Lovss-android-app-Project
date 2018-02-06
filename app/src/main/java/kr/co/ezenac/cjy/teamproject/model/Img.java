@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Img {
     private Integer id;
-    private Integer room_id;
+    private Integer room_number;
     private String path;
     private String content;
 }

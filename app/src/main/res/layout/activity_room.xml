@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.ezenac.cjy.teamproject.RoomActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_room_topBar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/ultraViolet">
+        <ImageView
+            android:id="@+id/img_room_Back"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/left_arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_room_Info"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/linear_room_topBar"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_roomImg"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/jc_ultraviolet2"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#999999"
+            android:layout_marginLeft="20dp"
+            />
+        <TextView
+            android:id="@+id/text_room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room Name"
+            android:layout_marginLeft="20dp"
+            android:textSize="30dp"
+            />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grid_room_gv"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="410dp"
+        android:numColumns="4"
+        android:layout_below="@+id/linear_room_Info"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/img_room_home"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/page_home_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_search"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/searcher_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_input"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/add2"
+            android:layout_marginLeft="45dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_option"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/settings2"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

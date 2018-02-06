@@ -6,27 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import kr.co.ezenac.cjy.teamproject.MainActivity;
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.model.Img;
-import kr.co.ezenac.cjy.teamproject.model.Join;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 
 /**
- * Created by Administrator on 2018-02-02.
+ * Created by Administrator on 2018-02-05.
  */
 
-public class Profile_adapter extends BaseAdapter{
-    ArrayList<Room> items = new ArrayList<>();
+public class Room_adapter extends BaseAdapter {
+    ArrayList<Img> items = new ArrayList<>();
     Context context;
 
-    public Profile_adapter(ArrayList<Room> items, Context context) {
+    public Room_adapter(ArrayList<Img> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -53,26 +50,22 @@ public class Profile_adapter extends BaseAdapter{
         if (convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).
                     inflate(R.layout.profile_gridadapter, parent, false);
-            holder.img_proGridRoom = convertView.findViewById(R.id.img_proGridRoom);
-            holder.text_proGridRoom = convertView.findViewById(R.id.text_proGridRoom);
+            holder.img_roomAdapter = convertView.findViewById(R.id.img_roomAdapter);
 
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
 
-
         for (int i = 0; i < items.size(); i++){
-        Room item = (Room) getItem(i);
-        holder.text_proGridRoom.setText(item.getName());
-        Glide.with(context).load(item.getRoom_img()).centerCrop().into(holder.img_proGridRoom);
+            Img item = (Img) getItem(i);
+            Glide.with(context).load(item.getPath()).centerCrop().into(holder.img_roomAdapter);
         }
 
         return convertView;
     }
 
-    private class Holder {
-        ImageView img_proGridRoom;
-        TextView text_proGridRoom;
+    private class Holder{
+        ImageView img_roomAdapter;
     }
 }
