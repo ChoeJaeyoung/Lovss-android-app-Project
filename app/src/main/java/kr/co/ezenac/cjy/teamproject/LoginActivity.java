@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     @OnClick(R.id.btn_login)
     public void onClickBtnLogin(View view){
         String login_id = edit_loginID.getText().toString();
