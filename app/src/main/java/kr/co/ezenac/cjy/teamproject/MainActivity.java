@@ -67,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
-            String updateImg = LoginInfo.getInstance().getMember().getMember_img();
-            Glide.with(MainActivity.this).load(updateImg).centerCrop().
-                    into(img_mainProfile);
         }
 
         @Override
@@ -108,6 +105,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Member> call, Response<Member> response) {
                         if (response.isSuccessful()){
                             Member member = response.body();
+                            LoginInfo.getInstance().setMember(member);
+                            Log.d("yyy", member.toString());
+                            Log.d("yyy", LoginInfo.getInstance().getMember().getMember_img());
+
+                            String updateImg = LoginInfo.getInstance().getMember().getMember_img();
+                            Glide.with(MainActivity.this).load(updateImg).centerCrop().
+                                    into(img_mainProfile);
                             Log.d("profile", "success : " + member.toString());
 
 
