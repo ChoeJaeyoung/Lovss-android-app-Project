@@ -1,0 +1,125 @@
+package kr.co.ezenac.cjy.teamproject;
+
+import android.Manifest;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.io.File;
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class upload_Activity extends AppCompatActivity {
+
+    @BindView(R.id.btn_upload) Button btn_upload;
+    @BindView(R.id.text_title) EditText text_title;
+    @BindView(R.id.img_add) ImageView img_add;
+
+    File file;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_upload);
+        ButterKnife.bind(this);
+
+    }
+
+    @OnClick(R.id.btn_upload)
+    public void onClickBtnAdd(View view) {
+
+        final MultipartBody.Part filePart =
+                MultipartBody.Part.createFormData("file",
+                        file.getName(),
+                        RequestBody.create(MediaType.parse("image/*"), file));
+        Log.d("bjh","file : " + file.toString());
+        String name = text_title.getText().toString();
+
+        final RequestBody nameBody =
+                RequestBody.create(MediaType.parse("text/plain"),
+                        name);
+
+        Call<Void> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody);
+        obserV.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("bjh", "suc");
+                    //finish();
+                } else {
+                    Log.d("bjh", "fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    @OnClick(R.id.btn_titleImg)
+    public void onClickBtnTitleImg(View view) {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select picture"), 0);
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+            }
+        };
+
+        TedPermission.with(upload_Activity.this)
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .check();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Glide.with(upload_Activity.this).load(data.getData()).into(img_add);
+        //String room_Img = img_add.getDrawable().toString();
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 0) {
+                file = new File(
+                        RealPathUtil.getRealPath(upload_Activity.this,
+                                data.getData()));
+                if (file.exists()) {
+                    Log.d("bjh", "exist");
+                }
+            }
+        }
+    }
+}

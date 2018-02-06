@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.edit_loginID) EditText edit_loginID;
     @BindView(R.id.edit_loginPw) EditText edit_loginPw;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     @OnClick(R.id.btn_login)
     public void onClickBtnLogin(View view){
         String login_id = edit_loginID.getText().toString();
@@ -51,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("ttt", "2");
                     Member member = response.body();
                     Integer tmpId = member.getId();
-                    Log.d("ttt", member.toString() + "tmpId " + tmpId);
+                    Log.d("ttt", member.toString()+ "tmpId " + tmpId);
                     isExistId(member);
 
                 } else {
