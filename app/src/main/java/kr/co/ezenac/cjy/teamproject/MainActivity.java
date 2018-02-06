@@ -94,15 +94,19 @@ public class MainActivity extends AppCompatActivity {
                 MultipartBody.Part filePart =
                         MultipartBody.Part.createFormData("file", file.getName(),
                                 RequestBody.create(MediaType.parse("image/*"),file));
+                Integer id = LoginInfo.getInstance().getMember().getId();
 
-                Call<Member> observ = RetrofitService.getInstance().getRetrofitRequest().updateProfile(filePart);
+                RequestBody loginIdBody =
+                        RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
+
+                Call<Member> observ = RetrofitService.getInstance().getRetrofitRequest().updateProfile(filePart, loginIdBody);
                 observ.enqueue(new Callback<Member>() {
                     @Override
                     public void onResponse(Call<Member> call, Response<Member> response) {
                         if (response.isSuccessful()){
                             Member member = response.body();
                             Log.d("profile", "success : " + member.toString());
-                            finish();
+
                         } else {
                             Log.d("profile", "fail");
                         }
