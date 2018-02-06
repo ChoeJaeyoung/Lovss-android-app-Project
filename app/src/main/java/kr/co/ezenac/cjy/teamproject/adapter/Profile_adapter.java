@@ -1,6 +1,7 @@
 package kr.co.ezenac.cjy.teamproject.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,13 +62,10 @@ public class Profile_adapter extends BaseAdapter{
             holder = (Holder) convertView.getTag();
         }
 
-
-        for (int i = 0; i < items.size(); i++){
-        Room item = (Room) getItem(i);
+        Room item = (Room) getItem(position);
         holder.text_proGridRoom.setText(item.getName());
         Glide.with(context).load(item.getRoom_img()).centerCrop().into(holder.img_proGridRoom);
-        }
-
+        Log.d("ttt", item.getName() + " / " + item.getRoom_img().toString());
         return convertView;
     }
 
