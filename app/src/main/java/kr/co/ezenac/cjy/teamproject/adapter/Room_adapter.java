@@ -49,7 +49,7 @@ public class Room_adapter extends BaseAdapter {
 
         if (convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).
-                    inflate(R.layout.profile_gridadapter, parent, false);
+                    inflate(R.layout.room_adapter, parent, false);
             holder.img_roomAdapter = convertView.findViewById(R.id.img_roomAdapter);
 
             convertView.setTag(holder);
@@ -57,10 +57,10 @@ public class Room_adapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        for (int i = 0; i < items.size(); i++){
-            Img item = (Img) getItem(i);
+            Img item = (Img) getItem(position);
             Glide.with(context).load(item.getPath()).centerCrop().into(holder.img_roomAdapter);
-        }
+
+
 
         return convertView;
     }

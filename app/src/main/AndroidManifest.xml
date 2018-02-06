@@ -29,6 +29,7 @@
         <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".RoomActivity"/>
         <activity android:name=".upload_Activity"></activity>
     </application>
 

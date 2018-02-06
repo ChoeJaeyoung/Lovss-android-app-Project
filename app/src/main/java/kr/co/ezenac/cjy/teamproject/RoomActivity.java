@@ -1,13 +1,17 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -39,8 +43,11 @@ public class RoomActivity extends AppCompatActivity {
         String room_name = intent.getStringExtra("room_name");
         String room_img = intent.getStringExtra("room_img");
 
+        Log.d("room", "room_info : " + room_name + " / " + room_img);
         text_room_name.setText(room_name);
-        img_roomImg.setBackgroundResource(Integer.parseInt(room_img));
+        Glide.with(RoomActivity.this).load(room_img).centerCrop().
+                into(img_roomImg);
+        callImgInfo(room_id);
     }
 
     public void callImgInfo(Integer room_id){
@@ -52,6 +59,9 @@ public class RoomActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ArrayList<Img> items = response.body();
 
+                    Log.d("uuu", items.toString());
+
+
                     roomAdapter = new Room_adapter(items, RoomActivity.this);
                     grid_room_gv.setAdapter(roomAdapter);
                     grid_room_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,6 +71,8 @@ public class RoomActivity extends AppCompatActivity {
                         }
                     });
 
+                } else {
+                    Log.d("uuu", "1");
                 }
             }
             @Override
