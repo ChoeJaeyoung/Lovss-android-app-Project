@@ -25,7 +25,6 @@ import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
-import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -42,6 +41,7 @@ public class upload_Activity extends AppCompatActivity {
 
     File file;
 
+    String tmpIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public class upload_Activity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("bjh", "suc");
 
-                    Room room = response.body();
+                    final Room room = response.body();
 
                     Log.d("bjh", "re:" + room.getId());
 
@@ -93,12 +93,25 @@ public class upload_Activity extends AppCompatActivity {
 
                         alertDialog.show();
                     } else {
-                        Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
-                        intent.putExtra("room_id", room.getId());
-                        intent.putExtra("room_name", room.getName());
-                        intent.putExtra("room_img", room.getRoom_img());
-                        startActivity(intent);
 
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
+                        alertDialog.setTitle("Q.");
+                        alertDialog.setMessage("이 방 이름이 확실합니까?");
+                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
+                                intent.putExtra("room_id", room.getId());
+                                intent.putExtra("room_name", room.getName());
+                                intent.putExtra("room_img", room.getRoom_img());
+
+                                startActivity(intent);
+                            }
+                        });
+                        alertDialog.show();
                     }
                 } else {
                     Log.d("bjh", "fail");

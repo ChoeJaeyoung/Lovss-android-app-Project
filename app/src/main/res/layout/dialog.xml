@@ -97,7 +97,7 @@
             />
 
         <ImageView
-            android:id="@+id/img_room_input"
+            android:id="@+id/dialog_img_room_input"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@drawable/add2"

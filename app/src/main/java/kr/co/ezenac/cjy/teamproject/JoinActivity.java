@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,12 +23,14 @@ public class JoinActivity extends AppCompatActivity {
     @BindView(R.id.edit_joinId) EditText edit_joinId;
     @BindView(R.id.edit_joinPw) EditText edit_joinPw;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
         ButterKnife.bind(this);
     }
+
 
     @OnClick(R.id.img_joinBack)
     public void onClickJoinBack(View view){
@@ -77,4 +80,5 @@ public class JoinActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
 }
