@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         if (member.getId() == -1){
             alertDialog.show();
         } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             LoginInfo.getInstance().setMember(member);
             startActivity(intent);
         }
