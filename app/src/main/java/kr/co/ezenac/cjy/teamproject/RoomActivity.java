@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
@@ -30,6 +32,8 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_room_Back) ImageView img_room_Back;
     @BindView(R.id.img_roomImg) ImageView img_roomImg;
     @BindView(R.id.text_room_name) TextView text_room_name;
+    @BindView(R.id.in_room_img_add) Button in_room_img_add;
+    Integer room_id;
 
 
     @Override
@@ -39,15 +43,29 @@ public class RoomActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        Integer room_id = intent.getIntExtra("room_id", 0);
+        room_id = intent.getIntExtra("room_id", 0);
         String room_name = intent.getStringExtra("room_name");
         String room_img = intent.getStringExtra("room_img");
 
-        Log.d("room", "room_info : " + room_name + " / " + room_img);
+
+
+
+        Log.d("room", "room_info : " + room_name + " / " + room_img +"/"+ room_id);
         text_room_name.setText(room_name);
         Glide.with(RoomActivity.this).load(room_img).centerCrop().
                 into(img_roomImg);
         callImgInfo(room_id);
+    }
+
+    @OnClick(R.id.in_room_img_add)
+    public void onClick_in_room_img_add(View view){
+        Intent intent = new Intent(RoomActivity.this, upload_imgActivity.class);
+        intent.putExtra("room_id", room_id);
+        Log.d("kkk","room_id" + room_id);
+        startActivity(intent);
+
+
+
     }
 
     public void callImgInfo(Integer room_id){
