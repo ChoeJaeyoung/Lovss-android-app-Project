@@ -50,4 +50,8 @@ public interface RetrofitRequest {
     @GET("call_main")
     Call<ArrayList<Img>> callMain(@Query("id") Integer member_id);
 
+    @GET("searchRoom")
+    Call<ArrayList<Room>> searchRoom(@Query("name") String name);
+
+
 }
