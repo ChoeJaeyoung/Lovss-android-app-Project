@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
