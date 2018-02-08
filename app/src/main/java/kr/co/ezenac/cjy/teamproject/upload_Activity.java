@@ -24,6 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
+import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -57,12 +59,16 @@ public class upload_Activity extends AppCompatActivity {
                         RequestBody.create(MediaType.parse("image/*"), file));
         Log.d("bjh","file : " + file.toString());
         String name = text_title.getText().toString();
+        Integer member_id = LoginInfo.getInstance().getMember().getId();
 
         final RequestBody nameBody =
                 RequestBody.create(MediaType.parse("text/plain"),
                         name);
 
-        Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody);
+        final RequestBody idBody =
+                RequestBody.create(MediaType.parse("text/plain"), String.valueOf(member_id));
+
+        Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody, idBody);
         obserV.enqueue(new Callback<Room>() {
             @Override
             public void onResponse(Call<Room> call, Response<Room> response) {
@@ -91,7 +97,6 @@ public class upload_Activity extends AppCompatActivity {
                         intent.putExtra("room_id", room.getId());
                         intent.putExtra("room_name", room.getName());
                         intent.putExtra("room_img", room.getRoom_img());
-
                         startActivity(intent);
 
                     }
