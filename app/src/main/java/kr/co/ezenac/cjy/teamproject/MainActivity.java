@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
         String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
 
+
         callLoginInfo(tmpId);
         Glide.with(MainActivity.this).load(tmpMember_img).centerCrop().
                 into(img_mainProfile);
