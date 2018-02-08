@@ -21,10 +21,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
-        @BindView(R.id.img_input) ImageView img_input;
-        @BindView(R.id.grid_home_gv) GridView grid_home_gv;
-        Home_adapter homeAdapter;
-
+    @BindView(R.id.grid_home_gv) GridView grid_home_gv;
+    Home_adapter homeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,30 +54,4 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
-    @OnClick(R.id.img_input)
-    public void onClickChange(View view){
-        initDialog();
-    }
-
-    private  void  initDialog(){
-        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
-            @Override
-            public void choosePhoto() {
-
-                Intent intent = new Intent(HomeActivity.this,upload_Activity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void chooseCamer() {
-
-                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        dialog.show();
-    }
-
-
 }
