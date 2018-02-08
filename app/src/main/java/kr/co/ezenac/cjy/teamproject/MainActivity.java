@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.gird_main) GridView grid_main;
     @BindView(R.id.text_mainId) TextView text_mainId;
     Profile_adapter profileAdapter;
+    @BindView(R.id.img_input) ImageView img_input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         PermissionListener permissionListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
-        }
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select picture"),0);
+            }
 
         @Override
         public void onPermissionDenied(ArrayList<String> deniedPermissions) {
@@ -172,5 +173,32 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
            }
        });
+    }
+    @OnClick(R.id.img_input)
+    public void onClickChange(View view){
+        initDialog();
+    }
+
+    private  void  initDialog(){
+        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
+            @Override
+            public void choosePhoto() {
+
+                Intent intent = new Intent(MainActivity.this,upload_Activity.class);
+                startActivity(intent);
+                Log.d("bjh","re: " + 3);
+            }
+
+            @Override
+            public void chooseCamer() {
+
+
+                Intent intent = new Intent(MainActivity.this,upload_btn_photo_activity.class);
+
+                startActivity(intent);
+                Log.d("bjh","re: " + 55);
+            }
+        });
+        dialog.show();
     }
 }
