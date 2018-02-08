@@ -41,7 +41,6 @@ public class upload_Activity extends AppCompatActivity {
 
     File file;
 
-    String tmpIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
