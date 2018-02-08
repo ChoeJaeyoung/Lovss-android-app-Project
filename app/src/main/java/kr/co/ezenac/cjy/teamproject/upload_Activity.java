@@ -41,6 +41,7 @@ public class upload_Activity extends AppCompatActivity {
 
     File file;
 
+    String tmpIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,7 @@ public class upload_Activity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("bjh", "suc");
 
-                    Room room = response.body();
+                    final Room room = response.body();
 
                     Log.d("bjh", "re:" + room.getId());
 
@@ -92,24 +93,24 @@ public class upload_Activity extends AppCompatActivity {
 
                         alertDialog.show();
                     } else {
-                        Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
-                        intent.putExtra("room_id", room.getId());
-                        intent.putExtra("room_name", room.getName());
-                        intent.putExtra("room_img", room.getRoom_img());
 
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
-                        alertDialog.setTitle("확인");
-                        alertDialog.setMessage("이 방 이름으로 만드시겠습니까?");
+                        alertDialog.setTitle("Q.");
+                        alertDialog.setMessage("이 방 이름이 확실합니까?");
                         alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
+                                intent.putExtra("room_id", room.getId());
+                                intent.putExtra("room_name", room.getName());
+                                intent.putExtra("room_img", room.getRoom_img());
+
+                                startActivity(intent);
                             }
                         });
-
-                        startActivity(intent);
-
                         alertDialog.show();
                     }
                 } else {
