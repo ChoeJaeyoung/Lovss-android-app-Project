@@ -21,7 +21,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
+import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,11 +46,10 @@ public class RoomActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
+
         room_id = intent.getIntExtra("room_id", 0);
         String room_name = intent.getStringExtra("room_name");
         String room_img = intent.getStringExtra("room_img");
-
-
 
 
         Log.d("room", "room_info : " + room_name + " / " + room_img +"/"+ room_id);
@@ -63,9 +65,6 @@ public class RoomActivity extends AppCompatActivity {
         intent.putExtra("room_id", room_id);
         Log.d("kkk","room_id" + room_id);
         startActivity(intent);
-
-
-
     }
 
     public void callImgInfo(Integer room_id){
@@ -75,7 +74,7 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Img>> call, Response<ArrayList<Img>> response) {
                 if (response.isSuccessful()) {
-                    ArrayList<Img> items = response.body();
+                    final ArrayList<Img> items = response.body();
 
                     Log.d("uuu", items.toString());
 
@@ -85,7 +84,9 @@ public class RoomActivity extends AppCompatActivity {
                     grid_room_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                            Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
+                            intent.putExtra("position", position);
+                            startActivity(intent);
                         }
                     });
 
@@ -95,7 +96,7 @@ public class RoomActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<Img>> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }

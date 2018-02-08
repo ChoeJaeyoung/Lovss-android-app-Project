@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -83,8 +84,9 @@ public class upload_imgActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("bjh", "suc");
                     Room item = response.body();
-
-                 Log.d("ccc7" ,""+ item);
+                    RoomInfo.getInstance().setRoom(item);
+                    Log.d("upup", item.toString());
+                 Log.d("ccc7" ,""+ item.toString());
                     Intent intent = new Intent(upload_imgActivity.this, RoomActivity.class);
                     intent.putExtra("room_id", item.getId());
                     intent.putExtra("room_name", item.getName());

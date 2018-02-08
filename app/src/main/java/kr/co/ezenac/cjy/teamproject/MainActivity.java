@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                        intent.putExtra("room_id", item.getId());
                        intent.putExtra("room_name", item.getName());
                        intent.putExtra("room_img", item.getRoom_img());
+                       RoomInfo.getInstance().setRoom(item);
                        Log.d("kkk", item.toString());
                        startActivity(intent);
                    }
