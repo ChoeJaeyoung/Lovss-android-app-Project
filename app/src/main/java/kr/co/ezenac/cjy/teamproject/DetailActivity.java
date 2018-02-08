@@ -26,6 +26,7 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.btn_detail_addPhoto) Button btn_detail_addPhoto;
     @BindView(R.id.grid_detail_gv) GridView grid_detail_gv;
+    @BindView(R.id.img_detail_back) ImageView img_detail_back;
     Detail_adapter detailAdapter;
     Integer dRoom_id;
 
@@ -41,6 +42,11 @@ public class DetailActivity extends AppCompatActivity {
 
         Log.d("room", "room_info : " + dRoom_name + " / " + dRoom_img +" / "+ dRoom_id);
         callImgDetail(dRoom_id);
+    }
+
+    @OnClick(R.id.img_detail_back)
+    public void onClickDetailBack(View view){
+        finish();
     }
 
     @OnClick(R.id.btn_detail_addPhoto)

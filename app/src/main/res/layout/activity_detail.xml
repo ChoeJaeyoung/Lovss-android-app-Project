@@ -13,6 +13,7 @@
         android:layout_height="30dp"
         android:background="@color/ultraViolet">
         <ImageView
+            android:id="@+id/img_detail_back"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_marginTop="5dp"
