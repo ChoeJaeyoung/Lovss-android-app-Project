@@ -37,5 +37,5 @@ public interface RetrofitRequest {
 
     @Multipart
     @POST("insertRoom")
-    Call<Void> makeRoom(@Part MultipartBody.Part photo, @Part("name") RequestBody name);
+    Call<Room> makeRoom(@Part MultipartBody.Part photo, @Part("name") RequestBody name);
 }

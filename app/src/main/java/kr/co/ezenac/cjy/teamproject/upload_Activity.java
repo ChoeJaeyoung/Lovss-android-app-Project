@@ -1,7 +1,9 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
 import okhttp3.MediaType;
@@ -59,25 +62,55 @@ public class upload_Activity extends AppCompatActivity {
                 RequestBody.create(MediaType.parse("text/plain"),
                         name);
 
-        Call<Void> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody);
-        obserV.enqueue(new Callback<Void>() {
+        Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody);
+        obserV.enqueue(new Callback<Room>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Room> call, Response<Room> response) {
                 if (response.isSuccessful()) {
                     Log.d("bjh", "suc");
-                    //finish();
+
+                    Room room = response.body();
+
+                    Log.d("bjh", "re:" + room.getId());
+
+                    if(room.getId()==1) {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
+                        alertDialog.setTitle("경고");
+                        alertDialog.setMessage("이미 동일한 방이 존재합니다.");
+                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+
+                        alertDialog.show();
+                    } else {
+                        Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
+                        intent.putExtra("room_id", room.getId());
+                        intent.putExtra("room_name", room.getName());
+                        intent.putExtra("room_img", room.getRoom_img());
+
+                        startActivity(intent);
+
+                    }
                 } else {
                     Log.d("bjh", "fail");
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Room> call, Throwable t) {
                 t.printStackTrace();
             }
         });
 
     }
+
+
+
+
 
     @OnClick(R.id.btn_titleImg)
     public void onClickBtnTitleImg(View view) {
@@ -108,7 +141,7 @@ public class upload_Activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Glide.with(upload_Activity.this).load(data.getData()).into(img_add);
+        Glide.with(upload_Activity.this).load(data.getData()).centerCrop().into(img_add);
         //String room_Img = img_add.getDrawable().toString();
 
         if (resultCode == RESULT_OK) {
