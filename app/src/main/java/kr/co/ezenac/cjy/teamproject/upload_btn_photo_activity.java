@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +38,8 @@ public class upload_btn_photo_activity extends AppCompatActivity {
     @BindView(R.id.img_room_search1) ImageView img_room_search1;
     @BindView(R.id.img_room_input1) ImageView img_room_input1;
     @BindView(R.id.img_room_option1) ImageView img_room_option1;
+    @BindView(R.id.linearLayout_uploadphoto) LinearLayout linearLayout_uploadphoto;
+
 
 
 
@@ -138,6 +141,10 @@ public class upload_btn_photo_activity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+    @OnClick(R.id.linearLayout_uploadphoto)
+    public void onClickMain(View view){
+
     }
 
 }

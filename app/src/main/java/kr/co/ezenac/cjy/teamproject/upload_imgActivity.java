@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
@@ -42,6 +43,8 @@ public class upload_imgActivity extends AppCompatActivity {
     @BindView(R.id.img_room_input) ImageView img_room_input;
     @BindView(R.id.img_room_option) ImageView img_room_option;
     @BindView(R.id.upload_img_btn_titleImg) Button upload_img_btn_titleImg;
+    @BindView(R.id.linearLayout_upload_img) LinearLayout linearLayout_upload_img;
+
 
 
     File file;
@@ -197,5 +200,9 @@ public class upload_imgActivity extends AppCompatActivity {
     public void onReturnOption(View view) {
         Intent intent = new Intent(upload_imgActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    @OnClick(R.id.linearLayout_upload_img)
+    public void onClickMain(View view){
+
     }
 }

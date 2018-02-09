@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +50,9 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_room_search) ImageView img_room_search;
     @BindView(R.id.img_room_input) ImageView img_room_input;
     @BindView(R.id.img_room_option) ImageView img_room_option;
+    @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
+
+
     Integer room_id;
 
 
@@ -224,5 +228,9 @@ public class RoomActivity extends AppCompatActivity {
     public void onReturnOption(View view) {
         Intent intent = new Intent(RoomActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    @OnClick(R.id.linearLayout_room)
+    public void onClickMain(View view){
+
     }
 }

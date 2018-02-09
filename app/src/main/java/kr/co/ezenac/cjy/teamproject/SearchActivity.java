@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
+    @BindView(R.id.linearLayout_search) LinearLayout linearLayout_search;
 
 
 
@@ -127,15 +129,14 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(SearchActivity.this, HomeActivity.class);
         startActivity(intent);
     }
-    @OnClick(R.id.img_search)
-    public void onReturnSearch(View view) {
-        Intent intent = new Intent(SearchActivity.this, SearchActivity.class);
-        startActivity(intent);
-    }
     @OnClick(R.id.img_option)
     public void onReturnOption(View view) {
         Intent intent = new Intent(SearchActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    @OnClick(R.id.linearLayout_search)
+    public void onClickMain(View view){
+
     }
 
 }

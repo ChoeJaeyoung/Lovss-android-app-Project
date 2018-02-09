@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
+    @BindView(R.id.linearLayout_detail) LinearLayout linearLayout_detail;
+
 
     Detail_adapter detailAdapter;
     Integer dRoom_id;
@@ -128,5 +131,9 @@ public class DetailActivity extends AppCompatActivity {
     public void onReturnOption(View view) {
         Intent intent = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    @OnClick(R.id.linearLayout_detail)
+    public void onClickMain(View view){
+
     }
 }

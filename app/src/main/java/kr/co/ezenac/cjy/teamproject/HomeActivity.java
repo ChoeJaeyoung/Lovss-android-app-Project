@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
+    @BindView(R.id.linearLayout_home) LinearLayout linearLayout_home;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +90,6 @@ public class HomeActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-    @OnClick(R.id.img_home)
-    public void onReturnHome(View view) {
-        Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
     @OnClick(R.id.img_search)
     public void onReturnSearch(View view) {
         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
@@ -101,5 +99,9 @@ public class HomeActivity extends AppCompatActivity {
     public void onReturnOption(View view) {
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+    @OnClick(R.id.linearLayout_home)
+    public void onClickMain(View view){
+
     }
 }
