@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.linearLayout_main) LinearLayout linearLayout_main;
-
+    @BindView(R.id.mainpage_id) RelativeLayout mainpage_id;
 
 
     @Override
@@ -221,5 +222,10 @@ public class MainActivity extends AppCompatActivity {
     public void onReturnSearch(View view) {
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.mainpage_id)
+    public void onReturnPresentPage(View view) {
+        finish();
     }
 }
