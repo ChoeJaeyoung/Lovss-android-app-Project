@@ -37,7 +37,7 @@
             <EditText
                 android:id="@+id/search_test"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:hint="검색어를 입력하세요"
                 android:textColor="@color/colorIDICon"
                 android:textSize="8dp"
@@ -92,7 +92,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/settings2"
+            android:background="@drawable/btn_home_profile"
             />
     </LinearLayout>
 

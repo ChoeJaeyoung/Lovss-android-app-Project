@@ -22,9 +22,9 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="사진추가"
-            android:textSize="10dp"
+            android:textSize="7dp"
             android:id="@+id/btn_detail_addPhoto"
             />
     </LinearLayout>
@@ -77,7 +77,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/settings2"
+            android:background="@drawable/btn_home_profile"
             />
     </LinearLayout>
 </RelativeLayout>

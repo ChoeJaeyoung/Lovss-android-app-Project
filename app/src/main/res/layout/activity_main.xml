@@ -63,6 +63,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linear_card"
+        android:layout_above="@+id/linearLayout_main"
         android:numColumns="3"></GridView>
 
     <LinearLayout
@@ -103,7 +104,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/settings"
+            android:background="@drawable/btn_home_profile2"
             />
     </LinearLayout>
 

@@ -116,6 +116,7 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
                 Log.d("bjh","re: " + 55);
             }
+
         });
         dialog.show();
     }
