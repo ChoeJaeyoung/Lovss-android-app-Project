@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Home_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import retrofit2.Call;
@@ -35,13 +36,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void callHomeImg(Integer member_id){
-        Call<ArrayList<Img>> observ = RetrofitService.getInstance().getRetrofitRequest()
+        Call<ArrayList<Main>> observ = RetrofitService.getInstance().getRetrofitRequest()
                 .callMain(member_id);
-        observ.enqueue(new Callback<ArrayList<Img>>() {
+        observ.enqueue(new Callback<ArrayList<Main>>() {
             @Override
-            public void onResponse(Call<ArrayList<Img>> call, Response<ArrayList<Img>> response) {
+            public void onResponse(Call<ArrayList<Main>> call, Response<ArrayList<Main>> response) {
                 if (response.isSuccessful()){
-                    ArrayList<Img> imgs = response.body();
+                    ArrayList<Main> imgs = response.body();
 
                     homeAdapter = new Home_adapter(imgs, HomeActivity.this);
                     grid_home_gv.setAdapter(homeAdapter);
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Img>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Main>> call, Throwable t) {
                 t.printStackTrace();
             }
         });

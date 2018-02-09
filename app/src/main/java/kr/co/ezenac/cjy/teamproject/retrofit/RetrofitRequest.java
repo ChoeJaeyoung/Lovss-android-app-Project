@@ -3,6 +3,7 @@ package kr.co.ezenac.cjy.teamproject.retrofit;
 import java.util.ArrayList;
 
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import okhttp3.MultipartBody;
@@ -48,10 +49,11 @@ public interface RetrofitRequest {
     Call<Room> makeImg(@Part MultipartBody.Part photo, @Part("content") RequestBody content, @Part("room_number") RequestBody room_number);
 
     @GET("call_main")
-    Call<ArrayList<Img>> callMain(@Query("id") Integer member_id);
+    Call<ArrayList<Main>> callMain(@Query("id") Integer member_id);
 
     @GET("searchRoom")
     Call<ArrayList<Room>> searchRoom(@Query("name") String name);
+
 
 
 }

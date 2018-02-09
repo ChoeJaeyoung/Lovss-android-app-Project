@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Room;
 
 /**
  * Created by Administrator on 2018-02-08.

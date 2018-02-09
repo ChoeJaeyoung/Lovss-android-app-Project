@@ -1,6 +1,7 @@
 package kr.co.ezenac.cjy.teamproject.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +16,22 @@ import java.util.ArrayList;
 
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.model.Img;
+import kr.co.ezenac.cjy.teamproject.model.Main;
+import kr.co.ezenac.cjy.teamproject.model.Room;
+import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2018-02-08.
  */
 
 public class Home_adapter extends BaseAdapter {
-    ArrayList<Img> items = new ArrayList<>();
+    ArrayList<Main> items = new ArrayList<>();
     Context context;
 
-    public Home_adapter(ArrayList<Img> items, Context context) {
+    public Home_adapter(ArrayList<Main> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -61,10 +68,12 @@ public class Home_adapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        Img item = (Img) getItem(position);
+        Main item = (Main) getItem(position);
         Log.d("ddd", item.toString());
         Glide.with(context).load(item.getPath()).centerCrop().into(holder.img_homeAdapter);
         holder.text_homeAdapter.setText(item.getContent());
+        holder.text_roomName.setText(item.getName());
+        Glide.with(context).load(item.getRoom_img()).centerCrop().into(holder.img_roomImg);
 
         return convertView;
     }
