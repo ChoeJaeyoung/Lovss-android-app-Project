@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="방 만들기 완료!"
+        android:text="사진 만들기 완료"
         />
     <LinearLayout
         android:layout_below="@id/btn_upload"
@@ -22,13 +22,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
         <EditText
             android:id="@+id/upload_img_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="방 제목을 입력하세요"
             android:layout_gravity="center"
-            />
+            android:hint="사진 제목" />
 
         <ImageView
             android:id="@+id/upload_img_img_add"
@@ -50,11 +50,51 @@
             android:id="@+id/upload_img_btn_titleImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="방 대표 사진 첨부"
+            android:text="사진 올리기 첨부"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/img_room_home"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/page_home_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_search"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/searcher_2"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_input"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/add2"
+            android:layout_marginLeft="45dp"
+            />
+
+        <ImageView
+            android:id="@+id/img_room_option"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/settings2"
+            />
+    </LinearLayout>
 
 
 </RelativeLayout>

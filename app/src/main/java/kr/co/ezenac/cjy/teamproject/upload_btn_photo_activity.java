@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Img;
@@ -32,6 +33,11 @@ public class upload_btn_photo_activity extends AppCompatActivity {
     Room_adapter roomAdapter;
     @BindView(R.id.grid_room_gv1) GridView grid_room_gv1;
     Profile_adapter profileAdapter;
+    @BindView(R.id.img_room_home1) ImageView img_room_home1;
+    @BindView(R.id.img_room_search1) ImageView img_room_search1;
+    @BindView(R.id.img_room_input1) ImageView img_room_input1;
+    @BindView(R.id.img_room_option1) ImageView img_room_option1;
+
 
 
     Integer room_id;
@@ -52,6 +58,48 @@ public class upload_btn_photo_activity extends AppCompatActivity {
 
 
     }
+    @OnClick(R.id.img_room_input1)
+    public void onClickChange(View view){
+        initDialog();
+    }
+
+    private  void  initDialog(){
+        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
+            @Override
+            public void choosePhoto() {
+
+                Intent intent = new Intent(upload_btn_photo_activity.this,upload_Activity.class);
+                startActivity(intent);
+                Log.d("bjh","re: " + 3);
+            }
+
+            @Override
+            public void chooseCamer() {
+
+
+                Intent intent = new Intent(upload_btn_photo_activity.this,upload_btn_photo_activity.class);
+
+                startActivity(intent);
+                Log.d("bjh","re: " + 55);
+            }
+        });
+        dialog.show();
+    }
+    @OnClick(R.id.img_room_home1)
+    public void onReturnHome(View view) {
+        Intent intent = new Intent(upload_btn_photo_activity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_search1)
+    public void onReturnSearch(View view) {
+        Intent intent = new Intent(upload_btn_photo_activity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_option1)
+    public void onReturnOption(View view) {
+        Intent intent = new Intent(upload_btn_photo_activity.this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void callLoginInfo(Integer tmp_memberId){
         Call<ArrayList<Room>> observ = RetrofitService.getInstance().getRetrofitRequest().profileRoomInfo(tmp_memberId);
@@ -71,7 +119,7 @@ public class upload_btn_photo_activity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Room item = items.get(position);
 
-                            Intent intent = new Intent(upload_btn_photo_activity.this, upload_Activity.class);
+                            Intent intent = new Intent(upload_btn_photo_activity.this, upload_imgActivity.class);
                             intent.putExtra("room_id", item.getId());
                             intent.putExtra("room_name", item.getName());
                             intent.putExtra("room_img", item.getRoom_img());
@@ -91,4 +139,5 @@ public class upload_btn_photo_activity extends AppCompatActivity {
             }
         });
     }
+
 }

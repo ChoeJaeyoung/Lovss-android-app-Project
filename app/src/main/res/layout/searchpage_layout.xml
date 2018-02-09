@@ -37,9 +37,11 @@
             <EditText
                 android:id="@+id/search_test"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="musical mozart"
+                android:layout_height="100dp"
+                android:hint="검색어를 입력하세요"
                 android:textColor="@color/colorIDICon"
+                android:textSize="8dp"
+                android:textColorHint="@color/colorIDICon"
                 android:layout_centerInParent="true"
                 />
         </RelativeLayout>

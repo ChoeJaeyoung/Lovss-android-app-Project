@@ -37,6 +37,12 @@ public class upload_imgActivity extends AppCompatActivity {
     @BindView(R.id.upload_img_btn_upload) Button upload_img_btn_upload;
     @BindView(R.id.upload_img_text_title) EditText upload_img_text_title;
     @BindView(R.id.upload_img_img_add) ImageView upload_img_img_add;
+    @BindView(R.id.img_room_home) ImageView img_room_home;
+    @BindView(R.id.img_room_search) ImageView img_room_search;
+    @BindView(R.id.img_room_input) ImageView img_room_input;
+    @BindView(R.id.img_room_option) ImageView img_room_option;
+    @BindView(R.id.upload_img_btn_titleImg) Button upload_img_btn_titleImg;
+
 
     File file;
 
@@ -149,5 +155,47 @@ public class upload_imgActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+    @OnClick(R.id.img_room_input)
+    public void onClickChange(View view){
+        initDialog();
+    }
+
+    private  void  initDialog(){
+        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
+            @Override
+            public void choosePhoto() {
+
+                Intent intent = new Intent(upload_imgActivity.this,upload_Activity.class);
+                startActivity(intent);
+                Log.d("bjh","re: " + 3);
+            }
+
+            @Override
+            public void chooseCamer() {
+
+
+                Intent intent = new Intent(upload_imgActivity.this,upload_btn_photo_activity.class);
+
+                startActivity(intent);
+                Log.d("bjh","re: " + 55);
+            }
+        });
+        dialog.show();
+    }
+    @OnClick(R.id.img_room_home)
+    public void onReturnHome(View view) {
+        Intent intent = new Intent(upload_imgActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_search)
+    public void onReturnSearch(View view) {
+        Intent intent = new Intent(upload_imgActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_option)
+    public void onReturnOption(View view) {
+        Intent intent = new Intent(upload_imgActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

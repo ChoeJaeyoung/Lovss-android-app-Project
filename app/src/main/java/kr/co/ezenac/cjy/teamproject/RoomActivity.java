@@ -45,6 +45,10 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_roomImg) ImageView img_roomImg;
     @BindView(R.id.text_room_name) TextView text_room_name;
     @BindView(R.id.in_room_img_add) Button in_room_img_add;
+    @BindView(R.id.img_room_home) ImageView img_room_home;
+    @BindView(R.id.img_room_search) ImageView img_room_search;
+    @BindView(R.id.img_room_input) ImageView img_room_input;
+    @BindView(R.id.img_room_option) ImageView img_room_option;
     Integer room_id;
 
 
@@ -178,5 +182,47 @@ public class RoomActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+    @OnClick(R.id.img_room_input)
+    public void onClickChange(View view){
+        initDialog();
+    }
+
+    private  void  initDialog(){
+        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
+            @Override
+            public void choosePhoto() {
+
+                Intent intent = new Intent(RoomActivity.this,upload_Activity.class);
+                startActivity(intent);
+                Log.d("bjh","re: " + 3);
+            }
+
+            @Override
+            public void chooseCamer() {
+
+
+                Intent intent = new Intent(RoomActivity.this,upload_btn_photo_activity.class);
+
+                startActivity(intent);
+                Log.d("bjh","re: " + 55);
+            }
+        });
+        dialog.show();
+    }
+    @OnClick(R.id.img_room_home)
+    public void onReturnHome(View view) {
+        Intent intent = new Intent(RoomActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_search)
+    public void onReturnSearch(View view) {
+        Intent intent = new Intent(RoomActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_option)
+    public void onReturnOption(View view) {
+        Intent intent = new Intent(RoomActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

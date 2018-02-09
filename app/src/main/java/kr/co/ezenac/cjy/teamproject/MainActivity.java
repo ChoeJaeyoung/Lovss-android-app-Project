@@ -40,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.gird_main) GridView grid_main;
     @BindView(R.id.text_mainId) TextView text_mainId;
     Profile_adapter profileAdapter;
+    @BindView(R.id.img_home) ImageView img_home;
+    @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
+    @BindView(R.id.img_option) ImageView img_option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,5 +203,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+    @OnClick(R.id.img_home)
+    public void onReturnHome(View view) {
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_search)
+    public void onReturnSearch(View view) {
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_option)
+    public void onReturnOption(View view) {
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

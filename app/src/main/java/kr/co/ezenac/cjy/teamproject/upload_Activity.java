@@ -38,6 +38,10 @@ public class upload_Activity extends AppCompatActivity {
     @BindView(R.id.btn_upload) Button btn_upload;
     @BindView(R.id.text_title) EditText text_title;
     @BindView(R.id.img_add) ImageView img_add;
+    @BindView(R.id.img_room_home) ImageView img_room_home;
+    @BindView(R.id.img_room_search) ImageView img_room_search;
+    @BindView(R.id.img_room_input) ImageView img_room_input;
+    @BindView(R.id.img_room_option) ImageView img_room_option;
 
     File file;
 
@@ -49,6 +53,48 @@ public class upload_Activity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.img_room_input)
+    public void onClickChange(View view){
+        initDialog();
+    }
+
+    private  void  initDialog(){
+        ChooseDialog dialog = new ChooseDialog(this, new ChooseDialog.ChooseListener() {
+            @Override
+            public void choosePhoto() {
+
+                Intent intent = new Intent(upload_Activity.this,upload_Activity.class);
+                startActivity(intent);
+                Log.d("bjh","re: " + 3);
+            }
+
+            @Override
+            public void chooseCamer() {
+
+
+                Intent intent = new Intent(upload_Activity.this,upload_btn_photo_activity.class);
+
+                startActivity(intent);
+                Log.d("bjh","re: " + 55);
+            }
+        });
+        dialog.show();
+    }
+    @OnClick(R.id.img_room_home)
+    public void onReturnHome(View view) {
+        Intent intent = new Intent(upload_Activity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_search)
+    public void onReturnSearch(View view) {
+        Intent intent = new Intent(upload_Activity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.img_room_option)
+    public void onReturnOption(View view) {
+        Intent intent = new Intent(upload_Activity.this, MainActivity.class);
+        startActivity(intent);
+    }
     @OnClick(R.id.btn_upload)
     public void onClickBtnAdd(View view) {
 
@@ -172,4 +218,5 @@ public class upload_Activity extends AppCompatActivity {
             }
         }
     }
+
 }
