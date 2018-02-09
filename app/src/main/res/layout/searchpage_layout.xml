@@ -76,7 +76,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/searcher_2"
+            android:background="@drawable/change_searcher1"
             />
 
         <ImageView

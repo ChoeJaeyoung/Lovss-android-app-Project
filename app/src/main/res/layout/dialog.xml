@@ -6,112 +6,100 @@
     android:background="@android:color/transparent"
     android:orientation="vertical"
     >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        >
-    <LinearLayout
-
-        android:id="@+id/option_bar"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="203dp"
-        >
-    <LinearLayout
-        android:layout_width="28dp"
-        android:layout_height="95dp"
-        android:background="@drawable/corners_bg"
-        android:orientation="vertical"
-        >
-
-        <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/corners_bg"
-            android:orientation="vertical">
-
-            <Button
-                android:background="@drawable/make_room"
-                android:id="@+id/btn_selectphoto"
-                android:layout_width="28dp"
-                android:layout_height="28dp" />
-
-            <Button
-                android:background="@drawable/upload_photo"
-                android:id="@+id/btn_makeaphoto"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="1dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
-            android:orientation="vertical">
-
-            <Button
-                android:background="@drawable/multiply_insert"
-                android:id="@+id/btn_photocancel"
-                android:layout_width="28dp"
-                android:layout_height="28dp"/>
-        </LinearLayout>
-
-    </LinearLayout>
-    </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/bottom_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        >
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        >
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+            <Button
+
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/make_room"
+                android:backgroundTint="@color/colorIDICon"
+                android:id="@+id/btn_selectphoto"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_above="@id/btn_makeaphoto"
+                android:layout_alignLeft="@id/dialog_img_room_input"
+                />
+
+            <Button
+
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/upload_photo"
+                android:backgroundTint="@color/colorIDICon"
+                android:id="@+id/btn_makeaphoto"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="5dp"
+                android:layout_above="@id/btn_photocancel"
+                android:layout_alignLeft="@id/dialog_img_room_input"
+                />
+
+
+            <Button
+
+                android:layout_marginBottom="12dp"
+                android:layout_alignLeft="@id/dialog_img_room_input"
+                android:layout_above="@id/dialog_img_room_input"
+                android:background="@drawable/btn_cancel"
+                android:backgroundTint="@color/colorIDICon"
+                android:id="@+id/btn_photocancel"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="5dp"
+                />
+
+
 
         <ImageView
+            android:layout_alignParentBottom="true"
             android:id="@+id/img_room_home"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:background="@drawable/page_home_2"
+
             />
 
         <ImageView
+            android:layout_alignParentBottom="true"
             android:id="@+id/img_room_search"
             android:layout_width="28dp"
             android:layout_height="28dp"
+            android:layout_toRightOf="@id/img_room_home"
+
             android:layout_marginLeft="45dp"
-            android:background="@drawable/searcher_2"
             />
 
         <ImageView
+            android:layout_alignParentBottom="true"
             android:id="@+id/dialog_img_room_input"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:background="@drawable/add2"
+
             android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@id/img_room_search"
             />
 
         <ImageView
+            android:layout_alignParentBottom="true"
             android:id="@+id/img_room_option"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/settings2"
+
+            android:layout_toRightOf="@+id/dialog_img_room_input"
             />
-    </LinearLayout>
+
     </RelativeLayout>
+        </RelativeLayout>
+
     </RelativeLayout>
-</RelativeLayout>
+
