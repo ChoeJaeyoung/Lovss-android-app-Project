@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="85dp"
     android:orientation="vertical"
     android:padding="2dp"
     android:background="@drawable/girdbox">
 
     <ImageView
        android:id="@+id/img_proGridRoom"
-            android:layout_width="match_parent"
+            android:layout_width="345dp"
             android:layout_height="55dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/daily_cover" >
         </ImageView>
+    <Button
+        android:id="@+id/btn_proDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/trash"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
 
         <TextView
             android:id="@+id/text_proGridRoom"
@@ -19,5 +27,6 @@
             android:layout_height="match_parent"
             android:text="RoomName"
             android:textSize="11dp"
+            android:layout_below="@+id/img_proGridRoom"
             android:gravity="center"/>
-    </LinearLayout>
+    </RelativeLayout>
