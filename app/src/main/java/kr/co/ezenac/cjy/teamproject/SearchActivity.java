@@ -1,8 +1,10 @@
 package kr.co.ezenac.cjy.teamproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,17 +48,12 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchpage_layout);
         ButterKnife.bind(this);
-
     }
-
-
 
     @OnClick(R.id.btn_searh)
     public void onClickJoinOk(View view){
         String name = search_test.getText().toString();
         callLoginInfo(name);
-
-
     }
 
 
@@ -76,14 +74,11 @@ public class SearchActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Room item = items.get(position);
+                            Integer member_id = LoginInfo.getInstance().getMember().getId();
+                            Integer room_id = item.getId();
 
-                            Intent intent = new Intent(SearchActivity.this, RoomActivity.class);
-                            intent.putExtra("room_id", item.getId());
-                            intent.putExtra("room_name", item.getName());
-                            intent.putExtra("room_img", item.getRoom_img());
-                            RoomInfo.getInstance().setRoom(item);
-                            Log.d("kkk", item.toString());
-                            startActivity(intent);
+                            Log.d("sss", item.toString() +" + " + member_id.toString());
+                            onClickRoomItem(member_id, room_id, item);
                         }
                     });
 
@@ -139,4 +134,45 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    public void onClickRoomItem(final Integer id, final Integer room_id, final Room item){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(SearchActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("이 방에 입장하시겠습니까? 입장 후에는 해당 방에 가입됩니다.");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Call<Void> observ = RetrofitService.getInstance().getRetrofitRequest()
+                        .joinRoom(id, room_id);
+                observ.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()){
+                            Intent intent = new Intent(SearchActivity.this, RoomActivity.class);
+                            intent.putExtra("room_id", item.getId());
+                            intent.putExtra("room_name", item.getName());
+                            intent.putExtra("room_img", item.getRoom_img());
+                            RoomInfo.getInstance().setRoom(item);
+                            Log.d("kkk", item.toString());
+                            startActivity(intent);
+                        } else {
+                            Log.d("sss", "error : 1");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+    }
 }

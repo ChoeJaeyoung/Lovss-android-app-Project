@@ -54,6 +54,9 @@ public interface RetrofitRequest {
     @GET("searchRoom")
     Call<ArrayList<Room>> searchRoom(@Query("name") String name);
 
+    @GET("insertJoin")
+    Call<Void> joinRoom(@Query("id") Integer id, @Query("room_id") Integer room_id);
+
 
 
 }
