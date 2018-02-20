@@ -60,5 +60,8 @@ public interface RetrofitRequest {
     @GET("deleteJoin")
     Call<Void> deleteRoom(@Query("id") Integer id, @Query("room_id") Integer room_id);
 
+    @GET("deleteRoom")
+    Call<Integer> deleteRoom2(@Query("manager_room") Integer manager_room, @Query("manager_member") Integer manager_member);
+
 
 }

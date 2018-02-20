@@ -154,6 +154,40 @@ public class RoomActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.in_room_room_delete)
+    public void onClick_in_room_room_delete(View view){
+
+            Call<Integer> observ = RetrofitService.getInstance().getRetrofitRequest().deleteRoom2(room_id,LoginInfo.getInstance().getMember().getId());
+            observ.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    if (response.isSuccessful()) {
+                        Integer items = response.body();
+
+                        Log.d("uuu", items.toString());
+
+
+
+
+
+                    } else {
+                        Log.d("uuu", "1");
+                    }
+                }
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
+    }
+
+    @OnClick(R.id.in_room_img_delete)
+    public void onClick_in_room_img_delete(View view){
+
+    }
+
+
     public void callImgInfo(Integer room_id){
         Call<ArrayList<Img>> observ = RetrofitService.getInstance().getRetrofitRequest().
                 callRoomImg(room_id);

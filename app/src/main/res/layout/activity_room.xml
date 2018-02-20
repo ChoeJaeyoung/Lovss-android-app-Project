@@ -27,6 +27,22 @@
             android:id="@+id/in_room_img_add"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="사진삭제"
+            android:textSize="7dp"
+            android:id="@+id/in_room_img_delete"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="방삭제"
+            android:textSize="7dp"
+            android:id="@+id/in_room_room_delete"
+            />
+
     </LinearLayout>
 
     <LinearLayout

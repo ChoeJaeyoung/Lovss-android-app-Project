@@ -68,5 +68,4 @@ public class ChooseDialog extends Dialog {
         void choosePhoto();
         void chooseCamer();
     }
-
 }
