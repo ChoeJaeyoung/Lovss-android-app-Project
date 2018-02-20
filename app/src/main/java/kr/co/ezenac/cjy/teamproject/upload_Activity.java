@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
@@ -36,14 +37,14 @@ import retrofit2.Response;
 
 public class upload_Activity extends AppCompatActivity {
 
-    @BindView(R.id.btn_upload) Button btn_upload;
-    @BindView(R.id.text_title) EditText text_title;
+    @BindView(R.id.btn_upload) TextView btn_upload; //ok
+    @BindView(R.id.text_title) EditText text_title; //ok
     @BindView(R.id.img_add) ImageView img_add;
-    @BindView(R.id.img_room_home) ImageView img_room_home;
-    @BindView(R.id.img_room_search) ImageView img_room_search;
-    @BindView(R.id.img_room_input) ImageView img_room_input;
-    @BindView(R.id.img_room_option) ImageView img_room_option;
-    @BindView(R.id.linearLayout_upload) LinearLayout linearLayout_upload;
+    @BindView(R.id.img_room_home) ImageView img_room_home; //ok
+    @BindView(R.id.img_room_search) ImageView img_room_search; //ok
+    @BindView(R.id.img_room_input) ImageView img_room_input; //ok
+    @BindView(R.id.img_room_option) ImageView img_room_option; //ok
+
 
 
 
@@ -98,10 +99,6 @@ public class upload_Activity extends AppCompatActivity {
     public void onReturnOption(View view) {
         Intent intent = new Intent(upload_Activity.this, MainActivity.class);
         startActivity(intent);
-    }
-    @OnClick(R.id.linearLayout_upload)
-    public void onClickMain(View view){
-
     }
     @OnClick(R.id.btn_upload)
     public void onClickBtnAdd(View view) {

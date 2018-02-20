@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/btn_total"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +23,7 @@
             <Button
 
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/make_room"
+                android:background="@drawable/twospeechbubbles"
                 android:backgroundTint="@color/colorIDICon"
                 android:id="@+id/btn_selectphoto"
                 android:layout_width="28dp"
