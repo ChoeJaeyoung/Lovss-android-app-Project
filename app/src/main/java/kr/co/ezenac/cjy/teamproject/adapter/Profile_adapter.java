@@ -2,6 +2,7 @@ package kr.co.ezenac.cjy.teamproject.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 import butterknife.OnLongClick;
 import kr.co.ezenac.cjy.teamproject.MainActivity;
@@ -38,8 +40,8 @@ import retrofit2.Response;
 
 public class Profile_adapter extends BaseAdapter{
     ArrayList<Room> items = new ArrayList<>();
+    Integer mode = 0;
     Context context;
-    private Integer room_id;
 
     public Profile_adapter(ArrayList<Room> items, Context context) {
         this.items = items;
@@ -62,7 +64,7 @@ public class Profile_adapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Holder holder = new Holder();
 
         if (convertView == null){
@@ -83,10 +85,56 @@ public class Profile_adapter extends BaseAdapter{
         Room item = (Room) getItem(position);
         holder.text_proGridRoom.setText(item.getName());
         Glide.with(context).load(item.getRoom_img()).centerCrop().into(holder.img_proGridRoom);
+        final Integer room_id = item.getId();
         Log.d("ttt", item.getName() + " / " + item.getRoom_img().toString());
-        room_id = item.getId();
-        Integer tmpId= LoginInfo.getInstance().getMember().getId();
 
+        if (mode == 1){
+            holder.btn_proDelete.setVisibility(View.VISIBLE);
+        } else {
+            holder.btn_proDelete.setVisibility(View.GONE);
+        }
+
+        holder.btn_proDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ppp","proDelete");
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                alertDialog.setTitle("경고");
+                alertDialog.setMessage("이 방을 나가시겠습니까?");
+                alertDialog.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final Integer member_id = LoginInfo.getInstance().getMember().getId();
+                        Call<Void> obser = RetrofitService.getInstance().getRetrofitRequest()
+                                .deleteRoom(member_id, room_id);
+                        obser.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()){
+                                    Log.d("ppp", member_id.toString() + "//" + room_id.toString() );
+                                    items.remove(position);
+                                    setMode(0);
+                                    notifyDataSetChanged();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
+            }
+        });
         return convertView;
     }
 
@@ -96,49 +144,7 @@ public class Profile_adapter extends BaseAdapter{
         Button btn_proDelete;
     }
 
-    @OnLongClick(R.id.img_proGridRoom)
-    public boolean viewDelete(View view){
-        Log.d("ppp", "longclick");
-        if (view.getVisibility() == View.GONE){
-            view.setVisibility(View.VISIBLE);
-        }
-        return true;
-    }
-
-    @OnClick(R.id.btn_proDelete)
-    public void deleteItem(View view){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-        alertDialog.setTitle("경고");
-        alertDialog.setMessage("이 방을 삭제하시겠습니까?");
-        alertDialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Integer member_id = LoginInfo.getInstance().getMember().getId();
-                Call<Void> obser = RetrofitService.getInstance().getRetrofitRequest()
-                        .deleteRoom(member_id, room_id);
-                obser.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()){
-                            Log.d("ppp", response.body().toString());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-            }
-        });
-
-        alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-
+    public void setMode(Integer mode) {
+        this.mode = mode;
     }
 }

@@ -65,6 +65,20 @@ public class MainActivity extends AppCompatActivity {
         text_mainId.setText(tmpMember_id);
 
         Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
+
+        grid_main.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("ppp", "LongCLICK2");
+                String str = grid_main.getItemAtPosition(position).toString();
+                Log.d("ppp", str);
+
+                profileAdapter.setMode(1);
+                profileAdapter.notifyDataSetChanged();
+
+                return true;
+            }
+        });
     }
 
     @OnClick(R.id.img_mainProfile)
@@ -140,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.linearLayout_main)
     public void onClickMain(View view){
-
     }
 
     @OnClick(R.id.img_mainBack)
@@ -226,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.mainpage_id)
     public void onReturnPresentPage(View view) {
-        finish();
+        profileAdapter.setMode(0);
+        profileAdapter.notifyDataSetChanged();
     }
 }
