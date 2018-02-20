@@ -2,11 +2,13 @@ package kr.co.ezenac.cjy.teamproject;
 
 import android.Manifest;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +25,9 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.Fragment.RoomFragment;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
+import kr.co.ezenac.cjy.teamproject.adapter.ViewPagerAdapter;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
@@ -39,7 +43,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_mainProfile) ImageView img_mainProfile;
-    @BindView(R.id.gird_main) GridView grid_main;
+
     @BindView(R.id.text_mainId) TextView text_mainId;
     Profile_adapter profileAdapter;
     @BindView(R.id.img_home) ImageView img_home;
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.linearLayout_main) LinearLayout linearLayout_main;
     @BindView(R.id.mainpage_id) RelativeLayout mainpage_id;
+    ViewPagerAdapter viewPagerAdapter;
+    @BindView(R.id.viewpager_1) ViewPager viewpager_1;
+    @BindView(R.id.btn_room) Button btn_room;
+    @BindView(R.id.btn_collection) Button btn_collection;
 
 
     @Override
@@ -58,27 +66,41 @@ public class MainActivity extends AppCompatActivity {
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
         String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
 
+        //★
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewpager_1.setAdapter(viewPagerAdapter);
 
-        callLoginInfo(tmpId);
+
+
+
         Glide.with(MainActivity.this).load(tmpMember_img).centerCrop().
                 into(img_mainProfile);
         text_mainId.setText(tmpMember_id);
 
         Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
 
-        grid_main.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("ppp", "LongCLICK2");
-                String str = grid_main.getItemAtPosition(position).toString();
-                Log.d("ppp", str);
 
-                profileAdapter.setMode(1);
-                profileAdapter.notifyDataSetChanged();
-
-                return true;
-            }
-        });
+    }
+    //★
+    @OnClick(R.id.btn_room)
+    public void click_btn_room(View view){
+        Log.d("joseph","aa");
+        view();
+    }
+    //★
+    @OnClick(R.id.btn_collection)
+    public void click_btn_collection(View view){
+        Log.d("joseph","bb");
+        view2();
+    }
+    //★
+    public void view(){
+        RoomFragment roomFragment = (RoomFragment) viewPagerAdapter.getFragmentIndex(0);
+        viewpager_1.setCurrentItem(0);
+    }
+    //★
+    public void view2(){
+        viewpager_1.setCurrentItem(1);
     }
 
     @OnClick(R.id.img_mainProfile)
@@ -161,44 +183,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void callLoginInfo(Integer tmp_memberId){
-        Call<ArrayList<Room>> observ = RetrofitService.getInstance().getRetrofitRequest().profileRoomInfo(tmp_memberId);
-       observ.enqueue(new Callback<ArrayList<Room>>() {
-           @Override
-           public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
-               if (response.isSuccessful()){
-               final ArrayList<Room> items = response.body();
 
-               profileAdapter = new Profile_adapter(items, MainActivity.this);
-               grid_main.setAdapter(profileAdapter);
-               for (int i = 0; i < items.size(); i++) {
-                   Log.d("profile", "profile : " + items.get(i).toString());
-               }
-               grid_main.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                   @Override
-                   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       Room item = items.get(position);
-
-                       Intent intent = new Intent(MainActivity.this, RoomActivity.class);
-                       intent.putExtra("room_id", item.getId());
-                       intent.putExtra("room_name", item.getName());
-                       intent.putExtra("room_img", item.getRoom_img());
-                       RoomInfo.getInstance().setRoom(item);
-                       Log.d("kkk", item.toString());
-                       startActivity(intent);
-                   }
-               });
-
-               Log.d("ttt", items.toString());
-               }
-           }
-
-           @Override
-           public void onFailure(Call<ArrayList<Room>> call, Throwable t) {
-                t.printStackTrace();
-           }
-       });
-    }
     @OnClick(R.id.img_input)
     public void onClickChange(View view){
         initDialog();
