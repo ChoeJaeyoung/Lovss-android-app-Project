@@ -108,72 +108,73 @@ public class upload_Activity extends AppCompatActivity {
                         file.getName(),
                         RequestBody.create(MediaType.parse("image/*"), file));
         Log.d("bjh","file : " + file.toString());
-        String name = text_title.getText().toString();
-        Integer member_id = LoginInfo.getInstance().getMember().getId();
+        final String name = text_title.getText().toString();
+        final Integer member_id = LoginInfo.getInstance().getMember().getId();
 
-        final RequestBody nameBody =
-                RequestBody.create(MediaType.parse("text/plain"),
-                        name);
-
-        final RequestBody idBody =
-                RequestBody.create(MediaType.parse("text/plain"), String.valueOf(member_id));
-
-        Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody, idBody);
-        obserV.enqueue(new Callback<Room>() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
+        alertDialog.setTitle("Q.");
+        alertDialog.setMessage("이 방 이름이 확실합니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
-            public void onResponse(Call<Room> call, Response<Room> response) {
-                if (response.isSuccessful()) {
-                    Log.d("bjh", "suc");
+            public void onClick(DialogInterface dialog, int which) {
 
-                    final Room room = response.body();
+                final RequestBody nameBody =
+                        RequestBody.create(MediaType.parse("text/plain"),  name);
 
-                    Log.d("bjh", "re:" + room.getId());
+                final RequestBody idBody =
+                        RequestBody.create(MediaType.parse("text/plain"), String.valueOf(member_id));
 
-                    if(room.getId()==1) {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
-                        alertDialog.setTitle("경고");
-                        alertDialog.setMessage("이미 동일한 방이 존재합니다.");
-                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody, idBody);
+                obserV.enqueue(new Callback<Room>() {
+                    @Override
+                    public void onResponse(Call<Room> call, Response<Room> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("bjh", "suc");
 
+                            final Room room = response.body();
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
+                            Log.d("bjh", "re:" + room.getId());
 
-                        alertDialog.show();
-                    } else {
-
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
-                        alertDialog.setTitle("Q.");
-                        alertDialog.setMessage("이 방 이름이 확실합니까?");
-                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            if(room.getId()==1) {
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
+                                alertDialog.setTitle("경고");
+                                alertDialog.setMessage("이미 동일한 방이 존재합니다.");
+                                alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
 
+                                alertDialog.show();
+                            } else {
                                 Intent intent = new Intent(upload_Activity.this, RoomActivity.class);
                                 intent.putExtra("room_id", room.getId());
                                 intent.putExtra("room_name", room.getName());
                                 intent.putExtra("room_img", room.getRoom_img());
-
                                 startActivity(intent);
-                            }
-                        });
-                        alertDialog.show();
-                    }
-                } else {
-                    Log.d("bjh", "fail");
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Room> call, Throwable t) {
-                t.printStackTrace();
+                            }
+                        } else {
+                            Log.d("bjh", "fail");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Room> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
             }
         });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        alertDialog.show();
     }
 
 
