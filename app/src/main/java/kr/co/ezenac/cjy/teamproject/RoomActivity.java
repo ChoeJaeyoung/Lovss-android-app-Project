@@ -1,8 +1,10 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -157,28 +159,78 @@ public class RoomActivity extends AppCompatActivity {
     @OnClick(R.id.in_room_room_delete)
     public void onClick_in_room_room_delete(View view){
 
-            Call<Integer> observ = RetrofitService.getInstance().getRetrofitRequest().deleteRoom2(room_id,LoginInfo.getInstance().getMember().getId());
-            observ.enqueue(new Callback<Integer>() {
-                @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    if (response.isSuccessful()) {
-                        Integer items = response.body();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("방을 삭제하시겠습니까?.");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-                        Log.d("uuu", items.toString());
+                Call<Integer> observ = RetrofitService.getInstance().getRetrofitRequest().deleteRoom2(room_id,LoginInfo.getInstance().getMember().getId());
+                observ.enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        if (response.isSuccessful()) {
+                            Integer items = response.body();
+
+                            Log.d("aaa", items.toString());
+
+                            if(items == 1){
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+                                alertDialog.setTitle("경고");
+                                alertDialog.setMessage("방이 삭제되었습니다.");
+                                alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+
+                                alertDialog.show();
+
+                            }else{
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+                                alertDialog.setTitle("경고");
+                                alertDialog.setMessage("방권한이 없습니다.");
+                                alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+
+                                alertDialog.show();
+
+                            }
 
 
 
-
-
-                    } else {
-                        Log.d("uuu", "1");
+                        } else {
+                            Log.d("uuu", "1");
+                        }
                     }
-                }
-                @Override
-                public void onFailure(Call<Integer> call, Throwable t) {
-                    t.printStackTrace();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+
+            }
+        });
+
+        alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+
+
+
+
+
 
     }
 
