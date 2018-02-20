@@ -34,9 +34,7 @@
         android:layout_height="match_parent"
         android:numColumns="1"
         android:layout_below="@+id/home_top">
-
     </GridView>
-
 
     <LinearLayout
         android:id="@+id/linearLayout_home"

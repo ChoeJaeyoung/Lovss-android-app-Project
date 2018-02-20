@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_home) LinearLayout linearLayout_home;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
     @OnClick(R.id.img_input)
     public void onClickChange(View view){
         initDialog();
@@ -80,10 +81,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void chooseCamer() {
-
-
                 Intent intent = new Intent(HomeActivity.this,upload_btn_photo_activity.class);
-
                 startActivity(intent);
                 Log.d("bjh","re: " + 55);
             }
