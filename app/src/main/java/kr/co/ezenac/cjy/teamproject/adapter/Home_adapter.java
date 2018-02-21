@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import kr.co.ezenac.cjy.teamproject.HomeActivity;
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.model.Main;
@@ -28,28 +29,37 @@ import retrofit2.Response;
  */
 
 public class Home_adapter extends BaseAdapter {
-    ArrayList<Main> items = new ArrayList<>();
-    Context context;
+    ArrayList<Main> Items = new ArrayList<>();
+    private Context mContext;
+    private int count = 5;
 
     public Home_adapter(ArrayList<Main> items, Context context) {
-        this.items = items;
-        this.context = context;
+        this.Items = items;
+        this.mContext = context;
     }
+
 
     @Override
     public int getCount() {
-        return items.size();
+        return Items.size();
     }
+
 
     @Override
     public Object getItem(int position) {
-        return items.get(position);
+        return Items.get(position); //변경여부..
     }
 
     @Override
     public long getItemId(int position) {
         return 0;
     }
+
+    public void addCount(int num) {
+        count += num;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -70,10 +80,10 @@ public class Home_adapter extends BaseAdapter {
 
         Main item = (Main) getItem(position);
         Log.d("ddd", item.toString());
-        Glide.with(context).load(item.getPath()).centerCrop().into(holder.img_homeAdapter);
+        Glide.with(mContext).load(item.getPath()).centerCrop().into(holder.img_homeAdapter);
         holder.text_homeAdapter.setText(item.getContent());
         holder.text_roomName.setText(item.getName());
-        Glide.with(context).load(item.getRoom_img()).centerCrop().into(holder.img_roomImg);
+        Glide.with(mContext).load(item.getRoom_img()).centerCrop().into(holder.img_roomImg);
 
         return convertView;
     }

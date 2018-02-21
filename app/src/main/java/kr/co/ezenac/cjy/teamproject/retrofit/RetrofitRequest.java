@@ -49,7 +49,7 @@ public interface RetrofitRequest {
     Call<Room> makeImg(@Part MultipartBody.Part photo, @Part("content") RequestBody content, @Part("room_number") RequestBody room_number);
 
     @GET("call_main")
-    Call<ArrayList<Main>> callMain(@Query("id") Integer member_id);
+    Call<ArrayList<Main>> callMain(@Query("count") Integer count, @Query("id") Integer member_id);
 
     @GET("searchRoom")
     Call<ArrayList<Room>> searchRoom(@Query("name") String name);

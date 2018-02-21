@@ -14,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Main {
+    private Integer id;
     private String name;
     private String room_img;
     private String path;
