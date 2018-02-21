@@ -32,10 +32,7 @@ public class JoinActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.img_joinBack)
-    public void onClickJoinBack(View view){
-        finish();
-    }
+
 
     @OnClick(R.id.btn_join)
     public void onClickJoinOk(View view){

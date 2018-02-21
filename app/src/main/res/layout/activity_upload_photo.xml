@@ -9,13 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/ultraViolet">
-    <ImageView
-        android:id="@+id/img_room_Back1"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/left_arrow" />
+
     </LinearLayout>
 
     <GridView
