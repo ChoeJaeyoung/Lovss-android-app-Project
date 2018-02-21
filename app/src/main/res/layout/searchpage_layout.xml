@@ -6,9 +6,11 @@
     >
 
     <LinearLayout
+        android:id="@+id/toptop"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/ultraViolet"
+
         >
 
     <ImageView
@@ -24,10 +26,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/ultraViolet"
+
             >
             <Button
                 android:id="@+id/btn_searh"
                 android:background="@drawable/btn_search"
+                android:backgroundTint="@color/colorIDICon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginRight="10dp"
@@ -46,9 +51,10 @@
                 />
         </RelativeLayout>
 
-
     </LinearLayout>
+
     <GridView
+        android:layout_below="@id/toptop"
         android:id="@+id/grid_picture"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
@@ -62,7 +68,9 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout_search">
+        android:id="@+id/linearLayout_search"
+        android:background="#ffffff"
+        >
 
         <ImageView
             android:id="@+id/img_home"

@@ -10,10 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,14 +38,14 @@ import retrofit2.Response;
 
 public class upload_imgActivity extends AppCompatActivity {
 
-    @BindView(R.id.upload_img_btn_upload) Button upload_img_btn_upload;
-    @BindView(R.id.upload_img_text_title) EditText upload_img_text_title;
-    @BindView(R.id.upload_img_img_add) ImageView upload_img_img_add;
+    @BindView(R.id.upload_img_btn_upload) TextView upload_img_btn_upload; // ok
+    @BindView(R.id.upload_img_text_title) EditText upload_img_text_title; // ok
+    @BindView(R.id.upload_img_img_add) ImageView upload_img_img_add; // ok
     @BindView(R.id.img_room_home) ImageView img_room_home;
     @BindView(R.id.img_room_search) ImageView img_room_search;
     @BindView(R.id.img_room_input) ImageView img_room_input;
     @BindView(R.id.img_room_option) ImageView img_room_option;
-    @BindView(R.id.upload_img_btn_titleImg) Button upload_img_btn_titleImg;
+    @BindView(R.id.upload_img_btn_titleImg) ImageView upload_img_btn_titleImg;
     @BindView(R.id.linearLayout_upload_img) LinearLayout linearLayout_upload_img;
 
 

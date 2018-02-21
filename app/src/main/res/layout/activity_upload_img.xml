@@ -9,51 +9,56 @@
 
 
 
-    <Button
+    <TextView
         android:id="@+id/upload_img_btn_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="사진 만들기 완료"
+        android:text="완료"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
         />
-    <LinearLayout
-        android:layout_below="@id/btn_upload"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+
+    <ImageView
+        android:id="@+id/upload_img_btn_titleImg"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/upload_photo"
+        android:layout_margin="10dp"
+
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 첨부"
+        android:layout_gravity="center_horizontal"
+        android:layout_toRightOf="@id/upload_img_btn_titleImg"
+        android:layout_alignBottom="@id/upload_img_btn_titleImg"
+        />
+
 
         <EditText
             android:id="@+id/upload_img_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="사진 제목" />
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:hint="간단한 글은 사진을 더욱 빛나게 해요"
+            android:layout_below="@id/upload_img_img_add"
+        />
 
         <ImageView
+            android:layout_below="@id/upload_img_btn_upload"
             android:id="@+id/upload_img_img_add"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:hint="대표사진을 입력하세요"
-            android:textAlignment="center"
+            android:src="@drawable/image_border"
             />
-        <Button
-            android:id="@+id/upload_img_btn_titleImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="사진 올리기 첨부"
-            android:layout_gravity="center_horizontal"/>
 
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +67,9 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout_upload_img">
+        android:id="@+id/linearLayout_upload_img"
+        android:background="#ffffff"
+        >
 
         <ImageView
             android:id="@+id/img_room_home"
@@ -83,7 +90,7 @@
             android:id="@+id/img_room_input"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:background="@drawable/add"
+            android:background="@drawable/add2"
             android:layout_marginLeft="45dp"
             />
 
@@ -92,7 +99,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/update_profile_img"
+            android:background="@drawable/btn_home_profile"
             />
     </LinearLayout>
 

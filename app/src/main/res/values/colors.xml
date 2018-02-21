@@ -7,4 +7,5 @@
     <color name="loginBar">#f9effa</color>
     <color name="colorIDICon">#ffffff</color>
     <color name="colorBTN">#2eccfa</color>
+    <color name="colorBlack">#020202</color>
 </resources>

@@ -148,7 +148,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()){
-                            Intent intent = new Intent(SearchActivity.this, RoomActivity.class);
+                            Intent intent = new Intent(SearchActivity.this,RoomActivity.class);
                             intent.putExtra("room_id", item.getId());
                             intent.putExtra("room_name", item.getName());
                             intent.putExtra("room_img", item.getRoom_img());

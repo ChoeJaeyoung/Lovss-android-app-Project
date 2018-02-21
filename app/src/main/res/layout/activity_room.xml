@@ -93,7 +93,9 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout_room">
+        android:id="@+id/linearLayout_room"
+        android:background="#ffffff"
+        >
 
         <ImageView
             android:id="@+id/img_room_home"
