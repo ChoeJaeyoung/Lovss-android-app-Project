@@ -83,7 +83,7 @@
             android:id="@+id/img_room_input"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:background="@drawable/add2"
+            android:background="@drawable/add"
             android:layout_marginLeft="45dp"
             />
 
@@ -92,7 +92,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
-            android:background="@drawable/btn_home_profile"
+            android:background="@drawable/update_profile_img"
             />
     </LinearLayout>
 

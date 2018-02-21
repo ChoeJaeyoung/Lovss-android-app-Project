@@ -47,7 +47,7 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_room_Back) ImageView img_room_Back;
     @BindView(R.id.img_roomImg) ImageView img_roomImg;
     @BindView(R.id.text_room_name) TextView text_room_name;
-    @BindView(R.id.in_room_img_add) Button in_room_img_add;
+    @BindView(R.id.in_room_img_add) ImageView in_room_img_add;
     @BindView(R.id.img_room_home) ImageView img_room_home;
     @BindView(R.id.img_room_search) ImageView img_room_search;
     @BindView(R.id.img_room_input) ImageView img_room_input;
