@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_mainProfile) ImageView img_mainProfile;
 
     @BindView(R.id.text_mainId) TextView text_mainId;
-    Profile_adapter profileAdapter;
     @BindView(R.id.img_home) ImageView img_home;
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
@@ -62,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Log.d("jjj","bbb"+  LoginInfo.getInstance().getMember().getId());
         Integer tmpId = LoginInfo.getInstance().getMember().getId();
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
         String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
+
+
+
 
         //★
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -224,7 +227,11 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.mainpage_id)
     public void onReturnPresentPage(View view) {
-        profileAdapter.setMode(0);
-        profileAdapter.notifyDataSetChanged();
+        if(viewpager_1.getCurrentItem()==0){
+            RoomFragment roomFragment = (RoomFragment) viewPagerAdapter.getFragmentIndex(0);//●굳굳굳굳
+            roomFragment.getProfileAdapter().setMode(0);
+            roomFragment.getProfileAdapter().notifyDataSetChanged();
+        }
+
     }
 }

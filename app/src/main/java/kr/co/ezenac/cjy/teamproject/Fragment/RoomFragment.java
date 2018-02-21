@@ -123,4 +123,13 @@ public class RoomFragment extends Fragment {
         });
     }
 
+    public Profile_adapter getProfileAdapter() {
+        return profileAdapter;
+    }
+
+    public void setProfileAdapter(Profile_adapter profileAdapter) {
+        this.profileAdapter = profileAdapter;
+    }
+
+
 }

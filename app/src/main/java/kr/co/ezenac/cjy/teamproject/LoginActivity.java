@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             LoginInfo.getInstance().setMember(member);
+            Log.d("jjj","qwe"+  LoginInfo.getInstance().getMember().getId());
             startActivity(intent);
         }
     }
