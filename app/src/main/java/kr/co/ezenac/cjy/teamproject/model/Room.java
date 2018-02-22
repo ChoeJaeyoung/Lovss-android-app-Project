@@ -17,4 +17,5 @@ public class Room {
     private Integer id;
     private String name;
     private String room_img;
+    private String room_ps;
 }

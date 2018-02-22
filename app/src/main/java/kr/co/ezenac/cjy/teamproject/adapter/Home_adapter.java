@@ -49,6 +49,12 @@ public class Home_adapter extends BaseAdapter {
         this.col = col;
     }
 
+    public Home_adapter(ArrayList<Main> items, Context mContext) {
+        Items = items;
+        this.mContext = mContext;
+
+    }
+
     @Override
     public int getCount() {
         return Items.size();

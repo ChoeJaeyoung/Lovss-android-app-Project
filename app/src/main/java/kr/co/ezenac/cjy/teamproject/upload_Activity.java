@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.customview.CustomDialog;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
@@ -39,12 +40,17 @@ public class upload_Activity extends AppCompatActivity {
 
     @BindView(R.id.btn_upload) TextView btn_upload; //ok
     @BindView(R.id.text_title) EditText text_title; //ok
+    @BindView(R.id.  btn_open_room) Button  btn_open_room; //ok
+    @BindView(R.id.  btn_hidden_room) Button  btn_hidden_room; //ok
     @BindView(R.id.img_add) ImageView img_add;
     @BindView(R.id.img_room_home) ImageView img_room_home; //ok
     @BindView(R.id.img_room_search) ImageView img_room_search; //ok
     @BindView(R.id.img_room_input) ImageView img_room_input; //ok
     @BindView(R.id.img_room_option) ImageView img_room_option; //ok
     @BindView(R.id.btn_logout) ImageView btn_logout;
+    String password;
+
+
 
 
 
@@ -58,6 +64,32 @@ public class upload_Activity extends AppCompatActivity {
         ButterKnife.bind(this);
 
     }
+
+
+
+
+    @OnClick(R.id.btn_hidden_room)
+    public void onClickbtn_hidden_room(View view){
+        password = "000000";
+        btn_hidden_room.setBackgroundResource(R.color.colorBTN);
+        btn_open_room.setBackgroundResource(R.color.colorGray);
+    }
+
+
+    @OnClick(R.id.btn_open_room)
+    public void onClickbtn_open_room(View view){
+        btn_open_room.setBackgroundResource(R.color.colorBTN);
+        btn_hidden_room.setBackgroundResource(R.color.colorGray);
+        CustomDialog dialog = new CustomDialog(upload_Activity.this);
+        dialog.setCallbacks(new CustomDialog.Callbacks() {
+            @Override
+            public void onClickSend(String name) {
+                password = name;
+            }
+        });
+        dialog.show();
+    }
+
 
     @OnClick(R.id.img_room_input)
     public void onClickChange(View view){
@@ -122,10 +154,13 @@ public class upload_Activity extends AppCompatActivity {
                 final RequestBody nameBody =
                         RequestBody.create(MediaType.parse("text/plain"),  name);
 
+                final RequestBody passwordBody =
+                        RequestBody.create(MediaType.parse("text/plain"),  password);
+
                 final RequestBody idBody =
                         RequestBody.create(MediaType.parse("text/plain"), String.valueOf(member_id));
 
-                Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody, idBody);
+                Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeRoom(filePart, nameBody, idBody,passwordBody);
                 obserV.enqueue(new Callback<Room>() {
                     @Override
                     public void onResponse(Call<Room> call, Response<Room> response) {

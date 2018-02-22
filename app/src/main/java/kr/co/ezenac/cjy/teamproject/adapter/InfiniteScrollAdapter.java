@@ -3,6 +3,7 @@ package kr.co.ezenac.cjy.teamproject.adapter;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,6 +137,7 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
                 if (mListeners != null) {
                     for (InfiniteScrollListener listener : mListeners) {
                         listener.onInfiniteScrolled();
+                        Log.d("sss","bb");
                     }
                 }
             }

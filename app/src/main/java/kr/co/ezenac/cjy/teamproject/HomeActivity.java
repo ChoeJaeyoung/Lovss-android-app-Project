@@ -1,6 +1,7 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_home) LinearLayout linearLayout_home;
     @BindView(R.id.btn_logout) ImageView btn_logout;
+    private ProgressDialog mDlg;
 
     private static final int GRID_ITEM_HEIGHT = 128;
     private static final int GRID_ITEM_WIDTH = 128;
@@ -80,6 +82,11 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     }
 
     public void callHomeImg(Integer count, Integer member_id){
+        mDlg = new ProgressDialog(this);
+        mDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDlg.setMessage("Loding...");
+        mDlg.show();
+
         Call<ArrayList<Main>> observ = RetrofitService.getInstance().getRetrofitRequest()
                 .callMain(count,member_id);
         observ.enqueue(new Callback<ArrayList<Main>>() {
@@ -93,6 +100,12 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
 
                     mAdapter.notifyDataSetChanged();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mDlg.dismiss();
                 }
             }
 
@@ -144,20 +157,20 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
     @Override
     public void onInfiniteScrolled() {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                callHomeImg(count,tmpId);
-                count++;
-              mAdapter.getAdapter().addCount(0); // ★★★증감되서 나오는 갯수
-                mAdapter.handledRefresh();
-                // when the adapter load more then 100 items. i will disable the
-                // feature of load more.
-                if (mAdapter.getOriginalAdapter().getCount() > 100) { //★★★나오는 최대갯수
-                    mAdapter.canReadMore(false);
-                }
-            }
-        }, 1000); //나오는 시간딜레이
+        Log.d("sss","aa");
+        callHomeImg(count,tmpId);
+        count++;
+        mAdapter.handledRefresh();
+
+    /*
+        mAdapter.getAdapter().addCount(0); // ★★★증감되서 나오는 갯수
+        mAdapter.handledRefresh();
+        // when the adapter load more then 100 items. i will disable the
+        // feature of load more.
+        if (mAdapter.getOriginalAdapter().getCount() > 100) { //★★★나오는 최대갯수
+            mAdapter.canReadMore(false);
+        }
+        */
     }
     @OnClick(R.id.btn_logout)
     public void onClickLogout(View view){

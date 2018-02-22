@@ -44,6 +44,29 @@
         android:layout_below="@id/img_add"
         />
 
+    <Button
+        android:id="@+id/btn_open_room"
+        android:layout_below="@id/img_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:hint="공개방"
+
+        />
+
+    <Button
+        android:id="@+id/btn_hidden_room"
+        android:layout_below="@id/img_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:hint="비공개방"
+        />
+
+
     <ImageView
         android:layout_below="@id/btn_upload"
         android:id="@+id/img_add"

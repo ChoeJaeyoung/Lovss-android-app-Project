@@ -78,6 +78,21 @@ public class RoomActivity extends AppCompatActivity {
         Glide.with(RoomActivity.this).load(room_img).centerCrop().
                 into(img_roomImg);
         callImgInfo(room_id);
+
+        grid_room_gv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("ppp", "LongCLICK2");
+                String str = grid_room_gv.getItemAtPosition(position).toString();
+                Log.d("ppp", str);
+
+                roomAdapter.setMode(1);
+                roomAdapter.notifyDataSetChanged();
+                roomAdapter.setRoom_id(room_id);
+
+                return true;
+            }
+        });
     }
 
     @OnClick(R.id.img_roomImg)
@@ -105,50 +120,108 @@ public class RoomActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
-            if (requestCode == 0){
-                File file = new File(RealPathUtil.getRealPath(RoomActivity.this, data.getData()));
-                if (file.exists()){
-                    Log.d("fff", "exist");
-                }
-                MultipartBody.Part filePart =
-                        MultipartBody.Part.createFormData("file", file.getName(),
-                                RequestBody.create(MediaType.parse("image/*"),file));
+        Integer member_id = LoginInfo.getInstance().getMember().getId();
+        Call<Integer> obser = RetrofitService.getInstance().getRetrofitRequest()
+                .checkManager(room_id, member_id);
+        Log.d("ppp","proDelete" + room_id);
+        Log.d("ppp","proDelete" + member_id);
+        obser.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()){
+                    Integer tmp = response.body();
+                    Log.d("ttt",""+tmp);
 
-                RequestBody roomId =
-                        RequestBody.create(MediaType.parse("text/plain"), String.valueOf(room_id));
+                    if(tmp == 1){
 
-                Call<Room> observ = RetrofitService.getInstance().getRetrofitRequest().updateRoom(filePart, roomId);
-                observ.enqueue(new Callback<Room>() {
-                    @Override
-                    public void onResponse(Call<Room> call, Response<Room> response) {
-                        if (response.isSuccessful()){
-                            Room room = response.body();
-                            RoomInfo.getInstance().setRoom(room);
-                            Log.d("yyy", room.toString());
+                        if (resultCode == RESULT_OK){
+                            if (requestCode == 0){
+                                File file = new File(RealPathUtil.getRealPath(RoomActivity.this, data.getData()));
+                                if (file.exists()){
+                                    Log.d("fff", "exist");
+                                }
+                                MultipartBody.Part filePart =
+                                        MultipartBody.Part.createFormData("file", file.getName(),
+                                                RequestBody.create(MediaType.parse("image/*"),file));
 
-                            String updateImg = RoomInfo.getInstance().getRoom().getRoom_img();
-                            Glide.with(RoomActivity.this).load(updateImg).centerCrop().
-                                    into(img_roomImg);
-                            Log.d("profile", "success : " + room.toString());
+                                RequestBody roomId =
+                                        RequestBody.create(MediaType.parse("text/plain"), String.valueOf(room_id));
+
+                                Call<Room> observ = RetrofitService.getInstance().getRetrofitRequest().updateRoom(filePart, roomId);
+                                observ.enqueue(new Callback<Room>() {
+                                    @Override
+                                    public void onResponse(Call<Room> call, Response<Room> response) {
+                                        if (response.isSuccessful()){
+                                            Room room = response.body();
+                                            RoomInfo.getInstance().setRoom(room);
+                                            Log.d("yyy", room.toString());
+
+                                            String updateImg = RoomInfo.getInstance().getRoom().getRoom_img();
+                                            Glide.with(RoomActivity.this).load(updateImg).centerCrop().
+                                                    into(img_roomImg);
+                                            Log.d("profile", "success : " + room.toString());
 
 
-                        } else {
-                            Log.d("profile", "fail");
+                                        } else {
+                                            Log.d("profile", "fail");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Room> call, Throwable t) {
+                                        t.printStackTrace();
+                                    }
+                                });
+                            }
                         }
+
+
+
+
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+                        alertDialog.setTitle("경고");
+                        alertDialog.setMessage("프로필이바뀌었습니다.");
+                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                            }
+                        });
+                        alertDialog.show();
+                    }else{
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+                        alertDialog.setTitle("경고");
+                        alertDialog.setMessage("방장권한이 없습니다..");
+                        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alertDialog.show();
                     }
 
-                    @Override
-                    public void onFailure(Call<Room> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                }
             }
-        }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                t.printStackTrace();
+            }
+
+
+        });
     }
+
+
+
+
+
 
     @OnClick(R.id.in_room_img_add)
     public void onClick_in_room_img_add(View view){
@@ -343,12 +416,12 @@ public class RoomActivity extends AppCompatActivity {
         alertDialog.setMessage("로그아웃 하시겠습니까?");
         alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-            Intent intent = new Intent(RoomActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
+                Intent intent = new Intent(RoomActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
 
         });
         alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
