@@ -44,6 +44,7 @@ public class upload_Activity extends AppCompatActivity {
     @BindView(R.id.img_room_search) ImageView img_room_search; //ok
     @BindView(R.id.img_room_input) ImageView img_room_input; //ok
     @BindView(R.id.img_room_option) ImageView img_room_option; //ok
+    @BindView(R.id.btn_logout) ImageView btn_logout;
 
 
 
@@ -223,6 +224,30 @@ public class upload_Activity extends AppCompatActivity {
                 }
             }
         }
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_Activity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(upload_Activity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 
 }

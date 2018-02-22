@@ -1,8 +1,10 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +30,7 @@ import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.Fragment.RoomFragment;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.ViewPagerAdapter;
+import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.viewpager_1) ViewPager viewpager_1;
     @BindView(R.id.btn_room) Button btn_room;
     @BindView(R.id.btn_collection) Button btn_collection;
-
+    @BindView(R.id.btn_logout) ImageView btn_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,5 +236,29 @@ public class MainActivity extends AppCompatActivity {
             roomFragment.getProfileAdapter().notifyDataSetChanged();
         }
 
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }

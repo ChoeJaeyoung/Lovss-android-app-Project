@@ -40,6 +40,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_search) LinearLayout linearLayout_search;
+    @BindView(R.id.btn_logout) ImageView btn_logout;
 
 
 
@@ -165,6 +166,30 @@ public class SearchActivity extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(SearchActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
 
         });

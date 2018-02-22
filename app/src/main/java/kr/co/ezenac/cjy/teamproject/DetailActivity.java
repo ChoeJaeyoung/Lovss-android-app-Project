@@ -1,6 +1,8 @@
 package kr.co.ezenac.cjy.teamproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +30,7 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.btn_detail_addPhoto) Button btn_detail_addPhoto;
     @BindView(R.id.grid_detail_gv) GridView grid_detail_gv;
-
+    @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.img_home) ImageView img_home;
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
@@ -132,5 +134,29 @@ public class DetailActivity extends AppCompatActivity {
     @OnClick(R.id.linearLayout_detail)
     public void onClickMain(View view){
 
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(DetailActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }

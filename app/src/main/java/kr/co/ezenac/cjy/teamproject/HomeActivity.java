@@ -2,9 +2,11 @@ package kr.co.ezenac.cjy.teamproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -33,6 +35,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     @BindView(R.id.img_input) ImageView img_input;
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_home) LinearLayout linearLayout_home;
+    @BindView(R.id.btn_logout) ImageView btn_logout;
 
     private static final int GRID_ITEM_HEIGHT = 128;
     private static final int GRID_ITEM_WIDTH = 128;
@@ -142,5 +145,29 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
                 }
             }
         }, 1000); //나오는 시간딜레이
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(HomeActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }

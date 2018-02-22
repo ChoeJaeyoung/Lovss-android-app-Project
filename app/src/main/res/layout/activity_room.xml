@@ -29,22 +29,24 @@
             android:layout_marginLeft="10dp"
             />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="사진삭제"
-            android:textSize="7dp"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
             android:id="@+id/in_room_img_delete"
-            android:layout_marginLeft="5dp"
+            android:background="@drawable/picture"
+            android:backgroundTint="@color/colorIDICon"
+            android:layout_marginLeft="15dp"
             />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="방삭제"
-            android:textSize="7dp"
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:id="@+id/in_room_room_delete"
-            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:background="@drawable/chat"
+            android:backgroundTint="@color/colorIDICon"
+            android:layout_marginLeft="15dp"
             />
 
     </LinearLayout>
@@ -126,6 +128,13 @@
             android:layout_height="28dp"
             android:layout_marginLeft="45dp"
             android:background="@drawable/btn_home_profile"
+            />
+        <ImageView
+            android:id="@+id/btn_logout"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/logout"
             />
     </LinearLayout>
 

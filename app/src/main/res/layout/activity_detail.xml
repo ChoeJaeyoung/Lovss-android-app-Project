@@ -72,5 +72,13 @@
             android:layout_marginLeft="45dp"
             android:background="@drawable/btn_home_profile"
             />
+        <ImageView
+        android:id="@+id/btn_logout"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="45dp"
+        android:background="@drawable/logout"
+        />
     </LinearLayout>
+
 </RelativeLayout>

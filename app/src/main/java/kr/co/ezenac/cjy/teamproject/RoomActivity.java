@@ -53,7 +53,9 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_room_input) ImageView img_room_input;
     @BindView(R.id.img_room_option) ImageView img_room_option;
     @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
-
+    @BindView(R.id.btn_logout) ImageView btn_logout;
+    @BindView(R.id.in_room_img_delete) ImageView in_room_img_delete;
+    @BindView(R.id.in_room_room_delete) ImageView in_room_room_delete;
 
     Integer room_id;
 
@@ -318,5 +320,29 @@ public class RoomActivity extends AppCompatActivity {
     @OnClick(R.id.linearLayout_room)
     public void onClickMain(View view){
 
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+            Intent intent = new Intent(RoomActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }

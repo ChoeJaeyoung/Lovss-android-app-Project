@@ -1,7 +1,9 @@
 package kr.co.ezenac.cjy.teamproject;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +49,7 @@ public class upload_imgActivity extends AppCompatActivity {
     @BindView(R.id.img_room_option) ImageView img_room_option;
     @BindView(R.id.upload_img_btn_titleImg) ImageView upload_img_btn_titleImg;
     @BindView(R.id.linearLayout_upload_img) LinearLayout linearLayout_upload_img;
+    @BindView(R.id.btn_logout) ImageView btn_logout;
 
 
 
@@ -207,5 +210,29 @@ public class upload_imgActivity extends AppCompatActivity {
     @OnClick(R.id.linearLayout_upload_img)
     public void onClickMain(View view){
 
+    }
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_imgActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("로그아웃 하시겠습니까?");
+        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(upload_imgActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }
