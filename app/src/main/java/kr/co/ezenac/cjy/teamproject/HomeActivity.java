@@ -14,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Home_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.InfiniteScrollAdapter;
+import kr.co.ezenac.cjy.teamproject.db.DBManager;
+import kr.co.ezenac.cjy.teamproject.model.Collect;
 import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
@@ -44,8 +47,10 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     private Handler mHandler;
     Integer tmpId;
     Integer count = 1;
-    Context context;
     ArrayList<Main> imgs2 = new ArrayList<>();
+    DBManager dbManager;
+    ArrayList<Collect> collects = new ArrayList<>();
+    HashMap<Integer, Collect> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +63,19 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
         mGridView = (GridView)findViewById(R.id.grid_home_gv);
         mAdapter = new InfiniteScrollAdapter<Home_adapter>(HomeActivity.this,
-                new Home_adapter(imgs2,HomeActivity.this), GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT);
+                new Home_adapter(imgs2,HomeActivity.this,hashMap), GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT);
         mAdapter.addListener(HomeActivity.this);
         mGridView.setAdapter(mAdapter);
 
         mHandler = new Handler();
+
+
+        dbManager = new DBManager(HomeActivity.this, "Collect.db", null,1);
+        collects = dbManager.getCollectList(tmpId);
+        for (int i = 0; i < collects.size(); i++){
+            Integer img_id = collects.get(i).getImg_id();
+            hashMap.put(img_id, collects.get(i));
+        }
 
     }
 

@@ -19,16 +19,9 @@ public class DBManager extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
-    public Integer checkCollect(Integer user_id, Integer img_id){
-        Log.d("checkData",user_id +"//" + img_id);
-        Integer getCount = 0;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select count(*) from Collect where user_id =" + user_id + " and img_id =" + img_id,null);
-        while (cursor.moveToNext()){
-            getCount = cursor.getInt(0);
-        }
-        return getCount;
-    }
+
+
+
 
     public void deleteData(Integer id){
         SQLiteDatabase db = getReadableDatabase();

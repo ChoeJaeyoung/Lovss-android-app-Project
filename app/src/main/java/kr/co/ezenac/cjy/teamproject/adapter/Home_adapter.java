@@ -37,16 +37,17 @@ import retrofit2.Response;
 public class Home_adapter extends BaseAdapter {
     ArrayList<Main> Items = new ArrayList<>();
     private Context mContext;
+    HashMap<Integer, Collect> col = new HashMap<>();
     private int count = 5;
     DBManager dbManager;
     Collect collect;
     Integer star_mode;
 
-    public Home_adapter(ArrayList<Main> items, Context context) {
-        this.Items = items;
-        this.mContext = context;
+    public Home_adapter(ArrayList<Main> items, Context mContext, HashMap<Integer, Collect> col) {
+        Items = items;
+        this.mContext = mContext;
+        this.col = col;
     }
-
 
     @Override
     public int getCount() {
@@ -102,15 +103,9 @@ public class Home_adapter extends BaseAdapter {
         final String img_content = item.getContent();
         final Integer main_id = item.getId();
 
-        HashMap<Integer,Collect> col = new HashMap<>();
-        //col.put(,collect);
-
-        //star_mode = dbManager.checkCollect(user_id, main_id);
-        Log.d("collection",star_mode+"++++");
-
         if (col.get(main_id) == null){
             holder.img_star.setBackgroundResource(R.drawable.star);
-        } else if(star_mode == 1){
+        } else {
             holder.img_star.setBackgroundResource(R.drawable.star_mark);
         }
 
@@ -118,12 +113,12 @@ public class Home_adapter extends BaseAdapter {
         holder.img_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(star_mode == 0) {
+                if(col.get(main_id) == null) {
                     dbManager.insertData(1, user_id, main_id, img_path, img_content);
                     finalHolder.img_star.setBackgroundResource(R.drawable.star_mark);
                     Log.d("collection",main_id + "//"+user_id +" // " +  img_path +" // " + img_content);
                     notifyDataSetChanged();
-                } else if(star_mode == 1){
+                } else {
                     dbManager.deleteData(main_id);
                     finalHolder.img_star.setBackgroundResource(R.drawable.star);
                     Log.d("collection", String.valueOf(main_id));
