@@ -79,7 +79,7 @@ public class Profile_adapter extends BaseAdapter{
             holder = (Holder) convertView.getTag();
         }
 
-        ButterKnife.bind(this,convertView);
+      
 
 
         Room item = (Room) getItem(position);

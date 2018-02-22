@@ -161,54 +161,75 @@ public class RoomActivity extends AppCompatActivity {
     @OnClick(R.id.in_room_room_delete)
     public void onClick_in_room_room_delete(View view){
 
+        Log.d("ppp","proDelete");
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
         alertDialog.setTitle("경고");
-        alertDialog.setMessage("방을 삭제하시겠습니까?.");
-        alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage("방을 삭제하시겠습니까?");
+        alertDialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                Call<Integer> observ = RetrofitService.getInstance().getRetrofitRequest().deleteRoom2(room_id,LoginInfo.getInstance().getMember().getId());
-                observ.enqueue(new Callback<Integer>() {
+                Integer member_id = LoginInfo.getInstance().getMember().getId();
+                Call<Integer> obser = RetrofitService.getInstance().getRetrofitRequest()
+                        .checkManager(room_id, member_id);
+                Log.d("ppp","proDelete" + room_id);
+                Log.d("ppp","proDelete" + member_id);
+                obser.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        if (response.isSuccessful()) {
-                            Integer items = response.body();
+                        if (response.isSuccessful()){
+                            Integer tmp = response.body();
+                            Log.d("ttt",""+tmp);
 
-                            Log.d("aaa", items.toString());
+                            if(tmp == 1){
 
-                            if(items == 1){
+                                final Integer member_id = LoginInfo.getInstance().getMember().getId();
+                                Call<Void> obser = RetrofitService.getInstance().getRetrofitRequest()
+                                        .deleteRoom2(room_id);
+                                obser.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.isSuccessful()){
+
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        t.printStackTrace();
+                                    }
+                                });
+
+
+
+
                                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
                                 alertDialog.setTitle("경고");
                                 alertDialog.setMessage("방이 삭제되었습니다.");
                                 alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(RoomActivity.this,MainActivity.class);
+
+                                        startActivity(intent);
 
                                     }
                                 });
-
                                 alertDialog.show();
-
                             }else{
                                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
                                 alertDialog.setTitle("경고");
-                                alertDialog.setMessage("방권한이 없습니다.");
+                                alertDialog.setMessage("방장권한이 없습니다..");
                                 alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
                                     }
                                 });
-
                                 alertDialog.show();
-
                             }
 
-
-
-                        } else {
-                            Log.d("uuu", "1");
                         }
                     }
                     @Override
@@ -216,23 +237,16 @@ public class RoomActivity extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
-
-
             }
         });
 
-        alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
         alertDialog.show();
-
-
-
-
-
 
     }
 

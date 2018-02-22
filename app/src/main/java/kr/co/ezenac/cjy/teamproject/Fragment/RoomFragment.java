@@ -73,14 +73,6 @@ public class RoomFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
         return  view;
     }
 

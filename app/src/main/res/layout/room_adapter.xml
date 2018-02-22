@@ -10,4 +10,13 @@
         android:layout_centerInParent="true"
         android:background="@drawable/daily_cover"/>
 
+    <Button
+        android:id="@+id/btn_imgDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/delete"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
+
+
 </RelativeLayout>
