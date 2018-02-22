@@ -48,6 +48,7 @@
             android:layout_marginLeft="7dp"/>
         
         <ImageView
+            android:id="@+id/img_star"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@drawable/star"

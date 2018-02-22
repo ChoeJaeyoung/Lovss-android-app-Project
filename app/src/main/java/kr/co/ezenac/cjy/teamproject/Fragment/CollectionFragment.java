@@ -18,7 +18,10 @@ import butterknife.ButterKnife;
 import kr.co.ezenac.cjy.teamproject.DetailActivity;
 import kr.co.ezenac.cjy.teamproject.R;
 import kr.co.ezenac.cjy.teamproject.RoomActivity;
+import kr.co.ezenac.cjy.teamproject.adapter.Collection_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
+import kr.co.ezenac.cjy.teamproject.db.DBManager;
+import kr.co.ezenac.cjy.teamproject.model.Collect;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
@@ -31,8 +34,22 @@ import retrofit2.Response;
  */
 
 public class CollectionFragment extends Fragment {
-    Room_adapter room_adapter;
+    ArrayList<Collect> items = new ArrayList<>();
+    Collection_adapter collectionAdapter;
     @BindView(R.id.gridview_main_2) GridView gridview_main_2;
+
+    DBManager dbManager;
+
+    public static CollectionFragment newInstance(int index) {
+        CollectionFragment f = new CollectionFragment();
+
+        // Supply index input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+
+        return f;
+    }
 
     @Nullable
     @Override
@@ -41,17 +58,13 @@ public class CollectionFragment extends Fragment {
 
         Log.d("joseph","cc");
         View view = inflater.inflate(R.layout.activity_fragment_collection, container, false);
-        ButterKnife.bind(this, view);
-        Integer tmpId = LoginInfo.getInstance().getMember().getId();
-        String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
-        String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
-        // getActivity
-        // this 프래그먼트
+        ButterKnife.bind(this,view);
+        dbManager = new DBManager(getActivity(), "Collect.db", null, 1);
+        Integer userID = LoginInfo.getInstance().getMember().getId();
+        items = dbManager.getCollectList(userID);
+        Log.d("collection",items.toString());
 
-        callImgInfo(2);
-
-
-        Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
+        collectImg();
 
         gridview_main_2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -66,50 +79,20 @@ public class CollectionFragment extends Fragment {
                 return true;
             }
         });
-
-
-
-
-
-
-
-
-
         return  view;
     }
 
-    public void callImgInfo(Integer room_id){
-        Call<ArrayList<Img>> observ = RetrofitService.getInstance().getRetrofitRequest().
-                callRoomImg(room_id);
-        observ.enqueue(new Callback<ArrayList<Img>>() {
+    public void collectImg(){
+        collectionAdapter = new Collection_adapter(items, getActivity());
+        gridview_main_2.setAdapter(collectionAdapter);
+        /*gridview_main_2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onResponse(Call<ArrayList<Img>> call, Response<ArrayList<Img>> response) {
-                if (response.isSuccessful()) {
-                    final ArrayList<Img> items = response.body();
-
-                    Log.d("uuu", items.toString());
-
-
-                    room_adapter = new Room_adapter(items, getActivity());
-                    gridview_main_2.setAdapter(room_adapter);
-                    gridview_main_2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(getActivity(), DetailActivity.class);
-                            intent.putExtra("position", position);
-                            startActivity(intent);
-                        }
-                    });
-
-                } else {
-                    Log.d("uuu", "1");
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
-            @Override
-            public void onFailure(Call<ArrayList<Img>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        });*/
     }
 
 }
