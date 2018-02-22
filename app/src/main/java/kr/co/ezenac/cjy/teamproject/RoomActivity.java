@@ -54,7 +54,6 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.img_room_option) ImageView img_room_option;
     @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
     @BindView(R.id.btn_logout) ImageView btn_logout;
-    @BindView(R.id.in_room_img_delete) ImageView in_room_img_delete;
     @BindView(R.id.in_room_room_delete) ImageView in_room_room_delete;
 
     Integer room_id;
@@ -323,10 +322,6 @@ public class RoomActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.in_room_img_delete)
-    public void onClick_in_room_img_delete(View view){
-
-    }
 
 
     public void callImgInfo(Integer room_id){

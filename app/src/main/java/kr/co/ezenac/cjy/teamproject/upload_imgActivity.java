@@ -67,59 +67,71 @@ public class upload_imgActivity extends AppCompatActivity {
     @OnClick(R.id.upload_img_btn_upload)
     public void onClickBtnAdd(View view) {
 
-        final MultipartBody.Part filePart =
-                MultipartBody.Part.createFormData("file",
-                        file.getName(),
-                        RequestBody.create(MediaType.parse("image/*"), file));
-        Log.d("bjh","file : " + file.toString());
-        String content = upload_img_text_title.getText().toString();
-
-        Intent intent = getIntent();
-        Integer troom_id = intent.getIntExtra("room_id", 0);
+        if (file == null || upload_img_text_title.getText().toString().equals("")) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(upload_imgActivity.this);
+            alertDialog.setTitle("!");
+            alertDialog.setMessage("사진과 글을 채워주세요");
+            alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 
-
-        String room_id = troom_id.toString();
-
-        final RequestBody contentBody =
-                RequestBody.create(MediaType.parse("text/plain"),
-                        content);
-        final RequestBody room_numberBody =
-                RequestBody.create(MediaType.parse("text/plain"),
-                        room_id); // 수정해야됩니다. ☆☆★
-
-
-
-
-
-        Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeImg(filePart, contentBody, room_numberBody);
-        obserV.enqueue(new Callback<Room>() {
-            @Override
-            public void onResponse(Call<Room> call, Response<Room> response) {
-                if (response.isSuccessful()) {
-                    Log.d("bjh", "suc");
-                    Room item = response.body();
-                    RoomInfo.getInstance().setRoom(item);
-                    Log.d("upup", item.toString());
-                 Log.d("ccc7" ,""+ item.toString());
-                    Intent intent = new Intent(upload_imgActivity.this, RoomActivity.class);
-                    intent.putExtra("room_id", item.getId());
-                    intent.putExtra("room_name", item.getName());
-                    intent.putExtra("room_img", item.getRoom_img());
-                    startActivity(intent);
-
-                    //finish();
-                } else {
-                    Log.d("bjh", "fail");
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                 }
-            }
+            });
 
-            @Override
-            public void onFailure(Call<Room> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+            alertDialog.show();
 
+        } else {
+            final MultipartBody.Part filePart =
+                    MultipartBody.Part.createFormData("file",
+                            file.getName(),
+                            RequestBody.create(MediaType.parse("image/*"), file));
+            Log.d("bjh", "file : " + file.toString());
+            String content = upload_img_text_title.getText().toString();
+
+            Intent intent = getIntent();
+            Integer troom_id = intent.getIntExtra("room_id", 0);
+
+
+            String room_id = troom_id.toString();
+
+            final RequestBody contentBody =
+                    RequestBody.create(MediaType.parse("text/plain"),
+                            content);
+            final RequestBody room_numberBody =
+                    RequestBody.create(MediaType.parse("text/plain"),
+                            room_id); // 수정해야됩니다. ☆☆★
+
+
+            Call<Room> obserV = RetrofitService.getInstance().getRetrofitRequest().makeImg(filePart, contentBody, room_numberBody);
+            obserV.enqueue(new Callback<Room>() {
+                @Override
+                public void onResponse(Call<Room> call, Response<Room> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("bjh", "suc");
+                        Room item = response.body();
+                        RoomInfo.getInstance().setRoom(item);
+                        Log.d("upup", item.toString());
+                        Log.d("ccc7", "" + item.toString());
+                        Intent intent = new Intent(upload_imgActivity.this, RoomActivity.class);
+                        intent.putExtra("room_id", item.getId());
+                        intent.putExtra("room_name", item.getName());
+                        intent.putExtra("room_img", item.getRoom_img());
+                        startActivity(intent);
+
+                        //finish();
+                    } else {
+                        Log.d("bjh", "fail");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Room> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
+        }
     }
 
     @OnClick(R.id.upload_img_btn_titleImg)
