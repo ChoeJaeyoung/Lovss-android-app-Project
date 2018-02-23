@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import kr.co.ezenac.cjy.teamproject.R;
 
@@ -43,6 +44,14 @@ public class CustomDialog extends Dialog {
         btn_dialog_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if( et_ps.length() < 4 ) {
+                    Toast
+                            .makeText(getContext(),"4자리 이하는 입력하실 수 없습니다." , Toast.LENGTH_LONG)
+                            .show();
+
+                }else{
+
                 String password = et_ps.getText().toString();
 
 
@@ -50,8 +59,12 @@ public class CustomDialog extends Dialog {
                     callbacks.onClickSend(password); // 이것이 형식포인트!
                 }
 
+
+
                 dismiss();
             }
+        }
+
         });
     }
 }

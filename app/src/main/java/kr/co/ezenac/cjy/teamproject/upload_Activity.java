@@ -68,18 +68,18 @@ public class upload_Activity extends AppCompatActivity {
 
 
 
-    @OnClick(R.id.btn_hidden_room)
+    @OnClick(R.id.btn_open_room)
     public void onClickbtn_hidden_room(View view){
-        password = "000000";
-        btn_hidden_room.setBackgroundResource(R.color.colorBTN);
-        btn_open_room.setBackgroundResource(R.color.colorGray);
+        password = "0";
+        btn_open_room.setBackgroundResource(R.color.colorBTN);
+        btn_hidden_room.setBackgroundResource(R.color.colorGray);
     }
 
 
-    @OnClick(R.id.btn_open_room)
+    @OnClick(R.id.btn_hidden_room)
     public void onClickbtn_open_room(View view){
-        btn_open_room.setBackgroundResource(R.color.colorBTN);
-        btn_hidden_room.setBackgroundResource(R.color.colorGray);
+        btn_hidden_room.setBackgroundResource(R.color.colorBTN);
+        btn_open_room.setBackgroundResource(R.color.colorGray);
         CustomDialog dialog = new CustomDialog(upload_Activity.this);
         dialog.setCallbacks(new CustomDialog.Callbacks() {
             @Override

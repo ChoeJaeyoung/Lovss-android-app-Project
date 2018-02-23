@@ -22,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
+import kr.co.ezenac.cjy.teamproject.adapter.Search_adapter;
+import kr.co.ezenac.cjy.teamproject.customview.CustomDialog;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_test) EditText search_test;
     @BindView(R.id.btn_searh) Button btn_searh;
-    Profile_adapter profileAdapter;
+    Search_adapter search_adapter;
     @BindView(R.id.grid_picture) GridView grid_picture;
     @BindView(R.id.img_home) ImageView img_home;
     @BindView(R.id.img_search) ImageView img_search;
@@ -41,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_search) LinearLayout linearLayout_search;
     @BindView(R.id.btn_logout) ImageView btn_logout;
-
+    String password ;
 
 
     @Override
@@ -66,8 +68,8 @@ public class SearchActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     final ArrayList<Room> items = response.body();
 
-                    profileAdapter = new Profile_adapter(items, SearchActivity.this);
-                    grid_picture.setAdapter(profileAdapter);
+                    search_adapter = new Search_adapter(items, SearchActivity.this);
+                    grid_picture.setAdapter(search_adapter);
                     for (int i = 0; i < items.size(); i++) {
                         Log.d("profile", "profile : " + items.get(i).toString());
                     }
@@ -143,29 +145,91 @@ public class SearchActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Call<Void> observ = RetrofitService.getInstance().getRetrofitRequest()
-                        .joinRoom(id, room_id);
-                observ.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()){
-                            Intent intent = new Intent(SearchActivity.this,RoomActivity.class);
-                            intent.putExtra("room_id", item.getId());
-                            intent.putExtra("room_name", item.getName());
-                            intent.putExtra("room_img", item.getRoom_img());
-                            RoomInfo.getInstance().setRoom(item);
-                            Log.d("kkk", item.toString());
-                            startActivity(intent);
-                        } else {
-                            Log.d("sss", "error : 1");
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                if(item.getRoom_ps().equals("0")){
+                    Call<Void> observ = RetrofitService.getInstance().getRetrofitRequest()
+                            .joinRoom(id, room_id);
+                    observ.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()){
+                                Intent intent = new Intent(SearchActivity.this,RoomActivity.class);
+                                intent.putExtra("room_id", item.getId());
+                                intent.putExtra("room_name", item.getName());
+                                intent.putExtra("room_img", item.getRoom_img());
+                                RoomInfo.getInstance().setRoom(item);
+                                Log.d("kkk", item.toString());
+                                startActivity(intent);
+                            } else {
+                                Log.d("sss", "error : 1");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
+                }else{
+
+                    CustomDialog dialog = new CustomDialog(SearchActivity.this);
+                    dialog.setCallbacks(new CustomDialog.Callbacks() {
+                        @Override
+                        public void onClickSend(String name) {
+                            password = name;
+                            Log.d("jjj","password"+ password);
+                            Log.d("jjj",""+ item.getRoom_ps());
+                            if(password.equals(item.getRoom_ps())){
+
+                                Call<Void> observ = RetrofitService.getInstance().getRetrofitRequest()
+                                        .joinRoom(id, room_id);
+                                observ.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.isSuccessful()){
+                                            Intent intent = new Intent(SearchActivity.this,RoomActivity.class);
+                                            intent.putExtra("room_id", item.getId());
+                                            intent.putExtra("room_name", item.getName());
+                                            intent.putExtra("room_img", item.getRoom_img());
+                                            RoomInfo.getInstance().setRoom(item);
+                                            Log.d("kkk", item.toString());
+                                            startActivity(intent);
+                                        } else {
+                                            Log.d("sss", "error : 1");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        t.printStackTrace();
+                                    }
+                                });
+
+                            }else{
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SearchActivity.this);
+                                alertDialog.setTitle("경고");
+                                alertDialog.setMessage("비밀번호가틀렸습니다.");
+                                alertDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                });
+                                alertDialog.show();
+                                password = "00";
+                            }
+
+
+                        }
+                    });
+                    dialog.show();
+
+
+                }
+
+
             }
 
         });
