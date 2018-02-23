@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +54,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     DBManager dbManager;
     ArrayList<Collect> collects = new ArrayList<>();
     HashMap<Integer, Collect> hashMap = new HashMap<>();
+    Integer img_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,14 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         tmpId = LoginInfo.getInstance().getMember().getId();
         callHomeImg(count,tmpId);
 
+        dbManager = new DBManager(HomeActivity.this, "Collect.db", null,1);
+        collects = dbManager.getCollectList(tmpId);
+        for (int i = 0; i < collects.size(); i++){
+            img_id = collects.get(i).getImg_id();
+            hashMap.put(img_id, collects.get(i));
+            Log.d("hashMapTest","hash : " + img_id + "///" + collects.get(i).toString());
+        }
+
         mGridView = (GridView)findViewById(R.id.grid_home_gv);
         mAdapter = new InfiniteScrollAdapter<Home_adapter>(HomeActivity.this,
                 new Home_adapter(imgs2,HomeActivity.this,hashMap), GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT);
@@ -70,14 +80,6 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         mGridView.setAdapter(mAdapter);
 
         mHandler = new Handler();
-
-
-        dbManager = new DBManager(HomeActivity.this, "Collect.db", null,1);
-        collects = dbManager.getCollectList(tmpId);
-        for (int i = 0; i < collects.size(); i++){
-            Integer img_id = collects.get(i).getImg_id();
-            hashMap.put(img_id, collects.get(i));
-        }
 
     }
 

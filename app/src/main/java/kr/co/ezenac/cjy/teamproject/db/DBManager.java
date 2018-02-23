@@ -19,13 +19,9 @@ public class DBManager extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
-
-
-
-
-    public void deleteData(Integer id){
+    public void deleteData(Integer id, Integer user_id){
         SQLiteDatabase db = getReadableDatabase();
-        db.execSQL("delete from Collect where id = " + id);
+        db.execSQL("delete from Collect where img_id = " + id  + " and user_id = " + user_id);
     }
 
     public void insertData(Integer heart, Integer user_id, Integer img_id, String img_path, String img_content){

@@ -41,7 +41,15 @@ public class Home_adapter extends BaseAdapter {
     private int count = 5;
     DBManager dbManager;
     Collect collect;
-    Integer star_mode;
+    Integer star_mode = 0;
+
+    public Integer getStar_mode() {
+        return star_mode;
+    }
+
+    public void setStar_mode(Integer star_mode) {
+        this.star_mode = star_mode;
+    }
 
     public Home_adapter(ArrayList<Main> items, Context mContext, HashMap<Integer, Collect> col) {
         Items = items;
@@ -95,7 +103,7 @@ public class Home_adapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        Main item = (Main) getItem(position);
+        final Main item = (Main) getItem(position);
         Log.d("ddd", item.toString());
         Glide.with(mContext).load(item.getPath()).centerCrop().into(holder.img_homeAdapter);
         holder.text_homeAdapter.setText(item.getContent());
@@ -108,6 +116,8 @@ public class Home_adapter extends BaseAdapter {
         final String img_path = item.getPath();
         final String img_content = item.getContent();
         final Integer main_id = item.getId();
+
+        collect = col.get(main_id);
 
         if (col.get(main_id) == null){
             holder.img_star.setBackgroundResource(R.drawable.star);
@@ -123,10 +133,12 @@ public class Home_adapter extends BaseAdapter {
                     dbManager.insertData(1, user_id, main_id, img_path, img_content);
                     finalHolder.img_star.setBackgroundResource(R.drawable.star_mark);
                     Log.d("collection",main_id + "//"+user_id +" // " +  img_path +" // " + img_content);
+                    col.put(main_id, collect);
                     notifyDataSetChanged();
                 } else {
-                    dbManager.deleteData(main_id);
+                    dbManager.deleteData(main_id, user_id);
                     finalHolder.img_star.setBackgroundResource(R.drawable.star);
+                    col.remove(main_id);
                     Log.d("collection", String.valueOf(main_id));
                     notifyDataSetChanged();
                 }
