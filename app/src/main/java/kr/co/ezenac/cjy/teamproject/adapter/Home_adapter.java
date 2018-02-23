@@ -41,15 +41,6 @@ public class Home_adapter extends BaseAdapter {
     private int count = 5;
     DBManager dbManager;
     Collect collect;
-    Integer star_mode = 0;
-
-    public Integer getStar_mode() {
-        return star_mode;
-    }
-
-    public void setStar_mode(Integer star_mode) {
-        this.star_mode = star_mode;
-    }
 
     public Home_adapter(ArrayList<Main> items, Context mContext, HashMap<Integer, Collect> col) {
         Items = items;

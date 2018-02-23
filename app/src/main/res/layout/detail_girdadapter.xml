@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="500dp">
 
         <ImageView
             android:id="@+id/img_detailAdapter"
@@ -16,20 +16,26 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/daily_cover"
             android:layout_marginTop="15dp"/>
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_marginTop="3dp">
         <TextView
             android:id="@+id/text_detailAdapter"
-            android:layout_width="340dp"
-            android:layout_height="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
             android:layout_marginTop="5dp"
-            android:hint="Content" />
+            android:hint="Content"
+            android:layout_alignLeft="@+id/img_detailAdapter"
+            android:layout_below="@id/img_detailAdapter"
+            android:layout_marginLeft="7dp"/>
+
+        <ImageView
+            android:id="@+id/img_detailStar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/star"
+            android:layout_alignRight="@+id/img_detailAdapter"
+            android:layout_below="@+id/img_detailAdapter"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"/>
     </RelativeLayout>
 
     <ImageView

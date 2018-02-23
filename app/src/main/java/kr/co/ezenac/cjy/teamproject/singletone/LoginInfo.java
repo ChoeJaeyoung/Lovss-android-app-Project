@@ -1,5 +1,7 @@
 package kr.co.ezenac.cjy.teamproject.singletone;
 
+import java.util.HashMap;
+
 import kr.co.ezenac.cjy.teamproject.model.Member;
 
 /**

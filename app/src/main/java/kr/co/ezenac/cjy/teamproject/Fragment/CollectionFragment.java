@@ -73,9 +73,6 @@ public class CollectionFragment extends Fragment {
                 String str = gridview_main_2.getItemAtPosition(position).toString();
                 Log.d("ppp", str);
 
-                //profileAdapter.setMode(1);
-                //profileAdapter.notifyDataSetChanged();
-
                 return true;
             }
         });
@@ -85,14 +82,15 @@ public class CollectionFragment extends Fragment {
     public void collectImg(){
         collectionAdapter = new Collection_adapter(items, getActivity());
         gridview_main_2.setAdapter(collectionAdapter);
-        /*gridview_main_2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridview_main_2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("position", position);
+                intent.putExtra("type", 2);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
 }

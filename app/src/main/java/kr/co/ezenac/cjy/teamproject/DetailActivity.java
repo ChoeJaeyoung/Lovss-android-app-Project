@@ -7,20 +7,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.adapter.CollectDetail_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Detail_adapter;
+import kr.co.ezenac.cjy.teamproject.db.DBManager;
+import kr.co.ezenac.cjy.teamproject.model.Collect;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.CollectHashMap;
+import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +45,11 @@ public class DetailActivity extends AppCompatActivity {
 
     Detail_adapter detailAdapter;
     Integer dRoom_id;
+    HashMap<Integer, Collect> hashMap;
+    DBManager dbManager;
+    ArrayList<Collect> collects = new ArrayList<>();
+    CollectDetail_adapter collectDetailAdapter;
+    Integer selPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +57,21 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        dRoom_id = RoomInfo.getInstance().getRoom().getId();
-        String dRoom_name = RoomInfo.getInstance().getRoom().getName();
-        String dRoom_img = RoomInfo.getInstance().getRoom().getRoom_img();
+        Intent intent = getIntent();
+        Integer typeRoom = intent.getIntExtra("type",0);
+        selPosition = intent.getIntExtra("position",0);
+        hashMap = CollectHashMap.getInstance().getCollect();
 
-        Log.d("room", "room_info : " + dRoom_name + " / " + dRoom_img +" / "+ dRoom_id);
-        callImgDetail(dRoom_id);
+        if (typeRoom == 1){
+            dRoom_id = RoomInfo.getInstance().getRoom().getId();
+            String dRoom_name = RoomInfo.getInstance().getRoom().getName();
+            String dRoom_img = RoomInfo.getInstance().getRoom().getRoom_img();
+
+            Log.d("room", "room_info : " + dRoom_name + " / " + dRoom_img +" / "+ dRoom_id);
+            callImgDetail(selPosition, dRoom_id);
+        } else if (typeRoom == 2){
+            collectionDetail(selPosition);
+        }
     }
 
 
@@ -64,7 +83,17 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void callImgDetail(Integer dRoom_id){
+    public void collectionDetail(Integer cPosition){
+        dbManager = new DBManager(DetailActivity.this, "Collect.db", null, 1);
+        Integer tmpId = LoginInfo.getInstance().getMember().getId();
+        collects = dbManager.getCollectList(tmpId);
+        collectDetailAdapter = new CollectDetail_adapter(collects, DetailActivity.this);
+        grid_detail_gv.setAdapter(collectDetailAdapter);
+        grid_detail_gv.setSelection(cPosition);
+
+    }
+
+    public void callImgDetail(final Integer dPosition, Integer dRoom_id){
         Call<ArrayList<Img>> obser = RetrofitService.getInstance().getRetrofitRequest()
                 .callRoomImg(dRoom_id);
         obser.enqueue(new Callback<ArrayList<Img>>() {
@@ -73,8 +102,6 @@ public class DetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ArrayList<Img> imgs = response.body();
                     Log.d("ddd", imgs.toString());
-                    Intent intent = getIntent();
-                    Integer dPosition = intent.getIntExtra("position",0);
 
                     detailAdapter = new Detail_adapter(imgs, DetailActivity.this);
                     grid_detail_gv.setAdapter(detailAdapter);

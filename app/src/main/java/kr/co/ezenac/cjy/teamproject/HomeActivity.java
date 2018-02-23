@@ -27,6 +27,7 @@ import kr.co.ezenac.cjy.teamproject.db.DBManager;
 import kr.co.ezenac.cjy.teamproject.model.Collect;
 import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
+import kr.co.ezenac.cjy.teamproject.singletone.CollectHashMap;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,7 +71,9 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         for (int i = 0; i < collects.size(); i++){
             img_id = collects.get(i).getImg_id();
             hashMap.put(img_id, collects.get(i));
+            CollectHashMap.getInstance().setCollect(hashMap);
             Log.d("hashMapTest","hash : " + img_id + "///" + collects.get(i).toString());
+            Log.d("hashMapSingle", CollectHashMap.getInstance().getCollect().toString());
         }
 
         mGridView = (GridView)findViewById(R.id.grid_home_gv);
