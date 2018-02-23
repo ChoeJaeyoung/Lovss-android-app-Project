@@ -60,18 +60,25 @@
 
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_room"
         android:layout_below="@+id/linear_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/list_2"
+        android:layout_marginLeft="20dp"
 
-    <Button
+        />
+
+    <ImageView
         android:id="@+id/btn_collection"
         android:layout_toRightOf="@+id/btn_room"
         android:layout_below="@+id/linear_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/starr"
+        />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_1"

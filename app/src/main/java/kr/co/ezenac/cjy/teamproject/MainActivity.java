@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mainpage_id) RelativeLayout mainpage_id;
     ViewPagerAdapter viewPagerAdapter;
     @BindView(R.id.viewpager_1) ViewPager viewpager_1;
-    @BindView(R.id.btn_room) Button btn_room;
-    @BindView(R.id.btn_collection) Button btn_collection;
+    @BindView(R.id.btn_room) ImageView btn_room;
+    @BindView(R.id.btn_collection) ImageView btn_collection;
     @BindView(R.id.btn_logout) ImageView btn_logout;
 
     @Override

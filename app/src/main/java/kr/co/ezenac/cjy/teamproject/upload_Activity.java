@@ -70,16 +70,18 @@ public class upload_Activity extends AppCompatActivity {
 
     @OnClick(R.id.btn_open_room)
     public void onClickbtn_hidden_room(View view){
+
         password = "0";
-        btn_open_room.setBackgroundResource(R.color.colorBTN);
-        btn_hidden_room.setBackgroundResource(R.color.colorGray);
+        btn_open_room.setBackgroundResource(R.drawable.a_unlock);
+        btn_hidden_room.setBackgroundResource(R.drawable.lock_before);
     }
 
 
     @OnClick(R.id.btn_hidden_room)
     public void onClickbtn_open_room(View view){
-        btn_hidden_room.setBackgroundResource(R.color.colorBTN);
-        btn_open_room.setBackgroundResource(R.color.colorGray);
+
+        btn_hidden_room.setBackgroundResource(R.drawable.a_lock);
+        btn_open_room.setBackgroundResource(R.drawable.unlock_before);
         CustomDialog dialog = new CustomDialog(upload_Activity.this);
         dialog.setCallbacks(new CustomDialog.Callbacks() {
             @Override
@@ -176,6 +178,9 @@ public class upload_Activity extends AppCompatActivity {
 
 
                     Log.d("bjh", "tete" + text_title.toString());
+
+
+                    password="0";
 
                     final RequestBody nameBody =
                             RequestBody.create(MediaType.parse("text/plain"), name);

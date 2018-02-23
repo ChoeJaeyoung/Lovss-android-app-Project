@@ -121,6 +121,7 @@ public class Home_adapter extends BaseAdapter {
 
         if (col.get(main_id) == null){
             holder.img_star.setBackgroundResource(R.drawable.star);
+            Log.d("col1", "i: " + holder.img_star);
         } else {
             holder.img_star.setBackgroundResource(R.drawable.star_mark);
         }
