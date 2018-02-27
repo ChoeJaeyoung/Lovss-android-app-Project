@@ -1,6 +1,7 @@
 package kr.co.ezenac.cjy.teamproject.retrofit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.model.Main;
@@ -68,6 +69,13 @@ public interface RetrofitRequest {
 
     @GET("deleteImg")
     Call<Void> deleteImg(@Query("img_id") Integer img_id);
+
+
+    @GET("getMemberList")
+    Call<Member> getMemberList(@Query("room_id") Integer room_id);
+
+    @GET("getMemberList2")
+    Call<ArrayList<Member>> getMemberList2(@Query("room_id") Integer room_id);
 
 
 

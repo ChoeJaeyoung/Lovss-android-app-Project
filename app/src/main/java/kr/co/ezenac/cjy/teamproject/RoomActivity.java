@@ -3,17 +3,25 @@ package kr.co.ezenac.cjy.teamproject;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +34,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.adapter.MemberList_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.model.Member;
@@ -44,7 +53,6 @@ import retrofit2.Response;
 public class RoomActivity extends AppCompatActivity {
     Room_adapter roomAdapter;
     @BindView(R.id.grid_room_gv) GridView grid_room_gv;
-    @BindView(R.id.img_room_Back) ImageView img_room_Back;
     @BindView(R.id.img_roomImg) ImageView img_roomImg;
     @BindView(R.id.text_room_name) TextView text_room_name;
     @BindView(R.id.in_room_img_add) ImageView in_room_img_add;
@@ -55,8 +63,15 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
     @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.in_room_room_delete) ImageView in_room_room_delete;
+    @BindView(R.id.memberList) GridView memberList;
+    @BindView(R.id.memberList2) GridView memberList2;
 
     Integer room_id;
+    Integer tmp = 1;
+    Toolbar toolbar;
+    DrawerLayout dlDrawer;
+    ActionBarDrawerToggle dtToggle;
+    MemberList_adapter memberList_adapter;
 
 
     @Override
@@ -92,6 +107,125 @@ public class RoomActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        if (null != ab) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
+        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
+        dlDrawer.setDrawerListener(dtToggle);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
+        Log.d("jjj","aa");
+        return true;
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        dtToggle.syncState();
+        Log.d("jjj","bb");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        dtToggle.onConfigurationChanged(newConfig);
+        Log.d("jjj","cc");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (dtToggle.onOptionsItemSelected(item)) {
+            Log.d("jjj", "dd");
+
+            Call<Member> observ = RetrofitService.getInstance().getRetrofitRequest().
+                    getMemberList(room_id);
+            observ.enqueue(new Callback<Member>() {
+                @Override
+                public void onResponse(Call<Member> call, Response<Member> response) {
+                    if (response.isSuccessful()) {
+                        final Member items = response.body();
+                        Log.d("jhjh", items.toString());
+
+                        Call<ArrayList<Member>> observ = RetrofitService.getInstance().getRetrofitRequest().
+                                getMemberList2(room_id);
+                        Log.d("bjh", items.toString());
+                        observ.enqueue(new Callback<ArrayList<Member>>() {
+                            @Override
+                            public void onResponse(Call<ArrayList<Member>> call, Response<ArrayList<Member>> response) {
+                                if (response.isSuccessful()) {
+                                    final ArrayList<Member> items = response.body();
+                                    Log.d("memberlist", items.toString());
+
+                                    memberList_adapter = new MemberList_adapter(items, RoomActivity.this);
+                                    memberList2.setAdapter(memberList_adapter);
+                                    memberList2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
+                                            intent.putExtra("position", position);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+                                } else {
+                                    Log.d("uuu", "1");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ArrayList<Member>> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+
+                        memberList_adapter = new MemberList_adapter(items, RoomActivity.this);
+                        memberList.setAdapter(memberList_adapter);
+                        memberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
+                                intent.putExtra("position", position);
+                                startActivity(intent);
+                            }
+                        });
+
+                    } else {
+                        Log.d("uuu", "1");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Member> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+
+
+
+
+
+
+
+
+
+            return true;
+
+        }
+        Log.d("jjj","gg");
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.img_roomImg)
