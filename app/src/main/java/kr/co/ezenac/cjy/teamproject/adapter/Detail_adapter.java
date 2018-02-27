@@ -29,8 +29,7 @@ import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 public class Detail_adapter extends BaseAdapter {
     ArrayList<Img> items = new ArrayList<>();
     Context context;
-    HashMap<Integer, Collect> col = new HashMap<>();
-    Collect collect;
+    HashMap<Integer, Collect> col;
     DBManager dbManager;
 
     public Detail_adapter(ArrayList<Img> items, Context context) {
@@ -80,11 +79,11 @@ public class Detail_adapter extends BaseAdapter {
         final String img_content = item.getContent();
         Log.d("detailAd", item.toString() + " // " + user_id);
         col = CollectHashMap.getInstance().getCollect();
-        collect = col.get(imgId);
+
         dbManager = new DBManager(context, "Collect.db", null, 1);
 
         if (col.get(imgId) == null){
-            holder.img_detailAdapter.setBackgroundResource(R.drawable.star);
+            holder.img_detailStar.setBackgroundResource(R.drawable.star);
         } else {
             holder.img_detailStar.setBackgroundResource(R.drawable.star_mark);
         }
@@ -96,7 +95,9 @@ public class Detail_adapter extends BaseAdapter {
                 if (col.get(imgId) == null){
                     dbManager.insertData(1, user_id, imgId, img_path, img_content);
                     finalHolder.img_detailStar.setBackgroundResource(R.drawable.star_mark);
-                    col.put(imgId, collect);
+                    Collect iCollect = new Collect();
+                    iCollect = dbManager.collectInfo(user_id, imgId);
+                    col.put(imgId, iCollect);
                     notifyDataSetChanged();
                 } else {
                     dbManager.deleteData(imgId, user_id);

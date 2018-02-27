@@ -59,4 +59,22 @@ public class DBManager extends SQLiteOpenHelper {
         }
         return list;
     }
+
+    public Collect collectInfo(Integer user_id, Integer main_id){
+        Collect collect = new Collect();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from Collect where user_id =" + user_id + " and  img_id =" + main_id,null);
+        while (cursor.moveToNext()){
+            Integer id = cursor.getInt(0);
+            Integer heart = cursor.getInt(1);
+            Integer cUser_id = cursor.getInt(2);
+            Integer img_id = cursor.getInt(3);
+            String img_path = cursor.getString(4);
+            String img_content = cursor.getString(5);
+
+            collect = new Collect(id,heart,cUser_id,img_id,img_path,img_content);
+        }
+        return collect;
+    }
 }

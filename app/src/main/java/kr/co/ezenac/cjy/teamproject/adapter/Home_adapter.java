@@ -40,7 +40,6 @@ public class Home_adapter extends BaseAdapter {
     HashMap<Integer, Collect> col = new HashMap<>();
     private int count = 5;
     DBManager dbManager;
-    Collect collect;
 
     public Home_adapter(ArrayList<Main> items, Context mContext, HashMap<Integer, Collect> col) {
         Items = items;
@@ -103,12 +102,10 @@ public class Home_adapter extends BaseAdapter {
 
         dbManager = new DBManager(mContext,"Collect.db", null,1);
 
-        final int user_id = LoginInfo.getInstance().getMember().getId();
+        final Integer user_id = LoginInfo.getInstance().getMember().getId();
         final String img_path = item.getPath();
         final String img_content = item.getContent();
         final Integer main_id = item.getId();
-
-        collect = col.get(main_id);
 
         if (col.get(main_id) == null){
             holder.img_star.setBackgroundResource(R.drawable.star);
@@ -125,7 +122,9 @@ public class Home_adapter extends BaseAdapter {
                     dbManager.insertData(1, user_id, main_id, img_path, img_content);
                     finalHolder.img_star.setBackgroundResource(R.drawable.star_mark);
                     Log.d("collection",main_id + "//"+user_id +" // " +  img_path +" // " + img_content);
-                    col.put(main_id, collect);
+                    Collect iCollect = new Collect();
+                    iCollect = dbManager.collectInfo(user_id,main_id);
+                    col.put(main_id, iCollect);
                     notifyDataSetChanged();
                 } else {
                     dbManager.deleteData(main_id, user_id);
@@ -134,7 +133,6 @@ public class Home_adapter extends BaseAdapter {
                     Log.d("collection", String.valueOf(main_id));
                     notifyDataSetChanged();
                 }
-
             }
         });
         return convertView;

@@ -102,7 +102,6 @@ public class DetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ArrayList<Img> imgs = response.body();
                     Log.d("ddd", imgs.toString());
-
                     detailAdapter = new Detail_adapter(imgs, DetailActivity.this);
                     grid_detail_gv.setAdapter(detailAdapter);
                     grid_detail_gv.setSelection(dPosition);

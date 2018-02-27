@@ -10,7 +10,7 @@ import kr.co.ezenac.cjy.teamproject.model.Collect;
 
 public class CollectHashMap {
     private static CollectHashMap curr = null;
-    private HashMap<Integer, Collect> collect;
+    private HashMap<Integer, Collect> collect =  new HashMap<>();
 
     public static CollectHashMap getInstance(){
         if (curr == null){
