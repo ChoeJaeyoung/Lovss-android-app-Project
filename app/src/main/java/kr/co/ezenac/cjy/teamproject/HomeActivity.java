@@ -187,8 +187,8 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
 

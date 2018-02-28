@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import kr.co.ezenac.cjy.teamproject.customview.BackPressCloseHandler;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
@@ -25,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.edit_loginID) EditText edit_loginID;
     @BindView(R.id.edit_loginPw) EditText edit_loginPw;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
 
     @OnClick(R.id.text_loginJoin)

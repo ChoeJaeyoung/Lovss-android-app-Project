@@ -66,7 +66,7 @@ public class CollectDetail_adapter extends BaseAdapter {
                 holder = (Holder) convertView.getTag();
             }
 
-            Collect item = (Collect) getItem(position);
+            final Collect item = (Collect) getItem(position);
             Log.d("ddd", item.toString());
             Glide.with(context).load(item.getImg_path()).centerCrop().into(holder.img_detailAdapter);
             holder.text_detailAdapter.setText(item.getImg_content());
@@ -82,12 +82,23 @@ public class CollectDetail_adapter extends BaseAdapter {
                 holder.img_detailStar.setBackgroundResource(R.drawable.star_mark);
             }
 
+            final Holder finalHolder = holder;
             holder.img_detailStar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dbManager.deleteData(imgId, user_id);
-                    col.remove(imgId);
-                    notifyDataSetChanged();
+                    if(col.get(item.getImg_id()) == null){
+                        dbManager.insertData(1,user_id,imgId,item.getImg_path(),item.getImg_content());
+                        finalHolder.img_detailStar.setBackgroundResource(R.drawable.star_mark);
+                        Collect collect = new Collect();
+                        collect = dbManager.collectInfo(user_id,imgId);
+                        col.put(imgId,collect);
+                        notifyDataSetChanged();
+                    } else {
+                        dbManager.deleteData(imgId, user_id);
+                        finalHolder.img_detailStar.setBackgroundResource(R.drawable.star);
+                        col.remove(imgId);
+                        notifyDataSetChanged();
+                    }
                 }
             });
 
