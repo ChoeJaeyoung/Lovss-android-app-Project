@@ -30,6 +30,7 @@ import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.Fragment.RoomFragment;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.ViewPagerAdapter;
+import kr.co.ezenac.cjy.teamproject.customview.BackPressCloseHandler;
 import kr.co.ezenac.cjy.teamproject.model.Main;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_room) ImageView btn_room;
     @BindView(R.id.btn_collection) ImageView btn_collection;
     @BindView(R.id.btn_logout) ImageView btn_logout;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +71,24 @@ public class MainActivity extends AppCompatActivity {
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
         String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
 
-
-
+        backPressCloseHandler = new BackPressCloseHandler(this);
         //★
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewpager_1.setAdapter(viewPagerAdapter);
-
-
-
 
         Glide.with(MainActivity.this).load(tmpMember_img).centerCrop().
                 into(img_mainProfile);
         text_mainId.setText(tmpMember_id);
 
         Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
+
     //★
     @OnClick(R.id.btn_room)
     public void click_btn_room(View view){

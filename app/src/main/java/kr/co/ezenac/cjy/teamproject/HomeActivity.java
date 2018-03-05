@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Home_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.InfiniteScrollAdapter;
+import kr.co.ezenac.cjy.teamproject.customview.BackPressCloseHandler;
 import kr.co.ezenac.cjy.teamproject.db.DBManager;
 import kr.co.ezenac.cjy.teamproject.model.Collect;
 import kr.co.ezenac.cjy.teamproject.model.Main;
@@ -56,12 +57,15 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     ArrayList<Collect> collects = new ArrayList<>();
     HashMap<Integer, Collect> hashMap = new HashMap<>();
     Integer img_id;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
 
         tmpId = LoginInfo.getInstance().getMember().getId();
         callHomeImg(count,tmpId);
@@ -83,6 +87,13 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         mGridView.setAdapter(mAdapter);
 
         mHandler = new Handler();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
 
     }
 

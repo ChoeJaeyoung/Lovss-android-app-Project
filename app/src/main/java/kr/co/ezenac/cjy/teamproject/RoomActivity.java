@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.MemberList_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Room_adapter;
+import kr.co.ezenac.cjy.teamproject.customview.BackPressCloseHandler;
 import kr.co.ezenac.cjy.teamproject.model.Img;
 import kr.co.ezenac.cjy.teamproject.model.Member;
 import kr.co.ezenac.cjy.teamproject.model.Room;
@@ -72,13 +73,15 @@ public class RoomActivity extends AppCompatActivity {
     DrawerLayout dlDrawer;
     ActionBarDrawerToggle dtToggle;
     MemberList_adapter memberList_adapter;
-
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         ButterKnife.bind(this);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         Intent intent = getIntent();
 
@@ -122,6 +125,11 @@ public class RoomActivity extends AppCompatActivity {
         dlDrawer.setDrawerListener(dtToggle);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

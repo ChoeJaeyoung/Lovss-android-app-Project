@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.ezenac.cjy.teamproject.adapter.Profile_adapter;
 import kr.co.ezenac.cjy.teamproject.adapter.Search_adapter;
+import kr.co.ezenac.cjy.teamproject.customview.BackPressCloseHandler;
 import kr.co.ezenac.cjy.teamproject.customview.CustomDialog;
 import kr.co.ezenac.cjy.teamproject.model.Room;
 import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
@@ -45,12 +46,22 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.btn_logout) ImageView btn_logout;
     String password ;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchpage_layout);
         ButterKnife.bind(this);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
 
     @OnClick(R.id.btn_searh)
