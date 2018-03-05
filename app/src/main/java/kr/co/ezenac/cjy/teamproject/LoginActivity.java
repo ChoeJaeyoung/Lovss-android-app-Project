@@ -26,22 +26,17 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.edit_loginID) EditText edit_loginID;
     @BindView(R.id.edit_loginPw) EditText edit_loginPw;
 
-    private BackPressCloseHandler backPressCloseHandler;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+        super.onBackPressed();
     }
 
     @OnClick(R.id.text_loginJoin)
@@ -94,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             LoginInfo.getInstance().setMember(member);
             Log.d("jjj","qwe"+  LoginInfo.getInstance().getMember().getId());
-            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }

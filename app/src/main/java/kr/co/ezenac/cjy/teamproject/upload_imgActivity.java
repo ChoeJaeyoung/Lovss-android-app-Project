@@ -208,6 +208,7 @@ public class upload_imgActivity extends AppCompatActivity {
     @OnClick(R.id.img_room_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(upload_imgActivity.this, HomeActivity.class);
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search)

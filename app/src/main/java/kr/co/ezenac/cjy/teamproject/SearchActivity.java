@@ -46,22 +46,17 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.btn_logout) ImageView btn_logout;
     String password ;
 
-    private BackPressCloseHandler backPressCloseHandler;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchpage_layout);
         ButterKnife.bind(this);
 
-        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+        super.onBackPressed();
     }
 
     @OnClick(R.id.btn_searh)
@@ -137,6 +132,7 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.img_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(SearchActivity.this, HomeActivity.class);
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     @OnClick(R.id.img_option)

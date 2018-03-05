@@ -30,32 +30,20 @@ public class BackPressCloseHandler {
     }
 
     public void onBackPressed(){
-        if(backKeypressedTime == 0){
-            activity.finish();
+        if (backKeypressedTime == 0){
+            showGuide();
             backKeypressedTime = System.currentTimeMillis();
         }
         else {
             int seconds = (int)(System.currentTimeMillis() - backKeypressedTime);
 
-            if (seconds < 2000){
-                showGuide();
-                int thirds = (int)(System.currentTimeMillis() - (seconds + backKeypressedTime));
-                if (thirds < 2000){
-                    Intent intent = new Intent(getActivity(), ClearActivity.class);
-                    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    activity.startActivity(intent);
-                }
-                else {
-                    backKeypressedTime = 0;
-                }
-
-            }
-            else {
+            if (seconds > 2000){
                 backKeypressedTime = 0;
+            } else {
+                activity.finish();
             }
         }
-
-        /*if (System.currentTimeMillis() > backKeypressedTime + 2000){
+       /*if (System.currentTimeMillis() > backKeypressedTime + 2000){
             backKeypressedTime = System.currentTimeMillis();
             showGuide();
             return;

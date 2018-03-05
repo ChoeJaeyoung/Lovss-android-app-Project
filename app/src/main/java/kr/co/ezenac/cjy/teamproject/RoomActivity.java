@@ -73,15 +73,12 @@ public class RoomActivity extends AppCompatActivity {
     DrawerLayout dlDrawer;
     ActionBarDrawerToggle dtToggle;
     MemberList_adapter memberList_adapter;
-    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         ButterKnife.bind(this);
-
-        backPressCloseHandler = new BackPressCloseHandler(this);
 
         Intent intent = getIntent();
 
@@ -127,8 +124,7 @@ public class RoomActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+        super.onBackPressed();
     }
 
     @Override
@@ -530,6 +526,7 @@ public class RoomActivity extends AppCompatActivity {
     @OnClick(R.id.img_room_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(RoomActivity.this, HomeActivity.class);
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search)

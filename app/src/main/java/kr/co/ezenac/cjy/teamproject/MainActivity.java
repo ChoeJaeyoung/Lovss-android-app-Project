@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_room) ImageView btn_room;
     @BindView(R.id.btn_collection) ImageView btn_collection;
     @BindView(R.id.btn_logout) ImageView btn_logout;
-    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         String tmpMember_id = LoginInfo.getInstance().getMember().getLogin_id().toString();
         String tmpMember_img = LoginInfo.getInstance().getMember().getMember_img();
 
-        backPressCloseHandler = new BackPressCloseHandler(this);
         //★
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewpager_1.setAdapter(viewPagerAdapter);
@@ -85,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+        super.onBackPressed();
     }
 
     //★
@@ -222,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.img_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     @OnClick(R.id.img_search)
