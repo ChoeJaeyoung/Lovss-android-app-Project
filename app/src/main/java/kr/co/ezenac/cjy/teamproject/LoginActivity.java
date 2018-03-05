@@ -87,9 +87,11 @@ public class LoginActivity extends AppCompatActivity {
             alertDialog.show();
         } else {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
             LoginInfo.getInstance().setMember(member);
             Log.d("jjj","qwe"+  LoginInfo.getInstance().getMember().getId());
             startActivity(intent);
+            finish();
         }
     }
 
