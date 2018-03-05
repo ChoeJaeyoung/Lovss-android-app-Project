@@ -277,11 +277,12 @@ public class upload_Activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Glide.with(upload_Activity.this).load(data.getData()).centerCrop().into(img_add);
+
         //String room_Img = img_add.getDrawable().toString();
 
         if (resultCode == RESULT_OK) {
             if (requestCode == 0) {
+                Glide.with(upload_Activity.this).load(data.getData()).centerCrop().into(img_add);
                 file = new File(
                         RealPathUtil.getRealPath(upload_Activity.this,
                                 data.getData()));
