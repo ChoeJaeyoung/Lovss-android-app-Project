@@ -47,7 +47,7 @@ public class upload_imgActivity extends AppCompatActivity {
     @BindView(R.id.img_room_search) ImageView img_room_search;
     @BindView(R.id.img_room_input) ImageView img_room_input;
     @BindView(R.id.img_room_option) ImageView img_room_option;
-    @BindView(R.id.upload_img_btn_titleImg) ImageView upload_img_btn_titleImg;
+    //@BindView(R.id.upload_img_btn_titleImg) ImageView upload_img_btn_titleImg;
     @BindView(R.id.linearLayout_upload_img) LinearLayout linearLayout_upload_img;
     @BindView(R.id.btn_logout) ImageView btn_logout;
 
@@ -134,7 +134,7 @@ public class upload_imgActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.upload_img_btn_titleImg)
+    @OnClick(R.id.upload_img_img_add)
     public void onClickBtnTitleImg(View view) {
         PermissionListener permissionListener = new PermissionListener() {
             @Override
@@ -168,7 +168,7 @@ public class upload_imgActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
             if (requestCode == 0) {
-                Glide.with(upload_imgActivity.this).load(data.getData()).into(upload_img_img_add);
+                Glide.with(upload_imgActivity.this).load(data.getData()).centerCrop().into(upload_img_img_add);
                 file = new File(
                         RealPathUtil.getRealPath(upload_imgActivity.this,
                                 data.getData()));
@@ -208,7 +208,7 @@ public class upload_imgActivity extends AppCompatActivity {
     @OnClick(R.id.img_room_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(upload_imgActivity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search)
@@ -237,8 +237,9 @@ public class upload_imgActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(upload_imgActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

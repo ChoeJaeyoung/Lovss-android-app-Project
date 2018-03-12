@@ -94,7 +94,7 @@ public class upload_btn_photo_activity extends AppCompatActivity {
     @OnClick(R.id.img_room_home1)
     public void onReturnHome(View view) {
         Intent intent = new Intent(upload_btn_photo_activity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search1)
@@ -163,8 +163,9 @@ public class upload_btn_photo_activity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(upload_btn_photo_activity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

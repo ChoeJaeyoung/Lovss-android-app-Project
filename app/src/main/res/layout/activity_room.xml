@@ -160,17 +160,9 @@
         android:fitsSystemWindows="true"
         >
 
-    <GridView
-        android:id="@+id/memberList"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:numColumns="1"
-        />
-
         <GridView
-            android:layout_below="@+id/memberList"
             android:id="@+id/memberList2"
-            android:layout_width="80dp"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
             android:numColumns="1"
             />

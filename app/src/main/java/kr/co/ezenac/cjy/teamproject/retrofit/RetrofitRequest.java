@@ -24,7 +24,7 @@ public interface RetrofitRequest {
     @GET("login")
     Call<Member> login(@Query("login_id") String member_id, @Query("pw") String pw);
 
-    @GET("insert_become_a_member")
+    @GET("check_become_a_member")
     Call<Integer> join(@Query("login_id") String member_id, @Query("pw") String pw);
 
     @GET("profile")

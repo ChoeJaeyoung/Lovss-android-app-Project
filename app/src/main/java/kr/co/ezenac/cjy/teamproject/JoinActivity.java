@@ -70,7 +70,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        if (backInt > 1){
+        if (backInt == 1){
             alertDialog.show();
         } else {
             Intent intent = new Intent(JoinActivity.this, LoginActivity.class);

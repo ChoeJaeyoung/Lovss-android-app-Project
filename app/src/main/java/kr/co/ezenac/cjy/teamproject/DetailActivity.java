@@ -145,7 +145,7 @@ public class DetailActivity extends AppCompatActivity {
     @OnClick(R.id.img_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(DetailActivity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_search)
@@ -174,8 +174,9 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(DetailActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

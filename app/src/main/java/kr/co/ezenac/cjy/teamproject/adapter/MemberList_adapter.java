@@ -55,31 +55,32 @@ public class MemberList_adapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView1, ViewGroup parent) {
         Holder holder = new Holder();
 
-        if (convertView == null){
-            convertView = LayoutInflater.from(parent.getContext()).
+        if (convertView1 == null){
+            convertView1 = LayoutInflater.from(parent.getContext()).
                     inflate(R.layout.activity_memberlist, parent, false);
-            holder.memberList_img = convertView.findViewById(R.id.memberList_img);
-            holder.memberList_id = convertView.findViewById(R.id.memberList_id);
+            holder.memberList_img = convertView1.findViewById(R.id.memberList_img);
+            holder.memberList_id = convertView1.findViewById(R.id.memberList_id);
 
+            Log.d("bjh3", "0: " + convertView1);
             Log.d("bjh3","1:" + holder.memberList_img);
             Log.d("bjh3","2:" + holder.memberList_id);
 
-            convertView.setTag(holder);
+            convertView1.setTag(holder);
         } else {
-            holder = (Holder) convertView.getTag();
+            holder = (Holder) convertView1.getTag();
         }
 
         Member item = (Member) getItem(position);
-        Log.d("ddd", item.toString());
+        Log.d("ddd78", item.toString());
         Glide.with(context).load(item.getMember_img()).centerCrop().into(holder.memberList_img);
         holder.memberList_id.setText(item.getLogin_id());
 
 
 
-        return convertView;
+        return convertView1;
     }
 
     private class Holder{

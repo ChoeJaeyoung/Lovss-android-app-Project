@@ -47,8 +47,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_mainProfile) ImageView img_mainProfile;
-
     @BindView(R.id.text_mainId) TextView text_mainId;
+    @BindView(R.id.text_mainContent) TextView text_mainContent;
+    @BindView(R.id.change_word) Button change_word;
     @BindView(R.id.img_home) ImageView img_home;
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_room) ImageView btn_room;
     @BindView(R.id.btn_collection) ImageView btn_collection;
     @BindView(R.id.btn_logout) ImageView btn_logout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
                 .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();
-}
+    }
+
+    @OnClick(R.id.change_word)
+    public void onClickWordImg(View view) {
+
+
+
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.img_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_search)
@@ -249,8 +258,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

@@ -104,6 +104,7 @@ public class upload_Activity extends AppCompatActivity {
             public void choosePhoto() {
 
                 Intent intent = new Intent(upload_Activity.this,upload_Activity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 Log.d("bjh","re: " + 3);
             }
@@ -123,7 +124,7 @@ public class upload_Activity extends AppCompatActivity {
     @OnClick(R.id.img_room_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(upload_Activity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search)
@@ -249,7 +250,7 @@ public class upload_Activity extends AppCompatActivity {
 
 
 
-    @OnClick(R.id.btn_titleImg)
+    @OnClick(R.id.img_add)
     public void onClickBtnTitleImg(View view) {
         PermissionListener permissionListener = new PermissionListener() {
             @Override
@@ -306,8 +307,9 @@ public class upload_Activity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(upload_Activity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

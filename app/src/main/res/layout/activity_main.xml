@@ -43,17 +43,26 @@
             android:layout_height="180dp">
                 <TextView
                     android:id="@+id/text_mainId"
-                    android:layout_width="130dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="My name is ..."
                     android:layout_marginTop="65dp" />
                 <TextView
                     android:id="@+id/text_mainContent"
-                    android:layout_width="180dp"
-                    android:layout_height="80dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="here write your content"
                     android:layout_below="@+id/text_mainId"
                     android:layout_marginTop="5dp"/>
+                <Button
+                    android:id="@+id/change_word"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignRight="@id/text_mainContent"
+                    android:layout_below="@id/text_mainContent"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/settings"
+                    />
 
         </RelativeLayout>
 

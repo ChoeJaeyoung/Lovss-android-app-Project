@@ -1,5 +1,7 @@
 package kr.co.ezenac.cjy.teamproject;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,12 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -44,14 +48,16 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.img_option) ImageView img_option;
     @BindView(R.id.linearLayout_search) LinearLayout linearLayout_search;
     @BindView(R.id.btn_logout) ImageView btn_logout;
+    @BindView(R.id.entitle_back) RelativeLayout entitle_back;
     String password ;
+    Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchpage_layout);
         ButterKnife.bind(this);
-
     }
 
     @Override
@@ -60,10 +66,20 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_searh)
-    public void onClickJoinOk(View view){
+    public void onClickJoinOk(View view) {
         String name = search_test.getText().toString();
         callLoginInfo(name);
+        hideKeyboardFrom(SearchActivity.this,search_test);
+        search_test.setText("");
     }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService
+                (Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
 
 
     public void callLoginInfo(String name){
@@ -112,6 +128,7 @@ public class SearchActivity extends AppCompatActivity {
             public void choosePhoto() {
 
                 Intent intent = new Intent(SearchActivity.this,upload_Activity.class);
+
                 startActivity(intent);
                 Log.d("bjh","re: " + 3);
             }
@@ -132,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.img_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(SearchActivity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_option)
@@ -260,8 +277,9 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });

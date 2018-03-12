@@ -45,7 +45,7 @@ public class RoomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Log.d("joseph","cc");
+        Log.d("joseph1","cc");
         View view = inflater.inflate(R.layout.activity_fragment_room, container, false);
         ButterKnife.bind(this, view);
         Integer tmpId = LoginInfo.getInstance().getMember().getId();
@@ -62,9 +62,9 @@ public class RoomFragment extends Fragment {
         gridview_main_1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("ppp", "LongCLICK2");
+                Log.d("ppp1", "LongCLICK2");
                 String str = gridview_main_1.getItemAtPosition(position).toString();
-                Log.d("ppp", str);
+                Log.d("ppp1", str);
 
                 profileAdapter.setMode(1);
                 profileAdapter.notifyDataSetChanged();
@@ -77,13 +77,14 @@ public class RoomFragment extends Fragment {
     }
 
     public void callLoginInfo(Integer tmp_memberId){
-        Call<ArrayList<Room>> observ = RetrofitService.getInstance().getRetrofitRequest().profileRoomInfo(tmp_memberId);
-        observ.enqueue(new Callback<ArrayList<Room>>() {
+        Call<ArrayList<Room>> observ2 = RetrofitService.getInstance().getRetrofitRequest().profileRoomInfo(tmp_memberId);
+        observ2.enqueue(new Callback<ArrayList<Room>>() {
             @Override
             public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
                 if (response.isSuccessful()){
                     final ArrayList<Room> items = response.body();
 
+                    Log.d("res4", "res3" + items.toString());
                     profileAdapter = new Profile_adapter(items,getActivity());
                     gridview_main_1.setAdapter(profileAdapter);
                     for (int i = 0; i < items.size(); i++) {
@@ -99,12 +100,12 @@ public class RoomFragment extends Fragment {
                             intent.putExtra("room_name", item.getName());
                             intent.putExtra("room_img", item.getRoom_img());
                             RoomInfo.getInstance().setRoom(item);
-                            Log.d("kkk", item.toString());
+                            Log.d("kkk2", item.toString());
                             startActivity(intent);
                         }
                     });
 
-                    Log.d("ttt", items.toString());
+                    Log.d("ttt3", items.toString());
                 }
             }
 

@@ -51,6 +51,7 @@
         <ImageView
             android:layout_below="@id/upload_img_btn_upload"
             android:id="@+id/upload_img_img_add"
+            android:background="@drawable/add"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:layout_width="200dp"

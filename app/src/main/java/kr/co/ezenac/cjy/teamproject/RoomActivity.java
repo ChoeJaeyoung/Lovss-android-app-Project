@@ -64,7 +64,7 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
     @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.in_room_room_delete) ImageView in_room_room_delete;
-    @BindView(R.id.memberList) GridView memberList;
+
     @BindView(R.id.memberList2) GridView memberList2;
 
     Integer room_id;
@@ -154,57 +154,18 @@ public class RoomActivity extends AppCompatActivity {
         if (dtToggle.onOptionsItemSelected(item)) {
             Log.d("jjj", "dd");
 
-            Call<Member> observ = RetrofitService.getInstance().getRetrofitRequest().
-                    getMemberList(room_id);
-            observ.enqueue(new Callback<Member>() {
+            Call<ArrayList<Member>> observ2= RetrofitService.getInstance().getRetrofitRequest().
+                    getMemberList2(room_id);
+            observ2.enqueue(new Callback<ArrayList<Member>>() {
                 @Override
-                public void onResponse(Call<Member> call, Response<Member> response) {
+                public void onResponse(Call<ArrayList<Member>> call, Response<ArrayList<Member>> response) {
                     if (response.isSuccessful()) {
-                        final Member items = response.body();
-                        Log.d("jhjh", items.toString());
-
-                        Call<ArrayList<Member>> observ = RetrofitService.getInstance().getRetrofitRequest().
-                                getMemberList2(room_id);
-                        Log.d("bjh", items.toString());
-                        observ.enqueue(new Callback<ArrayList<Member>>() {
-                            @Override
-                            public void onResponse(Call<ArrayList<Member>> call, Response<ArrayList<Member>> response) {
-                                if (response.isSuccessful()) {
-                                    final ArrayList<Member> items = response.body();
-                                    Log.d("memberlist", items.toString());
-
-                                    memberList_adapter = new MemberList_adapter(items, RoomActivity.this);
-                                    memberList2.setAdapter(memberList_adapter);
-                                    memberList2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                            Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
-                                            intent.putExtra("position", position);
-                                            startActivity(intent);
-                                        }
-                                    });
-
-                                } else {
-                                    Log.d("uuu", "1");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ArrayList<Member>> call, Throwable t) {
-                                t.printStackTrace();
-                            }
-                        });
+                        final ArrayList<Member> items = response.body();
+                        Log.d("memberlist", items.toString());
 
                         memberList_adapter = new MemberList_adapter(items, RoomActivity.this);
-                        memberList.setAdapter(memberList_adapter);
-                        memberList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent = new Intent(RoomActivity.this, DetailActivity.class);
-                                intent.putExtra("position", position);
-                                startActivity(intent);
-                            }
-                        });
+                        memberList2.setAdapter(memberList_adapter);
+
 
                     } else {
                         Log.d("uuu", "1");
@@ -212,21 +173,11 @@ public class RoomActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Member> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Member>> call, Throwable t) {
                     t.printStackTrace();
                 }
             });
-
-
-
-
-
-
-
-
-
             return true;
-
         }
         Log.d("jjj","gg");
         return super.onOptionsItemSelected(item);
@@ -463,15 +414,14 @@ public class RoomActivity extends AppCompatActivity {
 
 
     public void callImgInfo(Integer room_id){
-        Call<ArrayList<Img>> observ = RetrofitService.getInstance().getRetrofitRequest().
+        final Call<ArrayList<Img>> observ2 = RetrofitService.getInstance().getRetrofitRequest().
                 callRoomImg(room_id);
-        observ.enqueue(new Callback<ArrayList<Img>>() {
+        observ2.enqueue(new Callback<ArrayList<Img>>() {
             @Override
             public void onResponse(Call<ArrayList<Img>> call, Response<ArrayList<Img>> response) {
                 if (response.isSuccessful()) {
+                    Log.d("abccho", "re: " + 2);
                     final ArrayList<Img> items = response.body();
-
-                    Log.d("uuu", items.toString());
 
 
                     roomAdapter = new Room_adapter(items, RoomActivity.this);
@@ -526,7 +476,7 @@ public class RoomActivity extends AppCompatActivity {
     @OnClick(R.id.img_room_home)
     public void onReturnHome(View view) {
         Intent intent = new Intent(RoomActivity.this, HomeActivity.class);
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     @OnClick(R.id.img_room_search)
@@ -555,8 +505,9 @@ public class RoomActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(RoomActivity.this, LoginActivity.class);
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
             }
 
         });
