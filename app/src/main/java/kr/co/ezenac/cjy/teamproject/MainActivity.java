@@ -48,8 +48,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.img_mainProfile) ImageView img_mainProfile;
     @BindView(R.id.text_mainId) TextView text_mainId;
-    @BindView(R.id.text_mainContent) TextView text_mainContent;
-    @BindView(R.id.change_word) Button change_word;
     @BindView(R.id.img_home) ImageView img_home;
     @BindView(R.id.img_search) ImageView img_search;
     @BindView(R.id.img_input) ImageView img_input;
@@ -81,6 +79,19 @@ public class MainActivity extends AppCompatActivity {
         text_mainId.setText(tmpMember_id);
 
         Log.d("img", "img : " + LoginInfo.getInstance().getMember().getMember_img());
+    }
+
+    public void refreshList(){
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewpager_1.setAdapter(viewPagerAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        refreshList();
+        super.onResume();
+
+
     }
 
     @Override
@@ -132,13 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
                 .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();
-    }
-
-    @OnClick(R.id.change_word)
-    public void onClickWordImg(View view) {
-
-
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
