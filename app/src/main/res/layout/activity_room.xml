@@ -17,44 +17,38 @@
         android:minHeight="?attr/actionBarSize" />
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linear_room_topBar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/ultraViolet">
-        <TextView
-            android:id="@+id/img_room_Back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="8dp"
-            android:textColor="#000000"
-            android:text="회원"
-            android:gravity="center"
-
-             />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:background="@drawable/daily_photo"
+            android:id="@+id/img_room_Back"
+            android:layout_width="27dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/list3"
             android:backgroundTint="@color/colorIDICon"
-            android:id="@+id/in_room_img_add"
-            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textColor="#000000"
             />
+
 
         <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:id="@+id/in_room_room_delete"
-            android:layout_gravity="center"
-            android:background="@drawable/chat"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/delete_room"
             android:backgroundTint="@color/colorIDICon"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             />
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linear_room_Info"
@@ -157,16 +151,33 @@
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        >
-
+        android:fitsSystemWindows="true">
         <GridView
             android:id="@+id/memberList2"
             android:layout_width="110dp"
             android:layout_height="match_parent"
             android:numColumns="1"
             />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/ultraViolet"
+            android:gravity="center">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/daily_photo"
+            android:backgroundTint="@color/colorIDICon"
+            android:id="@+id/in_room_img_add"
+            android:layout_marginRight="25dp"
+            />
 
-
+        <ImageView
+            android:id="@+id/room_out"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/room_out"/>
+        </LinearLayout>
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

@@ -44,6 +44,7 @@ import kr.co.ezenac.cjy.teamproject.retrofit.RetrofitService;
 import kr.co.ezenac.cjy.teamproject.singletone.LoginInfo;
 import kr.co.ezenac.cjy.teamproject.singletone.RoomInfo;
 import kr.co.ezenac.cjy.teamproject.util.RealPathUtil;
+import lombok.Builder;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -64,6 +65,7 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.linearLayout_room) LinearLayout linearLayout_room;
     @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.in_room_room_delete) ImageView in_room_room_delete;
+    @BindView(R.id.room_out) ImageView room_out;
 
     @BindView(R.id.memberList2) GridView memberList2;
 
@@ -121,6 +123,44 @@ public class RoomActivity extends AppCompatActivity {
         dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
         dlDrawer.setDrawerListener(dtToggle);
     }
+
+    @OnClick(R.id.room_out)
+    public void onClickRoomOut(View view){
+        final Integer memberId = LoginInfo.getInstance().getMember().getId();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RoomActivity.this);
+        alertDialog.setTitle("경고");
+        alertDialog.setMessage("이 방을 나가시겠습니까?");
+        alertDialog.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final Integer member_id = LoginInfo.getInstance().getMember().getId();
+                Call<Void> obser = RetrofitService.getInstance().getRetrofitRequest().deleteRoom(memberId,room_id);
+                obser.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful()){
+                            Log.d("sucDelete","sucDelete");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+            }
+        });
+
+        alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+
+    }
+
 
     @Override
     public void onBackPressed() {

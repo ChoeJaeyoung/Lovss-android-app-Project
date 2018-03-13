@@ -8,48 +8,34 @@
     tools:context="kr.co.ezenac.cjy.teamproject.upload_Activity">
 
 
-
-    <ImageView
-        android:id="@+id/btn_titleImg"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/user_avatar"
-        android:layout_margin="10dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="방 프로필 사진"
-        android:layout_toRightOf="@id/btn_titleImg"
-        android:layout_alignBottom="@id/btn_titleImg"
-        />
-
     <TextView
         android:id="@+id/btn_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:text="완료"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
+        android:textSize="23dp"
+        android:gravity="center"
+        android:background="@drawable/square2"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="8dp"
         />
 
     <EditText
         android:id="@+id/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:hint="방의 제목을 정합니다"
-        android:layout_below="@id/img_add"
+        android:layout_below="@id/linear_photo"
         />
 
     <Button
         android:id="@+id/btn_open_room"
-        android:layout_below="@id/img_add"
+        android:layout_below="@id/text_title"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="80dp"
         android:gravity="center"
         android:background="@drawable/unlock_before"
 
@@ -57,30 +43,37 @@
 
     <Button
         android:id="@+id/btn_hidden_room"
-        android:layout_below="@id/img_add"
+        android:layout_below="@id/text_title"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="80dp"
         android:layout_alignParentRight="true"
-        android:gravity="center"
         android:background="@drawable/lock_before"
 
         />
 
 
-    <ImageView
-        android:layout_below="@id/btn_upload"
-        android:background="@drawable/add"
-        android:id="@+id/img_add"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/image_border"
+    <LinearLayout
+        android:id="@+id/linear_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/btn_upload"
+        android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="방의 대표사진을 정하세요"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
         />
-
-
-
+    <ImageView
+        android:id="@+id/img_add"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_upload"
+        android:background="@drawable/albums"></ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -11,32 +11,16 @@
 
     <TextView
         android:id="@+id/upload_img_btn_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:text="완료"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
+        android:textSize="23dp"
+        android:gravity="center"
+        android:background="@drawable/square2"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="8dp"
         />
-
-    <ImageView
-        android:id="@+id/upload_img_btn_titleImg"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/upload_photo"
-        android:layout_margin="10dp"
-        />
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진 첨부"
-        android:layout_gravity="center_horizontal"
-        android:layout_toRightOf="@id/upload_img_btn_titleImg"
-        android:layout_alignBottom="@id/upload_img_btn_titleImg"
-
-        />
-
 
         <EditText
             android:id="@+id/upload_img_text_title"
@@ -51,11 +35,11 @@
         <ImageView
             android:layout_below="@id/upload_img_btn_upload"
             android:id="@+id/upload_img_img_add"
-            android:background="@drawable/add"
+            android:background="@drawable/gallery"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
             android:src="@drawable/image_border"
             />
 

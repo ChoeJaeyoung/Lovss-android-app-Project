@@ -8,8 +8,8 @@
         android:id="@+id/linear_room_topBar1"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/ultraViolet">
-
+        android:background="@color/ultraViolet"
+        android:orientation="vertical">
     </LinearLayout>
 
     <GridView
