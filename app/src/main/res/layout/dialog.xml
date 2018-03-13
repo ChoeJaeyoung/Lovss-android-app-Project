@@ -62,43 +62,21 @@
 
 
 
-        <ImageView
-            android:layout_alignParentBottom="true"
-            android:id="@+id/img_room_home"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
 
-            />
+
+
 
         <ImageView
-            android:layout_alignParentBottom="true"
-            android:id="@+id/img_room_search"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_toRightOf="@id/img_room_home"
-
-            android:layout_marginLeft="45dp"
-            />
-
-        <ImageView
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:id="@+id/dialog_img_room_input"
             android:layout_width="28dp"
             android:layout_height="28dp"
-
             android:layout_marginLeft="45dp"
             android:layout_toRightOf="@id/img_room_search"
             />
 
-        <ImageView
-            android:layout_alignParentBottom="true"
-            android:id="@+id/img_room_option"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="45dp"
 
-            android:layout_toRightOf="@+id/dialog_img_room_input"
-            />
 
     </RelativeLayout>
         </RelativeLayout>

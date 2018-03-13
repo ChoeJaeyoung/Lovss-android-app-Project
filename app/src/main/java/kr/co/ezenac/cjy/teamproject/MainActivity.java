@@ -3,6 +3,7 @@ package kr.co.ezenac.cjy.teamproject;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -104,12 +105,18 @@ public class MainActivity extends AppCompatActivity {
     public void click_btn_room(View view){
         Log.d("joseph","aa");
         view();
-    }
+        btn_room.setBackgroundResource(R.drawable.list_2);
+        btn_collection.setBackgroundResource(R.drawable.star);
+        }
+
+
     //★
     @OnClick(R.id.btn_collection)
     public void click_btn_collection(View view){
         Log.d("joseph","bb");
         view2();
+        btn_collection.setBackgroundResource(R.drawable.starr);
+        btn_room.setBackgroundResource(R.drawable.list_unclick);
     }
     //★
     public void view(){

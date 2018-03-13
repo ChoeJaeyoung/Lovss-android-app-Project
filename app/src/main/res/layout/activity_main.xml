@@ -52,32 +52,37 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/list_123"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_card"
+        android:gravity="center"
+
+        >
     <ImageView
         android:id="@+id/btn_room"
-        android:layout_below="@+id/linear_card"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@drawable/list_2"
-        android:layout_marginLeft="20dp"
-
+        android:layout_marginRight="100dp"
         />
 
     <ImageView
         android:id="@+id/btn_collection"
-        android:layout_toRightOf="@+id/btn_room"
-        android:layout_below="@+id/linear_card"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/starr"
+        android:background="@drawable/star"
         />
+
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/btn_room"
+        android:layout_below="@+id/list_123"
         android:layout_above="@+id/linearLayout_main">
 
     </android.support.v4.view.ViewPager>
