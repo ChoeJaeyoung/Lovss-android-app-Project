@@ -179,15 +179,15 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         count++;
         mAdapter.handledRefresh();
 
-    /*
-        mAdapter.getAdapter().addCount(0); // ★★★증감되서 나오는 갯수
+
+        /*mAdapter.getAdapter().addCount(1); // ★★★증감되서 나오는 갯수
         mAdapter.handledRefresh();
         // when the adapter load more then 100 items. i will disable the
         // feature of load more.
-        if (mAdapter.getOriginalAdapter().getCount() > 100) { //★★★나오는 최대갯수
+        if (mAdapter.getOriginalAdapter().getCount() > imgs2.size()) { //★★★나오는 최대갯수
             mAdapter.canReadMore(false);
-        }
-        */
+        }*/
+
     }
     @OnClick(R.id.btn_logout)
     public void onClickLogout(View view){

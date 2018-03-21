@@ -19,6 +19,7 @@ import kr.co.ezenac.cjy.teamproject.R;
 public class CustomDialog extends Dialog {
     Button btn_dialog_send;
     EditText et_ps;
+    Button btn_cancel_Icon;
 
 
     // MemberInputDialog - Exam18Activity
@@ -39,6 +40,7 @@ public class CustomDialog extends Dialog {
         setContentView(R.layout.dialog_input);
         btn_dialog_send = findViewById(R.id.btn_dialog_send);
         et_ps = findViewById(R.id.et_ps);
+        btn_cancel_Icon = findViewById(R.id.btn_cancel_Icon);
 
 
         btn_dialog_send.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +67,12 @@ public class CustomDialog extends Dialog {
             }
         }
 
+        });
+        btn_cancel_Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
         });
     }
 }

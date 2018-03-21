@@ -13,11 +13,12 @@
         android:layout_height="30dp"
         android:background="@color/ultraViolet">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="사진추가"
-            android:textSize="7dp"
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/colorIDICon"
+            android:background="@drawable/daily_photo"
             android:id="@+id/btn_detail_addPhoto"
             />
     </LinearLayout>

@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 
 public class DetailActivity extends AppCompatActivity {
-    @BindView(R.id.btn_detail_addPhoto) Button btn_detail_addPhoto;
+    @BindView(R.id.btn_detail_addPhoto) ImageView btn_detail_addPhoto;
     @BindView(R.id.grid_detail_gv) GridView grid_detail_gv;
     @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.img_home) ImageView img_home;

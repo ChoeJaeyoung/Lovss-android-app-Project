@@ -12,14 +12,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호 : "
+            android:text="비밀번호 설정: "
             android:textSize="20dp"
             />
         <EditText
             android:id="@+id/et_ps"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text=""
             android:textSize="20dp"
             android:maxLength="12"
             />
@@ -33,21 +32,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(최소4자 최대12자 제한)"
+            android:text="(최소4자 ~ 최대12자)"
             android:textSize="20dp"
             />
 
     </LinearLayout>
-    <ImageView
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background=""
+        android:layout_gravity="center"
+
+        >
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_dialog_send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ok_btn"
         />
     <Button
-        android:id="@+id/btn_dialog_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="확인"
-        android:background=""
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_cancel_Icon"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@id/btn_dialog_send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/cancel_btn"
         />
+    </RelativeLayout>
 </LinearLayout>
