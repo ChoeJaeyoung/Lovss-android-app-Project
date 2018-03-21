@@ -52,6 +52,9 @@ public interface RetrofitRequest {
     @GET("call_main")
     Call<ArrayList<Main>> callMain(@Query("count") Integer count, @Query("id") Integer member_id);
 
+    @GET("maxMain")
+    Call<Integer> maxMain(@Query("id") Integer member_id);
+
     @GET("searchRoom")
     Call<ArrayList<Room>> searchRoom(@Query("name") String name);
 

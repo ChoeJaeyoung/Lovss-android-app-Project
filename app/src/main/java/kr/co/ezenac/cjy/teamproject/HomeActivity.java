@@ -58,6 +58,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     HashMap<Integer, Collect> hashMap = new HashMap<>();
     Integer img_id;
     private BackPressCloseHandler backPressCloseHandler;
+    Integer max = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
 
         tmpId = LoginInfo.getInstance().getMember().getId();
-        callHomeImg(count,tmpId);
+        callMaxMain(count,tmpId);
 
         dbManager = new DBManager(HomeActivity.this, "Collect.db", null,1);
         collects = dbManager.getCollectList(tmpId);
@@ -95,6 +96,25 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         //super.onBackPressed();
         backPressCloseHandler.onBackPressed();
 
+    }
+
+    public void callMaxMain(final Integer count, Integer member_id){
+        Call<Integer> observs = RetrofitService.getInstance().getRetrofitRequest().maxMain(member_id);
+        observs.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()){
+                    max = response.body();
+                    callHomeImg(count,tmpId);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void callHomeImg(Integer count, Integer member_id){
@@ -178,14 +198,14 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         callHomeImg(count,tmpId);
         count++;
         mAdapter.handledRefresh();
-
-
+        if (mAdapter.getOriginalAdapter().getCount() > max) { //★★★나오는 최대갯수
+            mAdapter.canReadMore(false);
+        }
         /*mAdapter.getAdapter().addCount(1); // ★★★증감되서 나오는 갯수
         mAdapter.handledRefresh();
         // when the adapter load more then 100 items. i will disable the
         // feature of load more.
-        if (mAdapter.getOriginalAdapter().getCount() > imgs2.size()) { //★★★나오는 최대갯수
-            mAdapter.canReadMore(false);
+
         }*/
 
     }
