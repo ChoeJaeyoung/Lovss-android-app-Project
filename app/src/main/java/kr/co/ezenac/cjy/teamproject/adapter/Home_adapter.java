@@ -38,17 +38,16 @@ public class Home_adapter extends BaseAdapter {
     ArrayList<Main> Items = new ArrayList<>();
     private Context mContext;
     HashMap<Integer, Collect> col = new HashMap<>();
-    private int count = 5;
     DBManager dbManager;
 
     public Home_adapter(ArrayList<Main> items, Context mContext, HashMap<Integer, Collect> col) {
-        Items = items;
+        this.Items = items;
         this.mContext = mContext;
         this.col = col;
     }
 
     public Home_adapter(ArrayList<Main> items, Context mContext) {
-        Items = items;
+        this.Items = items;
         this.mContext = mContext;
 
     }
@@ -69,12 +68,6 @@ public class Home_adapter extends BaseAdapter {
         return 0;
     }
 
-    public void addCount(int num) {
-        count += num;
-        notifyDataSetChanged();
-    }
-
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = new Holder();
@@ -94,7 +87,9 @@ public class Home_adapter extends BaseAdapter {
         }
 
         final Main item = (Main) getItem(position);
-        Log.d("ddd", item.toString());
+        //Log.d("ddd", item.toString());
+        Log.d("ddd","position : " + position);
+
         Glide.with(mContext).load(item.getPath()).centerCrop().into(holder.img_homeAdapter);
         holder.text_homeAdapter.setText(item.getContent());
         holder.text_roomName.setText(item.getName());

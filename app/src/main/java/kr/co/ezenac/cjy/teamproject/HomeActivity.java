@@ -85,6 +85,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
         mAdapter = new InfiniteScrollAdapter<Home_adapter>(HomeActivity.this,
                 new Home_adapter(imgs2,HomeActivity.this,hashMap), GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT);
         mAdapter.addListener(HomeActivity.this);
+        //mAdapter.getAdapter().addCount(5);
         mGridView.setAdapter(mAdapter);
 
         mHandler = new Handler();
@@ -99,25 +100,31 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
     }
 
     public void callMaxMain(final Integer count, Integer member_id){
-        Call<Integer> observs = RetrofitService.getInstance().getRetrofitRequest().maxMain(member_id);
-        observs.enqueue(new Callback<Integer>() {
+        Call<Integer> observs2 = RetrofitService.getInstance().getRetrofitRequest().maxMain(member_id);
+        observs2.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.isSuccessful()){
                     max = response.body();
-                    callHomeImg(count,tmpId);
+                    Log.d("maxTest", " : " +  max);
+                    callHomeImg(tmpId);
 
+
+                } else {
+                    Log.d("failMax", " : " + max);
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 t.printStackTrace();
+                Log.d("failMax", " : fail");
             }
         });
     }
 
-    public void callHomeImg(Integer count, Integer member_id){
+    public void callHomeImg(Integer member_id){
+
         mDlg = new ProgressDialog(this);
         mDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mDlg.setMessage("Loding...");
@@ -131,10 +138,10 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
                 if (response.isSuccessful()){
                     ArrayList<Main> imgs = response.body();
                     imgs2.addAll(imgs);
-                    Log.d("jjj","qwe"+ imgs);
-                    Log.d("jjj","qwe"+ imgs2);
-
-
+                    Log.d("jjj","size"+ imgs2.size());
+                    //Log.d("jjj","qwe"+ imgs);
+                    //Log.d("jjj","qwe"+ imgs2);
+                    count++;
                     mAdapter.notifyDataSetChanged();
                     try {
                         Thread.sleep(1000);
@@ -142,6 +149,7 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
                         e.printStackTrace();
                     }
                     mDlg.dismiss();
+                    mAdapter.handledRefresh();
                 }
             }
 
@@ -194,12 +202,14 @@ public class HomeActivity extends Activity implements InfiniteScrollAdapter.Infi
 
     @Override
     public void onInfiniteScrolled() {
-        Log.d("sss","aa");
-        callHomeImg(count,tmpId);
-        count++;
-        mAdapter.handledRefresh();
-        if (mAdapter.getOriginalAdapter().getCount() > max) { //★★★나오는 최대갯수
-            mAdapter.canReadMore(false);
+        Log.d("ksj","onInfiniteScrolled");
+        if (mAdapter.getOriginalAdapter().getCount() >= max) { //★★★나오는 최대갯수
+            //mAdapter.canReadMore(false);
+            Log.d("scrollMax","max : " + max);
+        } else {
+            Log.d("sss","aa");
+
+            callHomeImg(tmpId);
         }
         /*mAdapter.getAdapter().addCount(1); // ★★★증감되서 나오는 갯수
         mAdapter.handledRefresh();
