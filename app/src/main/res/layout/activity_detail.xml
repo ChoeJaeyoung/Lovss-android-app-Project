@@ -11,16 +11,8 @@
         android:id="@+id/linear_detail_topBar"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/ultraViolet">
-
-        <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:backgroundTint="@color/colorIDICon"
-            android:background="@drawable/daily_photo"
-            android:id="@+id/btn_detail_addPhoto"
-            />
+        android:background="@color/ultraViolet"
+        android:orientation="vertical">
     </LinearLayout>
 
     <GridView

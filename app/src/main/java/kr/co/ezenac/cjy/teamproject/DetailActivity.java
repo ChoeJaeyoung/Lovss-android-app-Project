@@ -33,7 +33,6 @@ import retrofit2.Response;
 
 
 public class DetailActivity extends AppCompatActivity {
-    @BindView(R.id.btn_detail_addPhoto) ImageView btn_detail_addPhoto;
     @BindView(R.id.grid_detail_gv) GridView grid_detail_gv;
     @BindView(R.id.btn_logout) ImageView btn_logout;
     @BindView(R.id.img_home) ImageView img_home;
@@ -72,15 +71,6 @@ public class DetailActivity extends AppCompatActivity {
         } else if (typeRoom == 2){
             collectionDetail(selPosition);
         }
-    }
-
-
-    @OnClick(R.id.btn_detail_addPhoto)
-    public void onClickUploadImg(View view){
-        Intent intent = new Intent(DetailActivity.this, upload_imgActivity.class);
-        intent.putExtra("room_id", dRoom_id);
-        Log.d("kkk","room_id" + dRoom_id);
-        startActivity(intent);
     }
 
     public void collectionDetail(Integer cPosition){

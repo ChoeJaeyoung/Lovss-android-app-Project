@@ -58,6 +58,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchpage_layout);
         ButterKnife.bind(this);
+
+        search_test.setPrivateImeOptions("defaultInputmode=korean");
     }
 
     @Override

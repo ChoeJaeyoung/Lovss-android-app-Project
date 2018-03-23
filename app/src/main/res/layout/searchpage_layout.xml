@@ -45,6 +45,7 @@
                 android:textSize="15dp"
                 android:textColorHint="@color/colorIDICon"
                 android:layout_centerInParent="true"
+                android:inputType="text"
                 />
         </RelativeLayout>
 
