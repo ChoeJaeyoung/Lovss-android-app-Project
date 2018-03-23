@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kr.co.ezenac.cjy.teamproject.JoinActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +17,26 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:id="@+id/iconinner"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/innericon"
+            android:layout_alignBottom="@id/mainTitle"
+            />
+
         <TextView
+            android:layout_toRightOf="@id/iconinner"
+            android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello TeamProject"
+            android:text="Hello Lov'ss !"
             android:textSize="30dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:textColor="@color/ultraViolet"/>
     </RelativeLayout>
 

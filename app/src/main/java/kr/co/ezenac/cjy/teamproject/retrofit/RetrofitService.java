@@ -24,7 +24,7 @@ public class RetrofitService {
 
     public RetrofitRequest init(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.16.141.212:8090/team/")
+                .baseUrl("http://ec2-13-125-186-152.ap-northeast-2.compute.amazonaws.com:8080/TEAM/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -13,12 +13,20 @@
         android:layout_height="48dp"
         android:background="@color/ultraViolet">
 
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/mainiccon"
+            android:layout_toLeftOf="@id/titleapplename"
+            />
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/titleapplename"
+            android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:text="Project Name"
+            android:layout_marginLeft="5dp"
+            android:text="Lov'ss"
             android:textColor="#ffffff"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:gravity="center"/>
     </RelativeLayout>
 
